@@ -1,0 +1,4 @@
+[23-Jan-2020 17:44:02 America/Sao_Paulo] PHP Parse error:  syntax error, unexpected 'logo' (T_STRING) in /home/altechindustria/vmsis.altechindustria.com.br/application/views/admin/users/users_pdf.php on line 5
+[02-Mar-2020 21:29:47 CST6CDT] PHP Parse error:  syntax error, unexpected end of file in /home/altechindustria/vmsis.altechindustria.com.br/application/controllers/admin/Pages.php on line 1
+[02-Mar-2020 21:31:22 CST6CDT] PHP Parse error:  syntax error, unexpected end of file in /home/altechindustria/vmsis.altechindustria.com.br/application/controllers/admin/Pages.php on line 1
+[02-Mar-2020 21:31:25 CST6CDT] PHP Parse error:  syntax error, unexpected end of file in /home/altechindustria/vmsis.altechindustria.com.br/application/controllers/admin/Pages.php on line 1
