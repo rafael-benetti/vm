@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 05/05/2020 às 19:39
+-- Tempo de geração: 05/05/2020 às 20:02
 -- Versão do servidor: 5.6.41-84.1
 -- Versão do PHP: 7.2.7
 
@@ -393,7 +393,7 @@ CREATE TABLE `ci_pontos` (
 --
 
 INSERT INTO `ci_pontos` (`id`, `ponto`, `nomefan`, `email`, `comissao`, `responsavel`, `telefone`, `endereco`, `numero`, `cidade`, `estado`, `latitude`, `longitude`, `is_admin`, `is_active`, `created_at`, `updated_at`, `bairro`, `cep`, `tipo_comissao`) VALUES
-(45, 'Shopping', 'Andorinhas', 'teste@teste.com', 10, 'Rafa', '(37) 73738-3838', 'Rua Tenente Timbauva', '174', 'Sapucaia do Sul', 'RS', '', '', 0, 1, '2020-05-04 00:00:00', '2020-05-04 00:00:00', 'Capão da Cruz', '93226-540', 'percentual');
+(45, 'Shopping', 'Andorinhas', 'teste@teste.com', 10, 'Rafa', '(37) 73738-3838', 'Rua Dionísio Moraes', '174', 'Sapucaia do Sul', 'RS', '-29.8387232', '-51.1277841', 0, 1, '2020-05-04 00:00:00', '2020-05-05 08:05:18', 'Ipiranga', '93230-450', '');
 
 -- --------------------------------------------------------
 
