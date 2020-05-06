@@ -43,7 +43,7 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <?php $this->load->view('admin/includes/_messages.php') ?>
-
+ <?php echo form_open(base_url('admin/rotas/add_rotas'), 'class="form-horizontal" '); ?> 
     <div class="modal-content">
 
             <div class="modal-body">
@@ -56,15 +56,16 @@
                     <div class="card-body">
                         
                             <div class="col-lg-12"  style='margin-top:10px'>
-                                <label for="pontodevenda" class="col-md-12 control-label">Selecione os Pontos de venda de sua Rota</label>
+                                <label for="ponto_id" class="col-md-12 control-label">Selecione os Pontos de venda de sua Rota</label>
                                 
                                <div class="input-group">
-                            <select name="#" required  multiple class="form-control" id="#" ></select>
-                            <?php /*
+                            <select name="ponto_id[]" required  multiple class="form-control" >
+                            <?php 
                             foreach ($pontos as $ponto) {
                                 echo '<option  value="' . $ponto->id . '">' . $ponto->ponto . ' | ' . $ponto->nomefan . ' ' . $pontos_selecionados[$ponto->id] . '</option>';
-                            }*/
+                            }
                             ?>
+                            </select>
                                </div>
                             </div>
                        
@@ -93,60 +94,7 @@
 
 
 
-<script>
-
-    function getMaquinas(ponto_id) {
-        $(function () {
-            $.ajaxSetup({cache: false});
-
-
-            var $url = '<?= base_url("admin/users/get_machines/") ?>'
-            var $formData = {
-                '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
-                pontodevenda: ponto_id,
-            };
-            $.ajax({
-                url: $url,
-                type: 'POST',
-                data: $formData,
-                beforeSend: function (response) { },
-                complete: function (response) { },
-                success: function (response) {
-                    //console.log( response );
-                    $('#result_tipodemaquina').html(response);
-                }
-            });
-
-            e.preventDefault();
-
-
-        });
-    }
-    
-    
-     $("body").on("change", ".tgl_checkbox", function () {
-
-        console.log('checked');
-
-        $.post('<?= base_url("admin/machines/change_status") ?>',
-                {
-
-                    '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
-
-                    id: $(this).data('id'),
-
-                    status: $(this).is(':checked') == true ? 1 : 0
-
-                },
-                function (data) {
-
-                    $.notify("Status Atualizado com sucesso", "success");
-
-                });
-
-    });
-    
-    
+<script> 
     //---------------------------------------------------
 
     var table = $('#na_datatable').DataTable({

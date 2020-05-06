@@ -1,9 +1,21 @@
 <?php
 	class Rotas_model extends CI_Model{
 
-		public function add_user($data){
-			$this->db->insert('ci_users', $data);
+		public function add_rota($data){
+			$this->db->insert('ci_rotas', $data);
 			return $this->db->insert_id();
+		}
+                
+                public function add_rota_ponto($data){
+			$this->db->insert('ci_rotas_pontos', $data);
+			return $this->db->insert_id();
+		}
+                
+                  public function delete_rotaosontas($user_id, $ponto_id){
+			$this->db->where('user_id', $user_id);
+			$this->db->where('ponto_id', $ponto_id);
+			$this->db->delete('ci_users_machines');
+			return true;
 		}
                  	// get all machines for server-side datatable processing (ajax based)
 		public function get_user_machines($user_id){
@@ -50,12 +62,7 @@
 			return true;
 		}
                 
-                 public function delete_user_machines($user_id, $ponto_id){
-			$this->db->where('user_id', $user_id);
-			$this->db->where('ponto_id', $ponto_id);
-			$this->db->delete('ci_users_machines');
-			return true;
-		}
+               
 
 		//---------------------------------------------------
 		// get all users for server-side datatable processing (ajax based)

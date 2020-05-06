@@ -17,9 +17,18 @@ class Rotas extends MY_Controller {
 
     //-----------------------------------------------------------
     public function index() {
+        
+        $where_pontos = array('is_active' => 1);
+            if ($this->is_supper == "0") {
+                $where_pontos = array(
+                    'admin_id' => $this->admin_id,
+                    'is_active' => 1
+                );
+            }
+        $dados['pontos'] = $this->ponto_model->getTodosPontos($where_pontos);
 
         $this->load->view('admin/includes/_header');
-        $this->load->view('admin/rotas/rotas_list');
+        $this->load->view('admin/rotas/rotas_list',$dados);
         $this->load->view('admin/includes/_footer');
     }
     
@@ -41,6 +50,13 @@ class Rotas extends MY_Controller {
         $this->load->view('admin/users/user_list_maquinas', $dados);
         $this->load->view('admin/includes/_footer');
     }
+    
+    
+    
+    
+    
+    
+    
     public function get_machines() {
 
         $ponto_id = $this->input->post('pontodevenda');
@@ -55,11 +71,11 @@ class Rotas extends MY_Controller {
     }
     
     
-     public function add_machines($user_id) {
+     public function add_rotas(){
       
          if ($this->input->post('submit')) {
        
-            $this->form_validation->set_rules('id_maquina', 'required');
+            $this->form_validation->set_rules('ponto_id', 'required');
           
             if ($this->form_validation->run() == TRUE) {
 
@@ -69,59 +85,41 @@ class Rotas extends MY_Controller {
 
                 $this->session->set_flashdata('errors', $data['errors']);
 
-                redirect(base_url('admin/users/ver_maquinas/'.$user_id), 'refresh');
+                redirect(base_url('admin/rotas'), 'refresh');
             } else {
                 
-                    $machines_user = $this->input->post('machines');
-                    $pontodevenda= $this->input->post('pontodevenda');
+                    $pontos = $this->input->post('ponto_id');
+                    $rota= $this->input->post('rota');
+                    
+                    $rota_id = $this->rotas_model->add_rota(array('nome'=>$rota));
+                    
+                    if($rota_id>0){ 
+                
+                     $result = 0;
+                                foreach ($pontos as $ponto) {
+
+                                    $data_rota_ponto = array(
+                                        'ponto_id' => $ponto,
+                                        'rota_id' => $rota_id
+
+                                    );
+                                    if($this->rotas_model->add_rota_ponto($data_rota_ponto)){
+                                        $result++;
+                                    }
+                                }
 
 
+                            if ($result > 0) {
+                                 $this->session->set_flashdata('success', 'rota adicionada com sucesso!');
 
-                    $this->user_model->delete_user_machines($user_id,$pontodevenda );
-
-                    $result = 0;
-                    foreach ($machines_user as $machine) {
-                        
-                        $data_users_machines = array(
-                            'ponto_id' => $pontodevenda,
-                            'user_id' => $user_id,
-                            'maq_id' => $machine,
-                            
-                        );
-                        if($this->user_model->add_user_machine($data_users_machines)){
-                            $result++;
+                                 redirect(base_url('admin/rotas'), 'refresh');
+                            }
                         }
-                    }
-                
-                
-                if ($result > 0) {
-                     $this->session->set_flashdata('success', 'maquina cadastrada com sucesso!');
-                 
-                    redirect(base_url('admin/users/ver_maquinas/'.$user_id), 'refresh');
-                }
             }
         }
 
 
-        $this->load->view('admin/includes/_header');
 
-        $where_tipos = array('is_active' => 1);
-        $where_pontos = array('is_active' => 1);
-        if ($this->is_supper == "0") {
-            $where_tipos = array(
-                'admin_id' => $this->admin_id,
-                'is_active' => 1
-            );
-            $where_pontos = array(
-                'admin_id' => $this->admin_id,
-                'is_active' => 1
-            );
-        }
-        $dados['tipos'] = $this->tipo_model->getTodosTipos($where_tipos);
-        $dados['pontos'] = $this->ponto_model->getTodosPontos($where_pontos);
-        $dados['item'] = $this->item_model->getTodosItens();
-        $this->load->view('admin/machines/machine_add', $dados);
-        $this->load->view('admin/includes/_footer');
     }
     
     
