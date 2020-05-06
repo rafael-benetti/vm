@@ -48,7 +48,7 @@ class Users extends MY_Controller {
         $maquinas= $this->machine_model->get_machine_by_ponto($ponto_id);
      
         foreach($maquinas as $maquina){
-        echo '<option value ='.$maquina['id_maquina'].'>'.$maquina['nome_tipo'].' ('.$maquina['observacoes_equip'].')</option>';
+        echo '<option value ='.$maquina['id_maquina'].'>'.$maquina['nome_tipo'].' ('.$maquina['serial'].')</option>';
         }
         
        exit;
@@ -139,7 +139,7 @@ class Users extends MY_Controller {
             $data[] = array(
                 $row['id'],
                 $row['nome_ponto'] ,
-                $row['nome_tipo'].' - '.$row['nome_maquina'],
+                $row['nome_tipo'].' - '.$row['serial'],
                 '<a title="Delete" class="delete btn btn-sm btn-danger" href=' . base_url("admin/users/delete_machine/" . $row['id'].'/'. $row['maq_id']) . ' title="Delete" onclick="return confirm(\'Apagar maquina ?\')"> <i class="fa fa-trash-o"></i></a>'
             );
         }

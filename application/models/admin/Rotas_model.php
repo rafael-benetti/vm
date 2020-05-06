@@ -10,25 +10,37 @@
 			$this->db->insert('ci_rotas_pontos', $data);
 			return $this->db->insert_id();
 		}
-                
-                  public function delete_rotaosontas($user_id, $ponto_id){
-			$this->db->where('user_id', $user_id);
-			$this->db->where('ponto_id', $ponto_id);
-			$this->db->delete('ci_users_machines');
-			return true;
+                       
+                public function get_all_rotas(){
+			$wh =array();
+			$SQL ='SELECT * FROM ci_rotas';
+			$wh[] = " is_admin = 0";
+			if(count($wh)>0)
+			{
+				$WHERE = implode(' and ',$wh);
+				return $this->datatable->LoadJson($SQL,$WHERE);
+			}
+			else
+			{
+				return $this->datatable->LoadJson($SQL);
+			}
 		}
-                 	// get all machines for server-side datatable processing (ajax based)
-		public function get_user_machines($user_id){
+                
+                
+       
+                
+                public function get_rotas_pontos($id){
 			$wh = array();
 			
-				$wh[] = " user_id =  '".$user_id."'";
+				$wh[] = " id =  '".$id."'";
 			
 			$SQL ='SELECT 
                                 um.id as id, um.maq_id, m.tipomaquina, m.pontodevenda, m.serial, m.cont_inicial, m.cont_saida_inicial, m.valorvenda,
 				m.imagem,m.noteiro,m.ficheiro,m.observacoes_equip as nome_maquina,m.is_active, m.created_at,m.updated_at,
 				t.tipo as nome_tipo, p.ponto as nome_ponto, t.id as id_tipo, p.id as id_ponto
-                        FROM ci_users_machines as um
-				INNER JOIN ci_machines as m ON m.id = um.maq_id 
+                                
+                        FROM ci_rotas as um
+				INNER JOIN ci_rotas as m ON m.id = um.id 
 				INNER JOIN ci_tipos as t ON t.id = m.tipomaquina 
 				INNER JOIN ci_pontos as p ON p.id=m.pontodevenda';
                         
@@ -46,6 +58,37 @@
 
 			}
 
+		}
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                                
+                  public function delete_rotaosontas($user_id, $ponto_id){
+			$this->db->where('user_id', $user_id);
+			$this->db->where('ponto_id', $ponto_id);
+			$this->db->delete('ci_users_machines');
+			return true;
 		}
                 
                 public function add_user_ponto($data){
@@ -66,20 +109,17 @@
 
 		//---------------------------------------------------
 		// get all users for server-side datatable processing (ajax based)
-		public function get_all_users(){
-			$wh =array();
-			$SQL ='SELECT * FROM ci_users';
-			$wh[] = " is_admin = 0";
-			if(count($wh)>0)
-			{
-				$WHERE = implode(' and ',$wh);
-				return $this->datatable->LoadJson($SQL,$WHERE);
-			}
-			else
-			{
-				return $this->datatable->LoadJson($SQL);
-			}
-		}
+		
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
 		public function getPontosByUserId($user_id){
 			$query = $this->db->get_where('ci_users_pontos', array('user_id' => $user_id));
 			return $result = $query->result_array();
@@ -117,6 +157,9 @@
                         return $query->row()->total;
                     
                 }
+                
+                
+                
                 
                 
 

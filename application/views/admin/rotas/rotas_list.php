@@ -19,23 +19,29 @@
         
         <div class="card">
             <div class="card-body table-responsive">
-                <table id="na_datatable" class="table table-bordered table-striped" width="100%">
-                    <thead>
+                <table id="na_dattable" class="table table-bordered table-striped" width="100%">
+                   
                         <tr>
                             <th>#ID</th>
                             <th>Nome da Rota</th>
                             <th>Pontos</th>
-                            <th>Máquinas</th>
+                            <th>Quantidade de Máquinas</th>
                             <th>Ações</th>
                         </tr>
-                    </thead>
+                        <?php foreach ($rotas as $rotas) {?>
+                <tr>
+                    <td><?= $rotas->id; ?></td>
+                    <td><?= $rotas->nome; ?></td>  
+                    <td><?= $rotas->nome; ?></td>  
+                    <td><?= $rotas->nome; ?></td>  
+                    <td><?= $rotas->nome; ?></td>  
+                </tr>
+                        <?php }?>
                 </table>
             </div>
         </div>
     </section>  
 </div>
-
-
 
 
 
@@ -91,39 +97,3 @@
 </div>
 
 
-
-
-
-<script> 
-    //---------------------------------------------------
-
-    var table = $('#na_datatable').DataTable({
-
-        "language": {
-            "url": "<?= base_url() ?>assets/plugins/datatables/i18n/br.json"
-        },
-
-        "processing": true,
-
-        "serverSide": true,
-
-        "ajax": "<?= base_url('admin/users/datatable_user_maquinas_json/' . $user_id . '') ?>",
-
-        "order": [[0, 'desc']],
-
-        "columnDefs": [<th>#ID</th>
-                            <th>Nome da Rota</th>
-                            <th>Pontos</th>
-                            <th>Máquinas</th>
-                            <th>Ações</th>
-
-            {"targets": 0, "name": "id_rota", 'searchable': true, 'orderable': true},
-            {"targets": 1, "name": "nome_rota", 'searchable': true, 'orderable': true},
-            {"targets": 2, "name": "pontos_rota", 'searchable': true, 'orderable': true},
-            {"targets": 3, "name": "maquinas_rota", 'searchable': false, 'orderable': false},
-            {"targets": 3, "name": "acoes", 'searchable': false, 'orderable': false},
-        ]
-
-    });
-    
-</script>
