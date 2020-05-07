@@ -20,13 +20,13 @@
           <div class="col-12">
                     <div class="callout callout-info">
                         <h5><i class="fa fa-info"></i> Informativo:</h5>
-                        Suporte e atendimento técnico 24horas por e-mail / atendimento das 8h as 18h de segunda à  sexta pelo fone: 47 3261-7900.
+                        Suporte e atendimento 24horas por e-mail / atendimento das 8h as 18h de segunda à  sexta pelo fone: 47 99779-9705.
                     </div> 
             <div class="invoice p-3 mb-3">
               <div class="row">
                 <div class="col-12">
                   <h4>
-                                    <i class="fa fa-globe"></i> Gerenciamento de Vending Machines.
+                                    <i class="fa fa-globe"></i> Gestor de Vending Machines.
                     <small class="float-right"></small>
                   </h4>
                 </div>
@@ -34,11 +34,9 @@
               <div class="row invoice-info">
                 <div class="col-sm-4 invoice-col">
                                 <address>
-                                    <strong>Altech Equipamentos Eletrônicos</strong><br>
-                                    BR101, Km 156 Sala 1, Porto Belo, SC<br>
-                                    CNPJ: 29.738.854/0001-51 IE: 258591030<br>
-                                    Fone: +55 47 3261-7900<br>
-                                    Email: desenvolvimentoweb@altechindustria.com.br
+                                    <strong>VM System</strong><br>
+                                    Itapema, SC<br>
+                                    Email:contato@vmsys.online
                                 </address>
                 </div>
               </div>

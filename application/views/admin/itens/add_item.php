@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="valor" class="col-md-6 control-label">Valorde custo</label>
+                    <label for="valor" class="col-md-6 control-label">Valor de custo</label>
                     <div class="col-md-12">
                    
                    <input type="number" name="valor" class="form-control" id="valor" pattern="[0-9]+([,\.][0-9]+)?" min="0.1" step="any">

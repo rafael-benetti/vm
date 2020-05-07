@@ -123,7 +123,7 @@
                                 
                                 <div class="col-6">
                                     <div class="col-lg-8"  style='margin-top:10px'>
-                                    <label for="lastname" class="col-md-12 control-label">Selecione o Tipo de Insumo e a quantidade abastecida</label>
+                                    <label for="lastname" class="col-md-12 control-label">Selecione o Tipo de Insumo</label>
                                     <div class="input-group">
                                         <select name="item" style="width:100%" class="js-example-basic-single"id="item" >
                                             <?php

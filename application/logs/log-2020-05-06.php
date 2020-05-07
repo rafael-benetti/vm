@@ -242,3 +242,57 @@ ERROR - 2020-05-06 23:18:36 --> Severity: Notice --> Undefined variable: pontos_
 ERROR - 2020-05-06 23:20:33 --> Severity: Notice --> Undefined variable: pontos_selecionados C:\xampp\htdocs\dashboard\vm\application\views\admin\rotas\rotas_list.php 71
 ERROR - 2020-05-06 23:21:09 --> Severity: Notice --> Undefined variable: pontos_selecionados C:\xampp\htdocs\dashboard\vm\application\views\admin\rotas\rotas_list.php 71
 ERROR - 2020-05-06 23:21:38 --> Severity: Notice --> Undefined variable: pontos_selecionados C:\xampp\htdocs\dashboard\vm\application\views\admin\rotas\rotas_list.php 71
+ERROR - 2020-05-06 23:25:22 --> Severity: Notice --> Undefined variable: pontos C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 125
+ERROR - 2020-05-06 23:25:22 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 125
+ERROR - 2020-05-06 23:25:22 --> Severity: Notice --> Use of undefined constant id - assumed 'id' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 147
+ERROR - 2020-05-06 23:25:22 --> Severity: Notice --> Use of undefined constant nome - assumed 'nome' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 147
+ERROR - 2020-05-06 23:25:22 --> Severity: Notice --> Use of undefined constant id - assumed 'id' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 147
+ERROR - 2020-05-06 23:25:22 --> Severity: Notice --> Use of undefined constant nome - assumed 'nome' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 147
+ERROR - 2020-05-06 23:25:22 --> Severity: Notice --> Use of undefined constant id - assumed 'id' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 167
+ERROR - 2020-05-06 23:25:22 --> Severity: Notice --> Use of undefined constant nome - assumed 'nome' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 167
+ERROR - 2020-05-06 23:25:22 --> Severity: Notice --> Use of undefined constant id - assumed 'id' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 167
+ERROR - 2020-05-06 23:25:22 --> Severity: Notice --> Use of undefined constant nome - assumed 'nome' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 167
+ERROR - 2020-05-06 23:26:49 --> Severity: Notice --> Undefined variable: pontos C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 125
+ERROR - 2020-05-06 23:26:49 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 125
+ERROR - 2020-05-06 23:26:49 --> Severity: Notice --> Use of undefined constant id - assumed 'id' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 147
+ERROR - 2020-05-06 23:26:49 --> Severity: Notice --> Use of undefined constant nome - assumed 'nome' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 147
+ERROR - 2020-05-06 23:26:49 --> Severity: Notice --> Use of undefined constant id - assumed 'id' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 147
+ERROR - 2020-05-06 23:26:49 --> Severity: Notice --> Use of undefined constant nome - assumed 'nome' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 147
+ERROR - 2020-05-06 23:26:49 --> Severity: Notice --> Use of undefined constant id - assumed 'id' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 167
+ERROR - 2020-05-06 23:26:49 --> Severity: Notice --> Use of undefined constant nome - assumed 'nome' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 167
+ERROR - 2020-05-06 23:26:49 --> Severity: Notice --> Use of undefined constant id - assumed 'id' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 167
+ERROR - 2020-05-06 23:26:49 --> Severity: Notice --> Use of undefined constant nome - assumed 'nome' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 167
+ERROR - 2020-05-06 23:26:54 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\dashboard\vm\application\controllers\admin\Users.php 228
+ERROR - 2020-05-06 23:27:05 --> Severity: Notice --> Undefined variable: pontos C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 125
+ERROR - 2020-05-06 23:27:05 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 125
+ERROR - 2020-05-06 23:27:05 --> Severity: Notice --> Use of undefined constant id - assumed 'id' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 147
+ERROR - 2020-05-06 23:27:05 --> Severity: Notice --> Use of undefined constant nome - assumed 'nome' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 147
+ERROR - 2020-05-06 23:27:05 --> Severity: Notice --> Use of undefined constant id - assumed 'id' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 147
+ERROR - 2020-05-06 23:27:05 --> Severity: Notice --> Use of undefined constant nome - assumed 'nome' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 147
+ERROR - 2020-05-06 23:27:05 --> Severity: Notice --> Use of undefined constant id - assumed 'id' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 167
+ERROR - 2020-05-06 23:27:05 --> Severity: Notice --> Use of undefined constant nome - assumed 'nome' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 167
+ERROR - 2020-05-06 23:27:05 --> Severity: Notice --> Use of undefined constant id - assumed 'id' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 167
+ERROR - 2020-05-06 23:27:05 --> Severity: Notice --> Use of undefined constant nome - assumed 'nome' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_add.php 167
+ERROR - 2020-05-06 23:27:12 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\dashboard\vm\application\controllers\admin\Users.php 228
+ERROR - 2020-05-06 23:27:15 --> Severity: Notice --> Undefined variable: users_pontos C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_edit.php 81
+ERROR - 2020-05-06 23:27:15 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_edit.php 81
+ERROR - 2020-05-06 23:27:15 --> Severity: Notice --> Undefined offset: 49 C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_edit.php 100
+ERROR - 2020-05-06 23:27:15 --> Severity: Notice --> Undefined offset: 49 C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_edit.php 106
+ERROR - 2020-05-06 23:27:15 --> Severity: Notice --> Use of undefined constant id - assumed 'id' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_edit.php 125
+ERROR - 2020-05-06 23:27:15 --> Severity: Notice --> Undefined variable: cheked_perfil C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_edit.php 129
+ERROR - 2020-05-06 23:27:15 --> Severity: Notice --> Use of undefined constant id - assumed 'id' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_edit.php 129
+ERROR - 2020-05-06 23:27:15 --> Severity: Notice --> Use of undefined constant nome - assumed 'nome' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_edit.php 129
+ERROR - 2020-05-06 23:27:15 --> Severity: Notice --> Use of undefined constant id - assumed 'id' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_edit.php 125
+ERROR - 2020-05-06 23:27:15 --> Severity: Notice --> Use of undefined constant id - assumed 'id' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_edit.php 129
+ERROR - 2020-05-06 23:27:15 --> Severity: Notice --> Use of undefined constant nome - assumed 'nome' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_edit.php 129
+ERROR - 2020-05-06 23:27:19 --> Severity: Notice --> Undefined variable: users_pontos C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_edit.php 81
+ERROR - 2020-05-06 23:27:19 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_edit.php 81
+ERROR - 2020-05-06 23:27:19 --> Severity: Notice --> Undefined offset: 49 C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_edit.php 100
+ERROR - 2020-05-06 23:27:19 --> Severity: Notice --> Undefined offset: 49 C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_edit.php 106
+ERROR - 2020-05-06 23:27:19 --> Severity: Notice --> Use of undefined constant id - assumed 'id' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_edit.php 125
+ERROR - 2020-05-06 23:27:19 --> Severity: Notice --> Undefined variable: cheked_perfil C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_edit.php 129
+ERROR - 2020-05-06 23:27:19 --> Severity: Notice --> Use of undefined constant id - assumed 'id' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_edit.php 129
+ERROR - 2020-05-06 23:27:19 --> Severity: Notice --> Use of undefined constant nome - assumed 'nome' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_edit.php 129
+ERROR - 2020-05-06 23:27:19 --> Severity: Notice --> Use of undefined constant id - assumed 'id' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_edit.php 125
+ERROR - 2020-05-06 23:27:19 --> Severity: Notice --> Use of undefined constant id - assumed 'id' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_edit.php 129
+ERROR - 2020-05-06 23:27:19 --> Severity: Notice --> Use of undefined constant nome - assumed 'nome' C:\xampp\htdocs\dashboard\vm\application\views\admin\users\user_edit.php 129

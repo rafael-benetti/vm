@@ -37,8 +37,8 @@
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3><?= $all_admin; ?></h3>
-                            <p>Clientes Cadastrados</p>
+                            <h3><?= $all_users; ?></h3>
+                            <p>Operadores Cadastrados</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -80,7 +80,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Faturamento Anual</h5>
+                            <h5 class="card-title">Visão geral dos últimos 90 dias</h5>
 
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-widget="collapse">
@@ -135,7 +135,7 @@
                                     <!-- /.progress-group -->
                                     <div class="progress-group">
                                         Posto Santa Catarina
-                                        <span class="float-right"><b>R$ 1.289,00</span>
+                                        <span class="float-right"><b>R$ 000.000,00</span>
                                         <div class="progress progress-sm">
                                             <div class="progress-bar bg-danger" style="width: 20%"></div>
                                         </div>
@@ -147,26 +147,26 @@
                             <div class="row">
                                 <div class="col-sm-3 col-6">
                                     <div class="description-block border-right">
-                                        <h5 class="description-header">R$ 335,210.43</h5>
+                                        <h5 class="description-header">R$ 000.000,00</h5>
                                         <span class="description-text">FATURAMENTO ANUAL</span>
                                     </div>
                                 </div>
                                 <div class="col-sm-3 col-6">
                                     <div class="description-block border-right">
 
-                                        <h5 class="description-header">R$ 10,390.90</h5>
+                                        <h5 class="description-header">R$ 000.000,00</h5>
                                         <span class="description-text">PERCENTUAL ANUAL</span>
                                     </div>
                                 </div>
                                 <div class="col-sm-3 col-6">
                                     <div class="description-block border-right">
-                                        <h5 class="description-header">R$ 24,813.53</h5>
+                                        <h5 class="description-header">R$ 000.000,00</h5>
                                         <span class="description-text">FATURAMENTO MÊS ATUAL</span>
                                     </div>
                                 </div> 
                                 <div class="col-sm-3 col-6">
                                     <div class="description-block border-right">
-                                        <h5 class="description-header">R$ 24,813.53</h5>
+                                        <h5 class="description-header">R$ 000.000,00</h5>
                                         <span class="description-text">PERCENTUAL DO MÊS</span>
                                     </div>
                                 </div>
