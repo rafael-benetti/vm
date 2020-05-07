@@ -28,12 +28,7 @@
                 </div>
               </div>
 
-              <div class="form-group">
-                <label for="nomefan" class="col-md-6 control-label">Nome Fantasia</label>
-                <div class="col-md-12">
-                  <input type="text" name="nomefan" value="<?php echo $ponto['nomefan']; ?>" class="form-control" id="nomefan" placeholder="">
-                </div>
-              </div>
+             
 			
 						<div class="form-group">
                 <label for="email" class="col-md-6 control-label">Email</label>

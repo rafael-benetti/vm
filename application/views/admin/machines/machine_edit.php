@@ -42,7 +42,7 @@
                                             if ($machine['pontodevenda'] == $ponto->id) {
                                                 $cheked_ponto = true;
                                             }
-                                            echo '<option selected="' . $cheked . '" value="' . $ponto->id . '">' . $ponto->ponto . ' | ' . $ponto->nomefan . '</option>';
+                                            echo '<option selected="' . $cheked . '" value="' . $ponto->id . '">' . $ponto->ponto . '</option>';
                                         }
                                         ?>
                                     </select>

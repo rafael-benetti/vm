@@ -50,7 +50,7 @@ class Pontos extends MY_Controller {
           
     $data[] = array(
                 $row['id'],
-                $row['ponto'].'   '.$row['nomefan'],
+                $row['ponto'],
                 $row['email'],
                 $row['telefone'],
                 inverteDataHora($row['created_at']),
@@ -126,7 +126,7 @@ class Pontos extends MY_Controller {
 
             $this->form_validation->set_rules('ponto', 'Ponto', 'trim|required');
 
-            $this->form_validation->set_rules('nomefan', 'Nomefan');
+            
 
             $this->form_validation->set_rules('email', 'Email', 'trim|valid_email|required');
 
@@ -161,7 +161,7 @@ class Pontos extends MY_Controller {
 
                 $data = array(
                     'ponto' => $this->input->post('ponto'),
-                    'nomefan' => $this->input->post('nomefan'),
+                   
                     'email' => $this->input->post('email'),
                     'comissao' => $this->input->post('comissao'),
                     'responsavel' => $this->input->post('responsavel'),
@@ -242,7 +242,7 @@ class Pontos extends MY_Controller {
 
 
             $this->form_validation->set_rules('ponto', 'Ponto', 'trim|required');
-            $this->form_validation->set_rules('nomefan', 'Nomefan', 'trim|required');
+            
             $this->form_validation->set_rules('email', 'Email', 'trim|valid_email|required');
             $this->form_validation->set_rules('responsavel', 'Responsavel', 'trim|required');
             $this->form_validation->set_rules('telefone', 'Telefone', 'trim|required');
@@ -267,7 +267,7 @@ class Pontos extends MY_Controller {
 
                 $data = array(
                     'ponto' => $this->input->post('ponto'),
-                    'nomefan' => $this->input->post('nomefan'),
+                    
                     'email' => $this->input->post('email'),
                     'responsavel' => $this->input->post('responsavel'),
                     'telefone' => $this->input->post('telefone'),
@@ -361,7 +361,7 @@ class Pontos extends MY_Controller {
         $file = fopen('php://output', 'w');
 
 
-        $header = array("ID", "Ponto", "Nomefan", "Email", "Responsavel", "Telefone", "cidade", "Created Date");
+        $header = array("ID", "Ponto", "Email", "Responsavel", "Telefone", "cidade", "Created Date");
         fputcsv($file, $header);
 
         foreach ($ponto_data as $key => $line) {

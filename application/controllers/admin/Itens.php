@@ -5,6 +5,7 @@ class Itens extends MY_Controller {
 		auth_check(); // check login auth
                 		$this->rbac->check_module_access();
 		$this->load->model('admin/item_model', 'item_model');
+                $this->load->model('admin/Admin_model', 'Admin_model');
 	}
 	// padrão do projeto vm ---------------------------
 
@@ -21,7 +22,10 @@ class Itens extends MY_Controller {
 	}
         
         public function view_logs($id_item) {
+         
+            
         $dados['item'] = $this->item_model->get_itens_by_id($id_item);
+        
         $this->load->view('admin/includes/_header');
         $this->load->view('admin/itens/item_list_log', $dados);
         $this->load->view('admin/includes/_footer');
@@ -96,7 +100,8 @@ class Itens extends MY_Controller {
     }
        
        public function datatable_log_json($id_item) {
-
+            
+            
         $records = $this->item_model->get_estoque_itens($id_item);
         $data = array();       
 

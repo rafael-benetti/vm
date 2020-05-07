@@ -41,7 +41,7 @@
 												$pontodevenda = (int)(isset($rs["pontodevenda"]) ? $rs["pontodevenda"] : "");
 												foreach ($pontos as $ponto) {
 													$selected = (($pontodevenda == $ponto->id) ? " selected = 'true'" : "");
-													echo '<option value="'. $ponto->id .'" '. $selected .'>' . $ponto->ponto . ' - ' . $ponto->nomefan . '</option>';
+													echo '<option value="'. $ponto->id .'" '. $selected .'>' . $ponto->ponto . '</option>';
 												}
 											?>
 										</select>

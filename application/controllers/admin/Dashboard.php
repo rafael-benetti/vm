@@ -36,9 +36,10 @@ class Dashboard extends My_Controller {
           $infowindow[] = [
            "<div class=info_content style='line-height: 0.7'><p>"
               . "<b>".$value->cidade."</b></p>"
-              . "<p>".$value->nomefan."</p></div>"
+              . "<p>".$value->ponto."</p></div>"
               . "<p>".$value->telefone."</p></div>"
-              . "<p>".$value->nomefan."</p></div>"
+              . "<p>".$value->responsavel."</p></div>"
+              
           ];
         }
         $data['markers'] = json_encode($markers);

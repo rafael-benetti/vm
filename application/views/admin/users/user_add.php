@@ -125,7 +125,7 @@
                                         foreach ($pontos as $ponto) {
 
                                         
-                                            echo '<option  value="' . $ponto->id . '">' . $ponto->ponto . ' | ' . $ponto->nomefan . '</option>';
+                                            echo '<option  value="' . $ponto->id . '">' . $ponto->ponto .  '</option>';
                                         }
                                         ?>
                                     </select>

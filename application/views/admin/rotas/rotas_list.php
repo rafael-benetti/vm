@@ -68,7 +68,7 @@
                             <select name="ponto_id[]" required  multiple class="form-control" >
                             <?php 
                             foreach ($pontos as $ponto) {
-                                echo '<option  value="' . $ponto->id . '">' . $ponto->ponto . ' | ' . $ponto->nomefan . ' ' . $pontos_selecionados[$ponto->id] . '</option>';
+                                echo '<option  value="' . $ponto->id . '">' . $ponto->ponto . '   ' . $pontos_selecionados[$ponto->id] . '</option>';
                             }
                             ?>
                             </select>

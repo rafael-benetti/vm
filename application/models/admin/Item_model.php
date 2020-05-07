@@ -90,6 +90,15 @@ class Item_model extends CI_Model {
                                 i.item, i.quantidade, i.valor, i.is_active as item_ativo
 			FROM ci_estoque_itens as e
 				INNER JOIN ci_itens as i ON i.id = e.item_id';
+                        
+                        
+                        
+                        
+                        
+                        
+                
+                        
+
         			
 			if(count($wh)>0) {
 

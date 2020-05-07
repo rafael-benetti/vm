@@ -37,7 +37,7 @@
                                         <select name="pontodevenda" style="width:100%" class="js-example-basic-single" id="pontodevenda" >
                                             <?php
                                             foreach ($pontos as $ponto) {
-                                                echo '<option value="' . $ponto->id . '">' . $ponto->ponto . ' | ' . $ponto->nomefan . '</option>';
+                                                echo '<option value="' . $ponto->id . '">' . $ponto->ponto .  '</option>';
                                             }
                                             ?> 
                                         </select>

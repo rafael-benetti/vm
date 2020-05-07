@@ -291,7 +291,7 @@ class Operar extends MY_Controller {
 
             $id = $row['id'];
             
-            $ponto = $row['ponto']. '  '. $row['nomefan'];
+            $ponto = $row['ponto'];
             $tipo = $row['tipo'];
             $serial = $row['serial'];
 

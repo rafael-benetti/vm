@@ -105,7 +105,7 @@
             {"targets": 1, "name": "data", 'searchable': true, 'orderable': true},
             {"targets": 2, "name": "tipo_operacao", 'searchable': true, 'orderable': true},
             {"targets": 3, "name": "qtde", 'searchable': true, 'orderable': true},
-            {"targets": 4, "name": "usuario", 'searchable': false, 'orderable': false},
+            {"targets": 4, "name": "user_id", 'searchable': false, 'orderable': false},
            
 
         ]

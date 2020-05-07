@@ -103,7 +103,7 @@
                                                     $cheked_ponto = '';
                                             }
                                             
-                                            echo '<option '.$cheked_ponto.' value="' . $ponto->id . '">' . $ponto->ponto . ' | ' . $ponto->nomefan . ' '.$pontos_selecionados[$ponto->id].'</option>';
+                                            echo '<option '.$cheked_ponto.' value="' . $ponto->id . '">' . $ponto->ponto . '  '.$pontos_selecionados[$ponto->id].'</option>';
                                         
                                             
                                         }

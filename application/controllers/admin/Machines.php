@@ -80,7 +80,7 @@ class Machines extends MY_Controller {
             $data[] = array(
                 $row['id_maquina'],                
                 $row['nome_tipo'],
-                $row['nome_ponto'].'   '.$row['nomefan'],
+                $row['nome_ponto'],
                 $row['observacoes_equip'],
                 $row['serial'],
                 $row['cont_inicial'],
@@ -480,7 +480,7 @@ class Machines extends MY_Controller {
         $file = fopen('php://output', 'w');
 
 
-        $header = array("ID", "Ponto", "Nomefan", "Email", "Responsavel", "Telefone", "cidade", "Created Date");
+        $header = array("ID", "Ponto", "Email", "Responsavel", "Telefone", "cidade", "Created Date");
 
 
 
