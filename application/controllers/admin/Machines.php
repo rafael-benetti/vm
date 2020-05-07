@@ -80,7 +80,7 @@ class Machines extends MY_Controller {
             $data[] = array(
                 $row['id_maquina'],                
                 $row['nome_tipo'],
-                $row['nome_ponto'],
+                $row['nome_ponto'].'   '.$row['nomefan'],
                 $row['observacoes_equip'],
                 $row['serial'],
                 $row['cont_inicial'],

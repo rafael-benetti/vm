@@ -99,6 +99,7 @@ class Operar_model extends CI_Model {
 				`MQ`.`serial`, 
 				`MQ`.`valorvenda`, 
 				`PT`.`ponto`, 
+                                `PT`.`nomefan`,
 				`PT`.`comissao`, 
 				`TP`.`tipo`
 			FROM `ci_operacoes` OP

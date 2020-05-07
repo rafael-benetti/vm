@@ -45,10 +45,12 @@ class Pontos extends MY_Controller {
         foreach ($records['data'] as $row) {
 
             $status = ($row['is_active'] == 1) ? 'checked' : '';
+            
 
-            $data[] = array(
+          
+    $data[] = array(
                 $row['id'],
-                $row['ponto'],
+                $row['ponto'].'   '.$row['nomefan'],
                 $row['email'],
                 $row['telefone'],
                 inverteDataHora($row['created_at']),

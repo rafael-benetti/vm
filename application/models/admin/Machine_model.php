@@ -61,7 +61,7 @@ class Machine_model extends CI_Model {
 
         $SQL = 'SELECT m.id as id_maquina,m.item_id,  m.tipomaquina, m.pontodevenda, m.serial, m.cont_inicial, m.cont_saida_inicial, m.valorvenda,
 				m.imagem,m.noteiro,m.ficheiro,m.observacoes_equip,m.is_active, m.created_at,m.updated_at,
-				t.tipo as nome_tipo, p.ponto as nome_ponto, t.id as id_tipo, p.id as id_ponto 
+				t.tipo as nome_tipo, p.ponto as nome_ponto, p.nomefan as nomefan, t.id as id_tipo, p.id as id_ponto 
 			FROM ci_machines as m 
 				INNER JOIN ci_tipos as t ON t.id = m.tipomaquina 
 				INNER JOIN ci_pontos as p ON p.id=m.pontodevenda ';
@@ -96,7 +96,7 @@ class Machine_model extends CI_Model {
 
         $this->db->select('m.id as id_maquina, m.nome_imagem, m.item_id, m.tipomaquina, m.pontodevenda, m.serial, m.cont_inicial, m.cont_saida_inicial, m.valorvenda,
 				m.imagem,m.noteiro,m.ficheiro,m.observacoes_equip,m.is_active, m.created_at,m.updated_at,
-				t.tipo as nome_tipo, p.ponto as nome_ponto, t.id as id_tipo, p.id as id_ponto');
+				t.tipo as nome_tipo, p.ponto as nome_ponto, p.nomefan as nomefan, t.id as id_tipo, p.id as id_ponto');
         $this->db->from('ci_machines m');
         $this->db->where('m.id', $id);
         $this->db->join('ci_tipos t', 't.id = m.tipomaquina');
@@ -111,7 +111,7 @@ class Machine_model extends CI_Model {
 
         $this->db->select('m.id as id_maquina, m.nome_imagem, m.item_id, m.tipomaquina, m.pontodevenda, m.serial, m.cont_inicial, m.cont_saida_inicial, m.valorvenda,
 				m.imagem,m.noteiro,m.ficheiro,m.observacoes_equip,m.is_active, m.created_at,m.updated_at,
-				t.tipo as nome_tipo, p.ponto as nome_ponto, t.id as id_tipo, p.id as id_ponto');
+				t.tipo as nome_tipo, p.ponto as nome_ponto, p.nomefan as nomefan, t.id as id_tipo, p.id as id_ponto');
         $this->db->from('ci_machines m');
         $this->db->where('m.pontodevenda', $ponto_id);
         $this->db->join('ci_tipos t', 't.id = m.tipomaquina');

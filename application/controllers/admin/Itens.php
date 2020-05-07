@@ -21,11 +21,13 @@ class Itens extends MY_Controller {
 	}
         
         public function view_logs($id_item) {
-
         $dados['item'] = $this->item_model->get_itens_by_id($id_item);
         $this->load->view('admin/includes/_header');
         $this->load->view('admin/itens/item_list_log', $dados);
         $this->load->view('admin/includes/_footer');
+        
+        
+        
        }
        
        public function add_log() {

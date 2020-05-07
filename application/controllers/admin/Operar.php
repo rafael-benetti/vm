@@ -290,7 +290,8 @@ class Operar extends MY_Controller {
             $status = ($row['is_active'] == 1) ? 'checked' : '';
 
             $id = $row['id'];
-            $ponto = $row['ponto'];
+            
+            $ponto = $row['ponto']. '  '. $row['nomefan'];
             $tipo = $row['tipo'];
             $serial = $row['serial'];
 
