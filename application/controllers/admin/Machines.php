@@ -73,14 +73,17 @@ class Machines extends MY_Controller {
             $status = ($row['is_active'] == 1) ? 'checked' : '';
             
             $qtde_estoque = $this->machine_model->get_total_estoque_machines($row['id_maquina']);
-            
-       
-            
+           $operador= $this->machine_model->get_operador_by_machine($row['id_maquina']);
+    $dados_operador = '';
+           if($operador)
+            $dados_operador =  '<a href="'.base_url('admin/users/ver_maquinas/'.$operador->user_id.'').'">'.$operador->firstname.' '.$operador->lastname.'</a>';
+              
 
             $data[] = array(
                 $row['id_maquina'],                
                 $row['nome_tipo'],
                 $row['nome_ponto'],
+                $dados_operador,
                 $row['observacoes_equip'],
                 $row['serial'],
                 $row['cont_inicial'],

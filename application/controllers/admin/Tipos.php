@@ -98,13 +98,24 @@ class Tipos extends MY_Controller {
             $file_img_tipos = $this->input->post('file_img_tipos');
             $file_img_tipos = $this->security->xss_clean($file_img_tipos);
             $file_tipo = $file_img_tipos;
-            $config['upload_path'] = $this->config->item('folder_images') . '/tipos/';
-            $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            $this->load->library('upload', $config);
-            if ($this->upload->do_upload('file_tipo')) {
+            
+            
+            $config = array(
+                            'upload_path' => $this->config->item('folder_images') . 'tipos/',
+                            'allowed_types' => 'jpg|jpeg|png|gif|JPG|PNG|JPEG',
+                            'file_name' => $this->input->post('tipo'),
+                            'overwrite' => true,
+                            'max_size' => '50000',
+                            'user_file' => 'file_img_tipos'
+                        );
+                        $this->load->library('upload', $config);
+                        
+        
+            if ($this->upload->do_upload('file_img_tipos')) {
                 $upload_data = $this->upload->data();
                 $file_tipo = $upload_data['file_name'];
             }
+     
             
             
             

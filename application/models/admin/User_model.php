@@ -119,6 +119,13 @@
 			$query = $this->db->get_where('ci_users', array('id' => $id));
 			return $result = $query->row_array();
 		}
+                public function get_dados_usuario($id){
+			 $this->db->from('ci_users');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        return $query->row();
+		}
+                
 
 		//---------------------------------------------------
 		// Edit user Record

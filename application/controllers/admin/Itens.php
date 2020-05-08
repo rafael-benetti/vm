@@ -5,6 +5,7 @@ class Itens extends MY_Controller {
 		auth_check(); // check login auth
                 		$this->rbac->check_module_access();
 		$this->load->model('admin/item_model', 'item_model');
+		$this->load->model('admin/user_model', 'user_model');
                 $this->load->model('admin/Admin_model', 'Admin_model');
 	}
 	// padrão do projeto vm ---------------------------
@@ -106,13 +107,16 @@ class Itens extends MY_Controller {
         $data = array();       
 
         foreach ($records['data'] as $row) {
+            
+            $dados_usuario = $this->user_model->get_dados_usuario($row['user_id']);
+          //  var_dump($row['user_id']); exit;
           
             $data[] = array(
                 $row['id'],
                 $row['data_log'],
                 $row['tipo_operacao'],
                 $row['qtde'],
-                $row['user_id']
+                $dados_usuario->firstname. ' '.$dados_usuario->lastname
                
             );
         }

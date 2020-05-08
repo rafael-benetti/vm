@@ -104,6 +104,18 @@ class Machine_model extends CI_Model {
 
         return $this->db->get()->row_array();
     }
+    public function get_operador_by_machine($id) {
+
+
+
+        $this->db->select('u.firstname, u.lastname, u.id as user_id');
+        $this->db->from('ci_users u');
+        $this->db->where('um.maq_id', $id);
+        $this->db->join('ci_users_machines um', 'um.user_id = u.id'); 
+        $query = $this->db->get();
+        return $query->row();
+        
+    }
 
     public function get_machine_by_ponto($ponto_id) {
 

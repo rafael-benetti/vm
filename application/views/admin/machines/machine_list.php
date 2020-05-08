@@ -58,6 +58,7 @@
               <th>#ID</th>
               <th>Máquina</th>
               <th>Ponto</th>
+              <th>Operador</th>
               <th>Descrição</th>
               <th>Serial</th>
               <th>Cont. Inicial</th>
@@ -110,14 +111,15 @@
     { "targets": 0, "name": "id_maquina", 'searchable':false, 'orderable':true},
     { "targets": 1, "name": "tipo", 'searchable':true, 'orderable':true},
     { "targets": 2, "name": "ponto", 'searchable':true, 'orderable':true},
-    { "targets": 3, "name": "descricao", 'searchable':false, 'orderable':false},
-    { "targets": 4, "name": "serial", 'searchable':false, 'orderable':false},
-    { "targets": 5, "name": "cont_inicial", 'searchable':false, 'orderable':false},
-    { "targets": 6, "name": "cont_saida_inicial", 'searchable':false, 'orderable':false},
-    { "targets": 7, "name": "valorvenda", 'searchable':false, 'orderable':false},
-    { "targets": 8, "name": "estoque", 'searchable':false, 'orderable':false},
-    { "targets": 9, "name": "is_active", 'searchable':false, 'orderable':false},
-    { "targets": 10, "name": "Ações", 'searchable':false, 'orderable':false,'width':'100px'}
+    { "targets": 3, "name": "operador", 'searchable':true, 'orderable':true},
+    { "targets": 4, "name": "descricao", 'searchable':false, 'orderable':false},
+    { "targets": 5, "name": "serial", 'searchable':false, 'orderable':false},
+    { "targets": 6, "name": "cont_inicial", 'searchable':false, 'orderable':false},
+    { "targets": 7, "name": "cont_saida_inicial", 'searchable':false, 'orderable':false},
+    { "targets": 8, "name": "valorvenda", 'searchable':false, 'orderable':false},
+    { "targets": 9, "name": "estoque", 'searchable':false, 'orderable':false},
+    { "targets": 10, "name": "is_active", 'searchable':false, 'orderable':false},
+    { "targets": 11, "name": "Ações", 'searchable':false, 'orderable':false,'width':'100px'}
 
     ]
 

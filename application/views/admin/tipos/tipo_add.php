@@ -18,7 +18,7 @@
 
                 <?php $this->load->view('admin/includes/_messages.php') ?>
 
-                <?php echo form_open(base_url('admin/tipos/add'), 'class="form-horizontal"'); ?> 
+                <?php echo form_open(base_url('admin/tipos/add'), 'class="form-horizontal" enctype="multipart/form-data"'); ?> 
                 <?php "<br />"; ?>
 
                 <div class="form-group">
