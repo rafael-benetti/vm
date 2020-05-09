@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 06-Maio-2020 às 02:36
--- Versão do servidor: 10.1.38-MariaDB
--- versão do PHP: 5.6.40
+-- Host: localhost:3306
+-- Tempo de geração: 09/05/2020 às 08:46
+-- Versão do servidor: 5.6.41-84.1
+-- Versão do PHP: 7.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `vmsis`
+-- Banco de dados: `vmsys_vm`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ci_admin`
+-- Estrutura para tabela `ci_admin`
 --
 
 CREATE TABLE `ci_admin` (
@@ -52,16 +52,16 @@ CREATE TABLE `ci_admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `ci_admin`
+-- Fazendo dump de dados para tabela `ci_admin`
 --
 
 INSERT INTO `ci_admin` (`admin_id`, `admin_role_id`, `username`, `firstname`, `lastname`, `email`, `mobile_no`, `image`, `password`, `last_login`, `is_verify`, `is_admin`, `is_active`, `is_supper`, `token`, `password_reset_code`, `last_ip`, `contrato`, `created_at`, `updated_at`) VALUES
-(31, 1, 'superadmin33', 'Rafael', 'Benetti', 'marketing@altechindustria.com.br', '47997799705', '', '$2y$10$3h721xTsJbI6WX0/oS4n.eVFAvsfcZ1vIIMnoDROrbBBOrlLCg86y', '0000-00-00 00:00:00', 1, 1, 1, 1, '', '', '', '', '2019-01-16 06:01:58', '2020-01-23 00:00:00');
+(31, 1, 'superadmin', 'Rafael', 'Benetti', 'marketing@altechindustria.com.br', '47997799705', '', '$2y$10$3h721xTsJbI6WX0/oS4n.eVFAvsfcZ1vIIMnoDROrbBBOrlLCg86y', '0000-00-00 00:00:00', 1, 1, 1, 1, '', '', '', '', '2019-01-16 06:01:58', '2020-01-23 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ci_admin_roles`
+-- Estrutura para tabela `ci_admin_roles`
 --
 
 CREATE TABLE `ci_admin_roles` (
@@ -75,7 +75,7 @@ CREATE TABLE `ci_admin_roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `ci_admin_roles`
+-- Fazendo dump de dados para tabela `ci_admin_roles`
 --
 
 INSERT INTO `ci_admin_roles` (`admin_role_id`, `admin_role_title`, `admin_role_status`, `admin_role_created_by`, `admin_role_created_on`, `admin_role_modified_by`, `admin_role_modified_on`) VALUES
@@ -86,26 +86,7 @@ INSERT INTO `ci_admin_roles` (`admin_role_id`, `admin_role_title`, `admin_role_s
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ci_calendar`
---
-
-CREATE TABLE `ci_calendar` (
-  `id` int(11) NOT NULL,
-  `title` varchar(126) DEFAULT NULL,
-  `description` text,
-  `color` varchar(24) DEFAULT NULL,
-  `start_date` date DEFAULT NULL,
-  `end_date` date DEFAULT NULL,
-  `create_at` datetime DEFAULT NULL,
-  `create_by` varchar(64) DEFAULT NULL,
-  `modified_at` datetime DEFAULT NULL,
-  `modified_by` varchar(64) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `ci_catfin`
+-- Estrutura para tabela `ci_catfin`
 --
 
 CREATE TABLE `ci_catfin` (
@@ -117,10 +98,17 @@ CREATE TABLE `ci_catfin` (
   `updated_at` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Fazendo dump de dados para tabela `ci_catfin`
+--
+
+INSERT INTO `ci_catfin` (`id`, `categorias`, `is_admin`, `is_active`, `created_at`, `updated_at`) VALUES
+(76, 'teste', 0, 1, '2020-04-11 07:04:44', '2020-04-11 07:04:44');
+
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ci_clientes`
+-- Estrutura para tabela `ci_clientes`
 --
 
 CREATE TABLE `ci_clientes` (
@@ -146,7 +134,7 @@ CREATE TABLE `ci_clientes` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ci_estoque_itens`
+-- Estrutura para tabela `ci_estoque_itens`
 --
 
 CREATE TABLE `ci_estoque_itens` (
@@ -161,18 +149,21 @@ CREATE TABLE `ci_estoque_itens` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `ci_estoque_itens`
+-- Fazendo dump de dados para tabela `ci_estoque_itens`
 --
 
 INSERT INTO `ci_estoque_itens` (`id`, `qtde`, `item_id`, `maq_id`, `user_id`, `created_at`, `updated_at`, `tipo_operacao`) VALUES
-(20, 5000, 81, 0, 31, '2020-05-04 00:00:00', '2020-05-04 00:00:00', 'entrada'),
-(21, -30, 81, 0, 31, '2020-05-05 05:53:45', '2020-05-05 05:53:45', 'saida'),
-(22, -30, 81, 0, 31, '2020-05-05 05:54:01', '2020-05-05 05:54:01', 'saida');
+(20, 5000, 81, 0, 31, '2020-05-08 08:12:14', '2020-05-08 08:12:14', 'entrada'),
+(21, 3000, 82, 0, 31, '2020-05-08 08:12:40', '2020-05-08 08:12:40', 'entrada'),
+(22, 5000, 83, 0, 31, '2020-05-08 08:22:11', '2020-05-08 08:22:11', 'entrada'),
+(23, 3000, 84, 0, 31, '2020-05-08 08:22:31', '2020-05-08 08:22:31', 'entrada'),
+(24, -60, 84, 0, 31, '2020-05-08 08:27:56', '2020-05-08 08:27:56', 'saida'),
+(25, -60, 83, 0, 31, '2020-05-08 08:28:28', '2020-05-08 08:28:28', 'saida');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ci_estoque_machine`
+-- Estrutura para tabela `ci_estoque_machine`
 --
 
 CREATE TABLE `ci_estoque_machine` (
@@ -188,33 +179,19 @@ CREATE TABLE `ci_estoque_machine` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `ci_estoque_machine`
+-- Fazendo dump de dados para tabela `ci_estoque_machine`
 --
 
 INSERT INTO `ci_estoque_machine` (`id`, `qtde`, `item_id`, `maq_id`, `user_id`, `created_at`, `updated_at`, `tipo_operacao`, `id_operacao`) VALUES
-(62, -12, 75, 46, 31, '2020-04-28 00:00:00', '2020-04-28 00:00:00', 'saida', 53),
-(63, -11, 76, 43, 31, '2020-04-28 00:00:00', '2020-04-28 00:00:00', 'saida', 54),
-(64, -1, 75, 44, 31, '2020-04-28 00:00:00', '2020-04-28 00:00:00', 'saida', 55),
-(65, 0, 75, 44, 31, '2020-04-28 00:00:00', '2020-04-28 00:00:00', 'saida', 56),
-(66, 0, 75, 44, 31, '2020-04-28 00:00:00', '2020-04-28 00:00:00', 'saida', 57),
-(67, -1, 75, 44, 31, '2020-04-28 00:00:00', '2020-04-28 00:00:00', 'saida', 58),
-(68, -5, 75, 44, 31, '2020-04-28 00:00:00', '2020-04-28 00:00:00', 'saida', 59),
-(69, -10, 75, 44, 31, '2020-04-28 00:00:00', '2020-04-28 00:00:00', 'saida', 60),
-(70, 100, 76, 43, 31, '2020-04-28 00:00:00', '2020-04-28 00:00:00', 'entrada', 0),
-(71, 100, 76, 43, 31, '2020-04-28 00:00:00', '2020-04-28 00:00:00', 'saida', 0),
-(72, 100, 76, 43, 31, '2020-04-29 00:00:00', '2020-04-29 00:00:00', 'saida', 0),
-(73, 100, 76, 43, 31, '2020-04-29 00:00:00', '2020-04-29 00:00:00', 'saida', 0),
-(74, 100, 76, 43, 31, '2020-04-29 00:00:00', '2020-04-29 00:00:00', 'saida', 0),
-(75, -100, 76, 43, 31, '2020-04-29 00:00:00', '2020-04-29 00:00:00', 'saida', 0),
-(76, -500, 76, 43, 31, '2020-04-29 00:00:00', '2020-04-29 00:00:00', 'saida', 0),
-(77, 100, 75, 46, 31, '2020-04-30 00:00:00', '2020-04-30 00:00:00', 'entrada', 0),
-(78, 30, 81, 48, 31, '2020-05-05 05:53:45', '2020-05-05 05:53:45', 'entrada', 0),
-(79, 30, 81, 47, 31, '2020-05-05 05:54:01', '2020-05-05 05:54:01', 'entrada', 0);
+(78, 60, 84, 48, 31, '2020-05-08 08:27:56', '2020-05-08 08:27:56', 'entrada', 0),
+(79, 60, 83, 47, 31, '2020-05-08 08:28:28', '2020-05-08 08:28:28', 'entrada', 0),
+(80, -1, 84, 48, 31, '2020-05-08 08:32:49', '2020-05-08 08:32:49', 'saida', 61),
+(81, -1, 83, 47, 31, '2020-05-08 08:33:50', '2020-05-08 08:33:50', 'saida', 62);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ci_financeiro`
+-- Estrutura para tabela `ci_financeiro`
 --
 
 CREATE TABLE `ci_financeiro` (
@@ -235,7 +212,7 @@ CREATE TABLE `ci_financeiro` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ci_general_settings`
+-- Estrutura para tabela `ci_general_settings`
 --
 
 CREATE TABLE `ci_general_settings` (
@@ -265,7 +242,7 @@ CREATE TABLE `ci_general_settings` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `ci_general_settings`
+-- Fazendo dump de dados para tabela `ci_general_settings`
 --
 
 INSERT INTO `ci_general_settings` (`id`, `favicon`, `logo`, `application_name`, `timezone`, `currency`, `copyright`, `email_from`, `smtp_host`, `smtp_port`, `smtp_user`, `smtp_pass`, `facebook_link`, `twitter_link`, `google_link`, `youtube_link`, `linkedin_link`, `instagram_link`, `recaptcha_secret_key`, `recaptcha_site_key`, `recaptcha_lang`, `created_date`, `updated_date`) VALUES
@@ -274,7 +251,7 @@ INSERT INTO `ci_general_settings` (`id`, `favicon`, `logo`, `application_name`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ci_itens`
+-- Estrutura para tabela `ci_itens`
 --
 
 CREATE TABLE `ci_itens` (
@@ -289,16 +266,17 @@ CREATE TABLE `ci_itens` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `ci_itens`
+-- Fazendo dump de dados para tabela `ci_itens`
 --
 
 INSERT INTO `ci_itens` (`id`, `item`, `quantidade`, `valor`, `is_admin`, `is_active`, `created_at`, `updated_at`) VALUES
-(81, 'Urso Comum', '', '5.00', 0, 1, '2020-05-04 00:00:00', '2020-05-04 00:00:00');
+(83, 'Ursinho Comum', '', '4.50', 0, 1, '2020-05-08 08:05:11', '2020-05-08 08:05:11'),
+(84, 'Ursinho Prêmium', '', '8.50', 0, 1, '2020-05-08 08:05:31', '2020-05-08 08:05:31');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ci_machines`
+-- Estrutura para tabela `ci_machines`
 --
 
 CREATE TABLE `ci_machines` (
@@ -322,17 +300,17 @@ CREATE TABLE `ci_machines` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `ci_machines`
+-- Fazendo dump de dados para tabela `ci_machines`
 --
 
 INSERT INTO `ci_machines` (`id`, `tipomaquina`, `pontodevenda`, `serial`, `cont_inicial`, `cont_saida_inicial`, `valorvenda`, `imagem`, `noteiro`, `ficheiro`, `observacoes_equip`, `is_active`, `created_at`, `updated_at`, `nome_imagem`, `qtde_insumos`, `item_id`) VALUES
-(47, 73, 45, 1212, 0, 0, '500.00', '', '1', '1', 'teste', '1', '2020-05-04 00:00:00', '2020-05-05 05:05:44', 'contador_inicial_47.jpg', 0, 81),
-(48, 74, 45, 1010, 1, 0, '5.00', '', '1', '1', 'teste', '1', '2020-05-05 05:52:22', '2020-05-05 05:52:22', 'contador_inicial_48.png', 0, 81);
+(48, 79, 46, 1515, 100, 0, '5.00', '', '1', '1', 'Ok para operar', '1', '2020-05-08 08:27:15', '2020-05-08 08:27:15', 'contador_inicial_48.png', 0, 84),
+(47, 80, 46, 1212, 1, 0, '5.00', '', '1', '1', 'Ok para operar', '1', '2020-05-08 08:26:11', '2020-05-08 08:26:11', 'contador_inicial_47.png', 0, 83);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ci_operacoes`
+-- Estrutura para tabela `ci_operacoes`
 --
 
 CREATE TABLE `ci_operacoes` (
@@ -359,10 +337,18 @@ CREATE TABLE `ci_operacoes` (
   `saidas` double NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Fazendo dump de dados para tabela `ci_operacoes`
+--
+
+INSERT INTO `ci_operacoes` (`id`, `maq_id`, `cont_anterior`, `cont_atual`, `cont_saida_anterior`, `cont_saida_atual`, `vendas`, `qnt_vendas`, `saldo`, `imagem`, `imagem_cont_saida`, `status_op`, `observacoes_equip`, `is_active`, `created_at`, `updated_at`, `ponto`, `user_id`, `qtde_saida`, `valor_insumo`, `saidas`) VALUES
+(62, 47, 1, 21, 0, 1, '100', '20', '95.5', '12.png', '13.png', '0', 'ok', '1', '2020-05-08 20:33:50', '2020-05-08 20:33:50', 46, 31, 1, 4.5, 4.5),
+(61, 48, 100, 110, 0, 1, '50', '10', '41.5', '1.png', '11.png', '0', 'ok', '1', '2020-05-08 20:32:49', '2020-05-08 20:32:49', 46, 31, 1, 8.5, 8.5);
+
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ci_pontos`
+-- Estrutura para tabela `ci_pontos`
 --
 
 CREATE TABLE `ci_pontos` (
@@ -389,17 +375,16 @@ CREATE TABLE `ci_pontos` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `ci_pontos`
+-- Fazendo dump de dados para tabela `ci_pontos`
 --
 
 INSERT INTO `ci_pontos` (`id`, `ponto`, `nomefan`, `email`, `comissao`, `responsavel`, `telefone`, `endereco`, `numero`, `cidade`, `estado`, `latitude`, `longitude`, `is_admin`, `is_active`, `created_at`, `updated_at`, `bairro`, `cep`, `tipo_comissao`) VALUES
-(45, 'Shopping', 'Andorinhas', 'teste@teste.com', 10, 'Rafa', '(37) 73738-3838', 'Rua Dionísio Moraes', '174', 'Sapucaia do Sul', 'RS', '-29.8387232', '-51.1277841', 0, 1, '2020-05-04 00:00:00', '2020-05-05 08:05:18', 'Ipiranga', '93230-450', ''),
-(46, 'In officiis consequa', 'Quidem enim id qui ', 'docop@mailinator.com', 64, 'Nisi sunt possimus', '(45) 64564-5645', 'shsdfghsdfgsdf', 'Quo sint sed excepte', 'Itapema', 'SC', '', '', 0, 1, '2020-05-05 00:00:00', '2020-05-05 00:00:00', 'gsgsdg', '88220-000', 'percentual');
+(46, 'Shopping Sapucaia do Sul', '', 'sap@teste.com', 10, 'Victor', '(51) 98798-7987', 'Rua Tenente Timbauva', '177', 'Sapucaia do Sul', 'RS', '-29.8413714', '-51.1509928', 0, 1, '2020-05-08 08:05:22', '2020-05-08 08:05:22', 'Capão da Cruz', '93226-540', 'percentual');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ci_rotas`
+-- Estrutura para tabela `ci_rotas`
 --
 
 CREATE TABLE `ci_rotas` (
@@ -407,17 +392,10 @@ CREATE TABLE `ci_rotas` (
   `nome` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Extraindo dados da tabela `ci_rotas`
---
-
-INSERT INTO `ci_rotas` (`id`, `nome`) VALUES
-(10, 't1');
-
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ci_rotas_pontos`
+-- Estrutura para tabela `ci_rotas_pontos`
 --
 
 CREATE TABLE `ci_rotas_pontos` (
@@ -426,18 +404,10 @@ CREATE TABLE `ci_rotas_pontos` (
   `ponto_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Extraindo dados da tabela `ci_rotas_pontos`
---
-
-INSERT INTO `ci_rotas_pontos` (`id`, `rota_id`, `ponto_id`) VALUES
-(3, 10, 45),
-(4, 10, 46);
-
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ci_tipos`
+-- Estrutura para tabela `ci_tipos`
 --
 
 CREATE TABLE `ci_tipos` (
@@ -451,17 +421,17 @@ CREATE TABLE `ci_tipos` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `ci_tipos`
+-- Fazendo dump de dados para tabela `ci_tipos`
 --
 
 INSERT INTO `ci_tipos` (`id`, `tipo`, `is_admin`, `is_active`, `created_at`, `updated_at`, `nome_imagem`) VALUES
-(73, 'Grua Unicórnio', 0, 1, '2020-05-04 00:00:00', '2020-05-04 00:00:00', 'WhatsApp Image 2020-04-21 at 14.32.17.jpeg'),
-(74, 'Grua Vintage', 0, 1, '2020-05-05 05:05:13', '2020-05-05 05:05:13', '');
+(80, 'Grua Vintage', 0, 1, '2020-05-08 08:05:30', '2020-05-08 08:05:30', 'Grua_Vintage.png'),
+(79, 'Grua Black', 0, 1, '2020-05-08 08:05:16', '2020-05-08 08:05:16', 'Grua_Black.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ci_users`
+-- Estrutura para tabela `ci_users`
 --
 
 CREATE TABLE `ci_users` (
@@ -486,16 +456,16 @@ CREATE TABLE `ci_users` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `ci_users`
+-- Fazendo dump de dados para tabela `ci_users`
 --
 
 INSERT INTO `ci_users` (`id`, `username`, `firstname`, `lastname`, `email`, `mobile_no`, `password`, `address`, `role`, `is_active`, `is_verify`, `is_admin`, `token`, `password_reset_code`, `last_ip`, `created_at`, `updated_at`, `profile_id`) VALUES
-(48, 'dobeh', 'Odessa', 'Thompson', 'hocegu@mailinator.net', '(56) 46546-5465', '$2y$10$y2EC7VohZ60Ti4WvmmCYSOXlBnlKxUk/GyOsthI0DKlJ32.pD5WGO', '', 1, 1, 0, 0, '', '', '', '2020-05-05 00:00:00', '2020-05-05 00:00:00', 2);
+(51, 'rafa', 'Rafael', 'Benetti', 'rafa@rafa.com', '(47) 99999-9999', '$2y$10$pV7ceT31/PcuUQVxJPrfbeQrs90.H4I49/ZfggeaPbhIMBfmWy51m', '', 1, 1, 0, 0, '', '', '', '2020-05-08 08:05:37', '2020-05-08 08:05:37', 2);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ci_users_machines`
+-- Estrutura para tabela `ci_users_machines`
 --
 
 CREATE TABLE `ci_users_machines` (
@@ -505,10 +475,18 @@ CREATE TABLE `ci_users_machines` (
   `ponto_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Fazendo dump de dados para tabela `ci_users_machines`
+--
+
+INSERT INTO `ci_users_machines` (`id`, `user_id`, `maq_id`, `ponto_id`) VALUES
+(5, 51, 48, 46),
+(6, 51, 47, 46);
+
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ci_users_pontos`
+-- Estrutura para tabela `ci_users_pontos`
 --
 
 CREATE TABLE `ci_users_pontos` (
@@ -520,7 +498,7 @@ CREATE TABLE `ci_users_pontos` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ci_user_profile`
+-- Estrutura para tabela `ci_user_profile`
 --
 
 CREATE TABLE `ci_user_profile` (
@@ -530,7 +508,7 @@ CREATE TABLE `ci_user_profile` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `ci_user_profile`
+-- Fazendo dump de dados para tabela `ci_user_profile`
 --
 
 INSERT INTO `ci_user_profile` (`id`, `nome`, `perfil_id`) VALUES
@@ -540,7 +518,7 @@ INSERT INTO `ci_user_profile` (`id`, `nome`, `perfil_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `module`
+-- Estrutura para tabela `module`
 --
 
 CREATE TABLE `module` (
@@ -553,7 +531,7 @@ CREATE TABLE `module` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `module`
+-- Fazendo dump de dados para tabela `module`
 --
 
 INSERT INTO `module` (`module_id`, `module_name`, `controller_name`, `fa_icon`, `operation`, `sort_order`) VALUES
@@ -566,7 +544,7 @@ INSERT INTO `module` (`module_id`, `module_name`, `controller_name`, `fa_icon`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `module_access`
+-- Estrutura para tabela `module_access`
 --
 
 CREATE TABLE `module_access` (
@@ -577,7 +555,7 @@ CREATE TABLE `module_access` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `module_access`
+-- Fazendo dump de dados para tabela `module_access`
 --
 
 INSERT INTO `module_access` (`id`, `admin_role_id`, `module`, `operation`) VALUES
@@ -612,264 +590,252 @@ INSERT INTO `module_access` (`id`, `admin_role_id`, `module`, `operation`) VALUE
 (29, 1, 'clientes', 'change_status');
 
 --
--- Indexes for dumped tables
+-- Índices de tabelas apagadas
 --
 
 --
--- Indexes for table `ci_admin`
+-- Índices de tabela `ci_admin`
 --
 ALTER TABLE `ci_admin`
   ADD PRIMARY KEY (`admin_id`);
 
 --
--- Indexes for table `ci_admin_roles`
+-- Índices de tabela `ci_admin_roles`
 --
 ALTER TABLE `ci_admin_roles`
   ADD PRIMARY KEY (`admin_role_id`);
 
 --
--- Indexes for table `ci_calendar`
---
-ALTER TABLE `ci_calendar`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `ci_catfin`
+-- Índices de tabela `ci_catfin`
 --
 ALTER TABLE `ci_catfin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ci_clientes`
+-- Índices de tabela `ci_clientes`
 --
 ALTER TABLE `ci_clientes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ci_estoque_itens`
+-- Índices de tabela `ci_estoque_itens`
 --
 ALTER TABLE `ci_estoque_itens`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ci_estoque_machine`
+-- Índices de tabela `ci_estoque_machine`
 --
 ALTER TABLE `ci_estoque_machine`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ci_financeiro`
+-- Índices de tabela `ci_financeiro`
 --
 ALTER TABLE `ci_financeiro`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ci_general_settings`
+-- Índices de tabela `ci_general_settings`
 --
 ALTER TABLE `ci_general_settings`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ci_itens`
+-- Índices de tabela `ci_itens`
 --
 ALTER TABLE `ci_itens`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ci_machines`
+-- Índices de tabela `ci_machines`
 --
 ALTER TABLE `ci_machines`
   ADD UNIQUE KEY `id` (`id`),
   ADD KEY `nomedamaquina` (`cont_inicial`);
 
 --
--- Indexes for table `ci_operacoes`
+-- Índices de tabela `ci_operacoes`
 --
 ALTER TABLE `ci_operacoes`
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- Indexes for table `ci_pontos`
+-- Índices de tabela `ci_pontos`
 --
 ALTER TABLE `ci_pontos`
   ADD UNIQUE KEY `id` (`id`),
   ADD KEY `ponto` (`ponto`);
 
 --
--- Indexes for table `ci_rotas`
+-- Índices de tabela `ci_rotas`
 --
 ALTER TABLE `ci_rotas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ci_rotas_pontos`
+-- Índices de tabela `ci_rotas_pontos`
 --
 ALTER TABLE `ci_rotas_pontos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ci_tipos`
+-- Índices de tabela `ci_tipos`
 --
 ALTER TABLE `ci_tipos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ci_users`
+-- Índices de tabela `ci_users`
 --
 ALTER TABLE `ci_users`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ci_users_machines`
+-- Índices de tabela `ci_users_machines`
 --
 ALTER TABLE `ci_users_machines`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ci_users_pontos`
+-- Índices de tabela `ci_users_pontos`
 --
 ALTER TABLE `ci_users_pontos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ci_user_profile`
+-- Índices de tabela `ci_user_profile`
 --
 ALTER TABLE `ci_user_profile`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `module`
+-- Índices de tabela `module`
 --
 ALTER TABLE `module`
   ADD PRIMARY KEY (`module_id`);
 
 --
--- Indexes for table `module_access`
+-- Índices de tabela `module_access`
 --
 ALTER TABLE `module_access`
   ADD PRIMARY KEY (`id`),
   ADD KEY `RoleId` (`admin_role_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de tabelas apagadas
 --
 
 --
--- AUTO_INCREMENT for table `ci_admin`
+-- AUTO_INCREMENT de tabela `ci_admin`
 --
 ALTER TABLE `ci_admin`
   MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
--- AUTO_INCREMENT for table `ci_admin_roles`
+-- AUTO_INCREMENT de tabela `ci_admin_roles`
 --
 ALTER TABLE `ci_admin_roles`
   MODIFY `admin_role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `ci_calendar`
---
-ALTER TABLE `ci_calendar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
-
---
--- AUTO_INCREMENT for table `ci_catfin`
+-- AUTO_INCREMENT de tabela `ci_catfin`
 --
 ALTER TABLE `ci_catfin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
--- AUTO_INCREMENT for table `ci_clientes`
+-- AUTO_INCREMENT de tabela `ci_clientes`
 --
 ALTER TABLE `ci_clientes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
--- AUTO_INCREMENT for table `ci_estoque_itens`
+-- AUTO_INCREMENT de tabela `ci_estoque_itens`
 --
 ALTER TABLE `ci_estoque_itens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT for table `ci_estoque_machine`
+-- AUTO_INCREMENT de tabela `ci_estoque_machine`
 --
 ALTER TABLE `ci_estoque_machine`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
--- AUTO_INCREMENT for table `ci_financeiro`
+-- AUTO_INCREMENT de tabela `ci_financeiro`
 --
 ALTER TABLE `ci_financeiro`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- AUTO_INCREMENT for table `ci_general_settings`
+-- AUTO_INCREMENT de tabela `ci_general_settings`
 --
 ALTER TABLE `ci_general_settings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `ci_itens`
+-- AUTO_INCREMENT de tabela `ci_itens`
 --
 ALTER TABLE `ci_itens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
--- AUTO_INCREMENT for table `ci_machines`
+-- AUTO_INCREMENT de tabela `ci_machines`
 --
 ALTER TABLE `ci_machines`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
--- AUTO_INCREMENT for table `ci_operacoes`
+-- AUTO_INCREMENT de tabela `ci_operacoes`
 --
 ALTER TABLE `ci_operacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
--- AUTO_INCREMENT for table `ci_pontos`
+-- AUTO_INCREMENT de tabela `ci_pontos`
 --
 ALTER TABLE `ci_pontos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
--- AUTO_INCREMENT for table `ci_rotas`
+-- AUTO_INCREMENT de tabela `ci_rotas`
 --
 ALTER TABLE `ci_rotas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `ci_rotas_pontos`
+-- AUTO_INCREMENT de tabela `ci_rotas_pontos`
 --
 ALTER TABLE `ci_rotas_pontos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `ci_tipos`
+-- AUTO_INCREMENT de tabela `ci_tipos`
 --
 ALTER TABLE `ci_tipos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
--- AUTO_INCREMENT for table `ci_users`
+-- AUTO_INCREMENT de tabela `ci_users`
 --
 ALTER TABLE `ci_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
--- AUTO_INCREMENT for table `ci_users_machines`
+-- AUTO_INCREMENT de tabela `ci_users_machines`
 --
 ALTER TABLE `ci_users_machines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `ci_users_pontos`
+-- AUTO_INCREMENT de tabela `ci_users_pontos`
 --
 ALTER TABLE `ci_users_pontos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT for table `ci_user_profile`
+-- AUTO_INCREMENT de tabela `ci_user_profile`
 --
 ALTER TABLE `ci_user_profile`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
