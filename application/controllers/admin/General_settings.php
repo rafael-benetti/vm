@@ -32,6 +32,7 @@ class General_settings extends MY_Controller {
 		
 		$data = array(
 			'application_name' => $this->input->post('application_name'),
+                        'proprietario' => $this->input->post('proprietario'),
 			'timezone' => $this->input->post('timezone'),
 			'currency' => $this->input->post('currency'),
 			'copyright' => $this->input->post('copyright'),

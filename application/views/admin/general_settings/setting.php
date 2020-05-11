@@ -6,7 +6,7 @@
             <div class="card-header">
               <div class="d-inline-block">
                   <h3 class="card-title"> <i class="fa fa-plus"></i>
-                  General Settings </h3>
+                  Opções Gerais </h3>
               </div>
             </div>
             <div class="card-body">   
@@ -51,8 +51,12 @@
                            <input type="hidden" name="old_logo" value="<?php echo html_escape($general_settings['logo']); ?>">
                        </div>
                         <div class="form-group">
-                            <label class="control-label">Application Name</label>
+                            <label class="control-label">Sistema</label>
                             <input type="text" class="form-control" name="application_name" placeholder="application name" value="<?php echo html_escape($general_settings['application_name']); ?>">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Proprietário</label>
+                            <input type="text" class="form-control" name="proprietario" placeholder="proprietario" value="<?php echo html_escape($general_settings['proprietario']); ?>">
                         </div>
                         <div class="form-group">
                             <label class="control-label">Timezone</label>
