@@ -38,21 +38,21 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2);
 
                 <!-- Add icons to the links using the .nav-icon class
               with font-awesome or any other icon font library -->
-                 <?php if ($this->rbac->check_module_permission('admin')): ?> 
-                <li id="dashboard" class="nav-item has-treeview">
+                <?php if ($this->rbac->check_module_permission('admin')): ?> 
+                    <li id="dashboard" class="nav-item has-treeview">
 
-                    <a href="<?= base_url('admin/dashboard'); ?>" class="nav-link">
+                        <a href="<?= base_url('admin/dashboard'); ?>" class="nav-link">
 
-                        <i class="nav-icon fa fa-dashboard"></i>
+                            <i class="nav-icon fa fa-dashboard"></i>
 
-                        <p>
-                            Dashboard
-                        </p>
+                            <p>
+                                Dashboard
+                            </p>
 
-                    </a>
+                        </a>
 
-                </li>
-                  <?php endif; ?> 
+                    </li>
+                <?php endif; ?> 
 
                 <?php if ($this->rbac->check_module_permission('admin')): ?> 
 
@@ -64,7 +64,7 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2);
 
                             <p>
 
-                                Cadastro de Clientes
+                                Cadastro de Admin
 
                                 <i class="right fa fa-angle-left"></i>
 
@@ -79,7 +79,7 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2);
 
                                     <i class="fa fa-circle-o nav-icon"></i>
 
-                                    <p>Listar Clientes</p>
+                                    <p>Listar Admin</p>
 
                                 </a>
 
@@ -90,7 +90,7 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2);
 
                                     <i class="fa fa-circle-o nav-icon"></i>
 
-                                    <p>Add Clientes</p>
+                                    <p>Add Admin</p>
 
                                 </a>
 
@@ -215,22 +215,22 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2);
                         </ul>
 
                     </li><?php endif; ?>
-<?php if ($this->rbac->check_module_permission('users')): ?>
+                <?php if ($this->rbac->check_module_permission('users')): ?>
                     <li id="operacoes" class="nav-item has-treeview">
 
-                    <a href="<?= base_url('admin/rotas'); ?>" class="nav-link">
+                        <a href="<?= base_url('admin/rotas'); ?>" class="nav-link">
 
-                        <i class="nav-icon fa fa-bars"></i>
+                            <i class="nav-icon fa fa-bars"></i>
 
-                        <p>
-                            Rotas
-                        </p>
+                            <p>
+                                Rotas
+                            </p>
 
-                    </a>
+                        </a>
 
-                </li>
+                    </li>
                 <?php endif; ?>
-                      <?php if ($this->rbac->check_module_permission('users')): ?>
+                <?php if ($this->rbac->check_module_permission('users')): ?>
 
                     <li id="estoque" class="nav-item has-treeview">
 
@@ -281,7 +281,7 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2);
                 <?php endif; ?>
                 <?php if ($this->rbac->check_module_permission('users')): ?>
 
-                    <li id="machines" class="nav-item has-treeview">
+                    <li id="tipos" class="nav-item has-treeview">
 
                         <a href="#" class="nav-link">
 
@@ -289,7 +289,7 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2);
 
                             <p>
 
-                                Minhas Máquinas
+                                Tipos de Máquinas
 
                                 <i class="right fa fa-angle-left"></i>
 
@@ -321,6 +321,33 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2);
 
                             </li>
 
+
+
+                        </ul>
+
+                    </li>
+
+                <?php endif; ?>
+
+                <?php if ($this->rbac->check_module_permission('users')): ?>
+
+                    <li id="machines" class="nav-item has-treeview">
+
+                        <a href="#" class="nav-link">
+
+                            <i class="nav-icon fa fa-cog"></i>
+
+                            <p>
+
+                                Minhas Máquinas
+
+                                <i class="right fa fa-angle-left"></i>
+
+                            </p>
+
+                        </a>
+
+                        <ul class="nav nav-treeview">
                             <li class="nav-item">
 
                                 <a href="<?= base_url('admin/machines'); ?>" class="nav-link">
@@ -353,7 +380,7 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2);
 
 
 
-              
+
                 <li id="operacoes" class="nav-item has-treeview">
 
                     <a href="<?= base_url('admin/operar/operar_list'); ?>" class="nav-link">
@@ -463,7 +490,7 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2);
 
                     </li>
 
-               
+
                 <?php endif; ?>
 
                 <?php if ($this->rbac->check_module_permission('tarefas_settings')): ?> 

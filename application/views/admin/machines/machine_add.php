@@ -91,7 +91,7 @@
 
                             <div class="row" style='margin-top:25px'>
                                 <div class="col-5">
-                                     <label for="firstname" class="col-md-12 control-label">Foto do contador geral da máquina</label>
+                                     <label for="firstname" class="col-md-12 control-label">Foto do contador analógico inicial</label>
                                     <div class="col-12">
                                     <?php $file_cont_inicial = (isset($rs["imagem"]) ? $rs["imagem"] : ""); ?>
                                     <div class="form-group row">
@@ -121,7 +121,7 @@
                                 </div>
                                 
                                 
-                                <div class="col-6">
+                                <div class="col-5">
                                     <div class="col-lg-8"  style='margin-top:10px'>
                                     <label for="lastname" class="col-md-12 control-label">Selecione o Tipo de Insumo</label>
                                     <div class="input-group">
