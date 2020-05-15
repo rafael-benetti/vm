@@ -150,9 +150,10 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2);
                                 </a>
 
                             </li>
+                            
                             <li class="nav-item">
 
-                                <a href="<?= base_url('admin/users/add'); ?>" class="nav-link">
+                                <a href="<?= base_url('admin/admin/add/2'); ?>" class="nav-link">
 
                                     <i class="fa fa-circle-o nav-icon"></i>
 
@@ -168,7 +169,7 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2);
 
                 <?php endif; ?>
 
-                <?php if ($this->rbac->check_module_permission('general_settings')): ?>
+                <?php if ($this->rbac->check_module_permission('ponto')): ?>
 
                     <li id="pontos" class="nav-item has-treeview">
 
@@ -230,7 +231,7 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2);
 
                     </li>
                 <?php endif; ?>
-                <?php if ($this->rbac->check_module_permission('users')): ?>
+                <?php if ($this->rbac->check_module_permission('itens')): ?>
 
                     <li id="estoque" class="nav-item has-treeview">
 
@@ -329,7 +330,7 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2);
 
                 <?php endif; ?>
 
-                <?php if ($this->rbac->check_module_permission('users')): ?>
+                <?php if ($this->rbac->check_module_permission('machines')): ?>
 
                     <li id="machines" class="nav-item has-treeview">
 

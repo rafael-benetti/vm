@@ -79,6 +79,18 @@
 		}
                 
                 
+                public function getUserByPonto($ponto_id){
+                    
+			$this->db->select('distinct(up.id) as user_id, u.firstname,u.lastname');
+			$this->db->where('up.ponto_id', $ponto_id);
+			$this->db->from('ci_users u');     
+                        $this->db->join('ci_users_machines up', 'up.user_id = u.id');
+                        $this->db->limit(1);
+                  	$query = $this->db->get();
+                   	return $result = $query->result_array();
+		}
+                
+                
                 public function get_maquinas_by_user_id($user_id){
                     
 			$this->db->select('m.nome_imagem, m.observacoes_equip as nome_maquina');

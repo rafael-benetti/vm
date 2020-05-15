@@ -16,7 +16,7 @@
            <!-- For Messages -->
             <?php $this->load->view('admin/includes/_messages.php') ?>
               
-            <?php echo form_open(base_url('admin/admin/edit/'.$admin['admin_id']), 'class="form-horizontal"' )?> 
+            <?php echo form_open(base_url('admin/admin/edit/'.$admin['id']), 'class="form-horizontal"' )?> 
               <div class="form-group">
                 <label for="username" class="col-md-2 control-label">Nome de usuário</label>
 
@@ -24,6 +24,20 @@
                   <input type="text" name="username" value="<?= $admin['username']; ?>" class="form-control" id="username" placeholder="">
                 </div>
               </div>
+           <div class="form-group">
+
+                        <label for="password" class="col-md-2 control-label">Senha</label>
+
+
+
+                        <div class="col-md-12">
+
+                            <input type="password" name="password" class="form-control" id="password" placeholder="">
+
+                        </div>
+
+                    </div>
+           
               <div class="form-group">
                 <label for="firstname" class="col-md-2 control-label">Nome</label>
 

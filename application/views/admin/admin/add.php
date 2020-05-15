@@ -93,7 +93,14 @@
                                         <select name="role" class="form-control">
                                             <option value="">Tipo de permissão</option>
                                             <?php foreach ($admin_roles as $role): ?>
+                                            
+                                            <?php
+                                            if($tipo == $role['admin_role_id']){ ?>
+                                                      <option selected="selectd" value="<?= $role['admin_role_id']; ?>"><?= $role['admin_role_title']; ?></option>
+                                          
+                                          <?php  }else{ ?>
                                                 <option value="<?= $role['admin_role_id']; ?>"><?= $role['admin_role_title']; ?></option>
+                                            <?php } ?>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>

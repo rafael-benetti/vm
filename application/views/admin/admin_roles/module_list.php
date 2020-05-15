@@ -9,10 +9,10 @@
 		<div class="card">
 			<div class="card-header">
 				<div class="d-inline-block">
-					<h3 class="card-title"><i class="fa fa-list"></i>&nbsp; Module Setting</h3>
+					<h3 class="card-title"><i class="fa fa-list"></i>&nbsp; Modulos</h3>
 				</div>
 				<div class="d-inline-block float-right">
-					<a href="<?= base_url('admin/admin_roles/module_add'); ?>" class="btn btn-success"><i class="fa fa-plus"></i> Add New Module</a>
+					<a href="<?= base_url('admin/admin_roles/module_add'); ?>" class="btn btn-success"><i class="fa fa-plus"></i> Add novo modulo</a>
 				</div>
 			</div>
 
@@ -21,11 +21,11 @@
 					<thead>
 						<tr>
 							<th width="50">ID</th>
-							<th>Module Name</th>
-							<th>Controller Name</th>
-							<th>Fa Icon</th>
-							<th>Operations</th>
-							<th width="100">Action</th>
+							<th>Modulo</th>
+							<th>Controller</th>
+							<th>Icone</th>
+							<th>Operações</th>
+							<th width="100">Ações</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -59,6 +59,16 @@
 
 <script>
   $(function () {
-    $("#example1").DataTable();
+      
+    $("#example1").DataTable({
+      
+       "language": {
+            "url": "<?= base_url() ?>assets/plugins/datatables/i18n/br.json"
+        },
+
+
+   
+
+  });
   })
 </script>

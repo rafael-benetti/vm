@@ -54,6 +54,7 @@
               <th>#ID</th>
 
               <th>Nome do Ponto</th>
+              <th>Operador</th>
 
               <th>Email</th>
 

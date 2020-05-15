@@ -5,17 +5,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Pontos extends MY_Controller {
 
     public function __construct() {
-
-
-
         parent::__construct();
-
         auth_check(); // check login auth
-
         $this->rbac->check_module_access();
-
-
-
+        $this->load->model('admin/user_model', 'user_model');
         $this->load->model('admin/ponto_model', 'ponto_model');
     }
 
@@ -34,9 +27,13 @@ class Pontos extends MY_Controller {
 
     public function datatable_json() {
 
-        $records = $this->ponto_model->get_all_pontos();
+        $records = $this->ponto_model->get_all_pontos(array('user_id'=>33));
+
+
+var_dump($records);
 
         $data = array();
+        
 
 
 
@@ -44,13 +41,17 @@ class Pontos extends MY_Controller {
 
         foreach ($records['data'] as $row) {
 
+            
             $status = ($row['is_active'] == 1) ? 'checked' : '';
+            
+            $operador = $this->user_model->getUserByPonto($row['id']);
             
 
           
     $data[] = array(
                 $row['id'],
                 $row['ponto'],
+                $operador[0]['firstname']. ' '.$operador[0]['lastname'],
                 $row['email'],
                 $row['telefone'],
                 inverteDataHora($row['created_at']),

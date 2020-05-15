@@ -13,11 +13,11 @@
         </div>
         <div class="d-inline-block float-right">
           <div class="btn-group margin-bottom-20"> 
-            <a href="<?= base_url() ?>admin/users/create_users_pdf" class="btn btn-secondary">Export PDF</a>
+            <!--<a href="<?= base_url() ?>admin/users/create_users_pdf" class="btn btn-secondary">Export PDF</a>-->
             <a href="<?= base_url() ?>admin/users/export_csv" class="btn btn-secondary">Export CSV</a>
           </div>
           <?php if($this->rbac->Check_operation_permission('add')): ?>
-            <a href="<?= base_url('admin/users/add'); ?>" class="btn btn-success"><i class="fa fa-plus"></i> Add Operador</a>
+            <a href="<?= base_url('admin/admin/add'); ?>" class="btn btn-success"><i class="fa fa-plus"></i> Add Operador</a>
           <?php endif; ?>
         </div>
       </div>
@@ -32,7 +32,7 @@
               <th>E-mail</th>
               <th>Telefone</th>
               <th>Data de Cadastro</th>
-              <th>Máquinas</th>
+              <th>Pontos / Máquinas</th>
               <th>Status</th>
               <th width="100" class="text-right">Ações</th>
             </tr>
@@ -72,14 +72,14 @@
 <script type="text/javascript">
   $("body").on("change",".tgl_checkbox",function(){
     console.log('checked');
-    $.post('<?=base_url("admin/users/change_status")?>',
+    $.post('<?=base_url("admin/admin/change_status")?>',
     {
       '<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>',
       id : $(this).data('id'),
       status : $(this).is(':checked') == true?1:0
     },
     function(data){
-      $.notify("Status Changed Successfully", "success");
+      $.notify("Status atualizado com sucesso", "success");
     });
   });
 </script>
