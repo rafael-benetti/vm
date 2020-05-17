@@ -4,7 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pontos extends MY_Controller {
 
+     private $modulo_name = 'ponto';
+    
     public function __construct() {
+        
+       
         parent::__construct();
         auth_check(); // check login auth
         $this->rbac->check_module_access();
@@ -27,13 +31,19 @@ class Pontos extends MY_Controller {
 
     public function datatable_json() {
 
-        $records = $this->ponto_model->get_all_pontos(array('user_id'=>33));
+        
+        
+        if($this->session->userdata('is_supper') == 1){
+                 $records = $this->ponto_model->get_all_pontos();
+   
+        }else{
+        
+        $records = $this->ponto_model->get_all_pontos($this->session->userdata('admin_id'));
+        }
 
-
-var_dump($records);
 
         $data = array();
-        
+
 
 
 
@@ -41,21 +51,26 @@ var_dump($records);
 
         foreach ($records['data'] as $row) {
 
-            
+
             $status = ($row['is_active'] == 1) ? 'checked' : '';
+            $bnt_status ='';
+
+            $operador = $this->user_model->getUserByPonto($row['user_id']);
             
-            $operador = $this->user_model->getUserByPonto($row['id']);
             
 
-          
-    $data[] = array(
-                $row['id'],
-                $row['ponto'],
-                $operador[0]['firstname']. ' '.$operador[0]['lastname'],
-                $row['email'],
-                $row['telefone'],
-                inverteDataHora($row['created_at']),
-                '<input class="tgl_checkbox tgl-ios" 
+            
+             
+       
+
+if(verifica_permissao($this->modulo_name, 'edit'))           
+$edit ='<a title="Edit" class="update btn btn-sm btn-warning" href="' . base_url('admin/pontos/edit/' . $row['id']) . '"> <i class="fa fa-pencil-square-o"></i></a>&nbsp;';
+
+if(verifica_permissao($this->modulo_name, 'delete'))
+$delete ='<a title="Delete" class="delete btn btn-sm btn-danger" href=' . base_url("admin/pontos/delete/" . $row['id']) . ' title="Delete" onclick="return confirm(\'Deseja realmente apagar ?\')"> <i class="fa fa-trash-o"></i></a>';
+
+if(verifica_permissao($this->modulo_name, 'change_status')){
+$bnt_status = '<input class="tgl_checkbox tgl-ios" 
 
 				data-id="' . $row['id'] . '" 
 
@@ -63,10 +78,24 @@ var_dump($records);
 
 				type="checkbox"  
 
-				' . $status . '><label for="cb_' . $row['id'] . '"></label>',
-                '<a title="Edit" class="update btn btn-sm btn-warning" href="' . base_url('admin/pontos/edit/' . $row['id']) . '"> <i class="fa fa-pencil-square-o"></i></a>
+				' . $status . '><label for="cb_' . $row['id'] . '"></label>';
+}else{
+    if($status)
+        $bnt_status = 'Ativo';
+    else
+        $bnt_status = 'Desativado';
+}
 
-				<a title="Delete" class="delete btn btn-sm btn-danger" href=' . base_url("admin/pontos/delete/" . $row['id']) . ' title="Delete" onclick="return confirm(\'Deseja realmente apagar ?\')"> <i class="fa fa-trash-o"></i></a>'
+
+$data[] = array(
+                $row['id'],
+                $row['ponto'],
+                $operador[0]['firstname'] . ' ' . $operador[0]['lastname'],
+                $row['email'],
+                $row['telefone'],
+                inverteDataHora($row['created_at']),
+                $bnt_status,
+                @$delete.@$edit
             );
         }
 
@@ -87,10 +116,12 @@ var_dump($records);
     public function add() {
 
 
+        if(!verifica_permissao($this->modulo_name, 'add')){
+                               redirect('access_denied/index/'); 
+
+        }
 
 
-
-        $this->rbac->check_operation_access(); // check opration permission
 
 
 
@@ -127,7 +158,7 @@ var_dump($records);
 
             $this->form_validation->set_rules('ponto', 'Ponto', 'trim|required');
 
-            
+
 
             $this->form_validation->set_rules('email', 'Email', 'trim|valid_email|required');
 
@@ -162,7 +193,6 @@ var_dump($records);
 
                 $data = array(
                     'ponto' => $this->input->post('ponto'),
-                   
                     'email' => $this->input->post('email'),
                     'comissao' => $this->input->post('comissao'),
                     'responsavel' => $this->input->post('responsavel'),
@@ -173,12 +203,12 @@ var_dump($records);
                     'estado' => $this->input->post('estado'),
                     'latitude' => $latitude,
                     'longitude' => $longitude,
+                    'user_id' => $this->session->userdata('admin_id'),
                     'bairro' => $this->input->post('bairro'),
                     'tipo_comissao' => $this->input->post('tipo_comissao'),
                     'cep' => $this->input->post('cep'),
-                    'created_at' => date('Y-m-d : h:m:s'),
-                    'updated_at' => date('Y-m-d : h:m:s'),
-                    
+                    'created_at' => date('Y-m-d h:i:s'),
+                    'updated_at' => date('Y-m-d h:i:s'),
                     'is_active' => $this->input->post('is_active')
                 );
 
@@ -210,7 +240,10 @@ var_dump($records);
 
 
 
-        $this->rbac->check_operation_access(); // check opration permission
+      if(!verifica_permissao($this->modulo_name, 'edit')){
+                               redirect('access_denied/index/'); 
+
+        }
 
 
 
@@ -243,7 +276,7 @@ var_dump($records);
 
 
             $this->form_validation->set_rules('ponto', 'Ponto', 'trim|required');
-            
+
             $this->form_validation->set_rules('email', 'Email', 'trim|valid_email|required');
             $this->form_validation->set_rules('responsavel', 'Responsavel', 'trim|required');
             $this->form_validation->set_rules('telefone', 'Telefone', 'trim|required');
@@ -268,7 +301,6 @@ var_dump($records);
 
                 $data = array(
                     'ponto' => $this->input->post('ponto'),
-                    
                     'email' => $this->input->post('email'),
                     'responsavel' => $this->input->post('responsavel'),
                     'telefone' => $this->input->post('telefone'),

@@ -26,11 +26,11 @@
         <div class="d-inline-block float-right">
 
           <div class="btn-group margin-bottom-20"> 
-
+<!--
             <a href="<?= base_url() ?>admin/machines/create_machines_pdf" class="btn btn-secondary">Export para PDF</a>
 
             <a href="<?= base_url() ?>admin/machines/export_csv" class="btn btn-secondary">Export para CSV</a>
-
+-->
           </div>
 
           <?php if($this->rbac->Check_operation_permission('add')): ?>

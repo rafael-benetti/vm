@@ -55,9 +55,12 @@ class Machine_model extends CI_Model {
     public function get_all_machines() {
         $wh = array();
 
+        /*
         if ($this->is_supper == "0") {
             $wh[] = " m.admin_id = '" . $this->admin_id . "' ";
         }
+         * 
+         */
 
         $SQL = 'SELECT m.id as id_maquina,m.item_id,  m.tipomaquina, m.pontodevenda, m.serial, m.cont_inicial, m.cont_saida_inicial, m.valorvenda,
 				m.imagem,m.noteiro,m.ficheiro,m.observacoes_equip,m.is_active, m.created_at,m.updated_at,

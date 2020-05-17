@@ -15,6 +15,27 @@
         }
     }
     
+     //check auth
+    if (!function_exists('verifica_permissao')) {
+        function verifica_permissao($modulo, $operacao)
+        {
+            // Get a reference to the controller object
+            $ci =& get_instance();
+            $acessos = $ci->session->userdata('module_access');
+            
+           
+            if($ci->session->userdata('is_supper'))
+			return 1;		
+                elseif(isset($acessos[$modulo][$operacao])) 
+			return 1;
+		
+		else 
+		 	return 0;
+            
+            
+        }
+    }
+    
     
 if (!function_exists('dateEmMysql')) {
 

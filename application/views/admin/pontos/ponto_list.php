@@ -22,14 +22,16 @@
         <div class="d-inline-block float-right">
 
           <div class="btn-group margin-bottom-20"> 
-
+                 <?php if(verifica_permissao('ponto','view')): ?>
+<!--
             <a href="<?= base_url() ?>admin/pontos/create_pontos_pdf" class="btn btn-secondary">Exportar para PDF</a>
 
             <a href="<?= base_url() ?>admin/pontos/export_csv" class="btn btn-secondary">Exportar para CSV</a>
-
+-->
+            <?php endif; ?>
           </div>
 
-          <?php if($this->rbac->Check_operation_permission('add')): ?>
+          <?php if(verifica_permissao('ponto','add')): ?>
 
             <a href="<?= base_url('admin/pontos/add'); ?>" class="btn btn-success"><i class="fa fa-plus"></i> Adicionar novo ponto</a>
 

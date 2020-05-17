@@ -37,13 +37,18 @@
 
 		// get all pontos for server-side datatable processing (ajax based)
 
-		public function get_all_pontos(){
+		public function get_all_pontos($user_id=0){
 
 			$wh =array();
 
 			$SQL ='SELECT * FROM ci_pontos';
 
-			$wh[] = " is_admin = 0";
+                        if($user_id > 0){
+			$wh[] = " is_admin = 0 AND user_id=".$user_id;
+                        }
+                        else{
+                           $wh[] = " is_admin = 0 "; 
+                        }
 
 			if(count($wh)>0)
 

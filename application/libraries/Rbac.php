@@ -2,6 +2,7 @@
 class RBAC 
 {	
 	private $module_access;
+        
 	function __construct()
 	{
 		$this->obj =& get_instance();
@@ -40,7 +41,7 @@ class RBAC
 		}
 		elseif($this->check_module_permission($this->obj->uri->segment(2), $this->obj->uri->segment(3))) //sending controller name
 		{
-                    echo 2; exit;
+              
 			
                          $error = false;
 		
@@ -116,8 +117,25 @@ class RBAC
 		if($this->obj->is_supper){
 			return 1;
 		}
+                elseif(isset($this->obj->module_access[$this->obj->uri->segment(1)][$operation])) 
+			return 1;
 		elseif(isset($this->obj->module_access[$this->obj->uri->segment(2)][$operation])) 
 			return 1;
+                elseif(isset($this->obj->module_access[$this->obj->uri->segment(3)][$operation])) 
+			return 1;
+		else 
+		 	return 0;
+	}
+        
+        //--------------------------------------------------------------	
+	function verifica_permissao($modulo, $operacao)
+	{
+		if($this->obj->is_supper){
+			return 1;
+		}
+                elseif(isset($this->obj->module_access[$modulo][$operacao])) 
+			return 1;
+		
 		else 
 		 	return 0;
 	}

@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Machines extends MY_Controller {
 
+      private $modulo_name = 'machines';
     public function __construct() {
 
         parent::__construct();
@@ -70,15 +71,44 @@ class Machines extends MY_Controller {
 
         foreach ($records['data'] as $row) {
 
-            $status = ($row['is_active'] == 1) ? 'checked' : '';
             
             $qtde_estoque = $this->machine_model->get_total_estoque_machines($row['id_maquina']);
            $operador= $this->machine_model->get_operador_by_machine($row['id_maquina']);
     $dados_operador = '';
            if($operador)
-            $dados_operador =  '<a href="'.base_url('admin/users/ver_maquinas/'.$operador->user_id.'').'">'.$operador->firstname.' '.$operador->lastname.'</a>';
+            $dados_operador =  $operador->firstname.' '.$operador->lastname;
+           // $dados_operador =  '<a href="'.base_url('admin/users/ver_maquinas/'.$operador->user_id.'').'">'.$operador->firstname.' '.$operador->lastname.'</a>';
               
 
+           
+                                  $status = ($row['is_active'] == 1) ? 'checked' : '';
+
+                    
+if(verifica_permissao($this->modulo_name, 'edit'))           
+$edit ='<a title="Edit" class="update btn btn-sm btn-warning" href="' . base_url('admin/machines/edit/' . $row['id_maquina']) . '"> <i class="fa fa-pencil-square-o"></i></a>';
+
+if(verifica_permissao($this->modulo_name, 'delete'))
+$delete ='<a title="Delete" class="delete btn btn-sm btn-danger" href=' . base_url("admin/machines/delete/" . $row['id_maquina']) . ' title="Delete" onclick="return confirm(\'Deseja realmente apagar?\')"> <i class="fa fa-trash-o"></i></a>';
+
+if(verifica_permissao($this->modulo_name, 'view'))
+$view ='<a title="View" class="view btn btn-sm btn-info" href="' . base_url('admin/machines/view/' . $row['id_maquina']) . '"> <i class="fa fa-eye"></i></a>';
+
+if(verifica_permissao($this->modulo_name, 'change_status')){
+$bnt_status = '<input class="tgl_checkbox tgl-ios" 
+				data-id="' . $row['id_maquina'] . '" 
+				id="cb_' . $row['id_maquina'] . '"
+				type="checkbox"  
+				' . $status . '><label for="cb_' . $row['id_maquina'] . '">
+                                </label>';
+}else{
+    if($status)
+        $bnt_status = 'Ativo';
+    else
+        $bnt_status = 'Desativado';
+}
+
+           
+           
             $data[] = array(
                 $row['id_maquina'],                
                 $row['nome_tipo'],
@@ -90,16 +120,8 @@ class Machines extends MY_Controller {
                 $row['cont_saida_inicial'],
                 $row['valorvenda'],
                 '<a title="View" class="view btn btn-sm btn-info" href="' . base_url('admin/machines/view_logs/' . $row['id_maquina']) . '"> <i class="fa fa-list"></i> ('.$qtde_estoque.') </a>',
-                '<input class="tgl_checkbox tgl-ios" 
-				data-id="' . $row['id_maquina'] . '" 
-				id="cb_' . $row['id_maquina'] . '"
-				type="checkbox"  
-				' . $status . '><label for="cb_' . $row['id_maquina'] . '">
-                                </label>',
-                '<a title="View" class="view btn btn-sm btn-info" href="' . base_url('admin/machines/view/' . $row['id_maquina']) . '"> <i class="fa fa-eye"></i></a>
-                                 <a title="Edit" class="update btn btn-sm btn-warning" href="' . base_url('admin/machines/edit/' . $row['id_maquina']) . '"> <i class="fa fa-pencil-square-o"></i></a>
-
-				<a title="Delete" class="delete btn btn-sm btn-danger" href=' . base_url("admin/machines/delete/" . $row['id_maquina']) . ' title="Delete" onclick="return confirm(\'Deseja realmente apagar?\')"> <i class="fa fa-trash-o"></i></a>'
+                $bnt_status,
+                @$view.@$delete.@$edit
             );
         }
         $records['data'] = $data;
@@ -116,6 +138,7 @@ class Machines extends MY_Controller {
     //---------------------------------------------------------------
 
     public function add() {
+       
         // $this->rbac->check_operation_access(); // check opration permission
         if ($this->input->post('submit')) {
 
@@ -204,11 +227,9 @@ class Machines extends MY_Controller {
         $where_pontos = array('is_active' => 1);
         if ($this->is_supper == "0") {
             $where_tipos = array(
-                'admin_id' => $this->admin_id,
                 'is_active' => 1
             );
             $where_pontos = array(
-                'admin_id' => $this->admin_id,
                 'is_active' => 1
             );
         }
@@ -392,11 +413,11 @@ class Machines extends MY_Controller {
         $where_pontos = array('is_active' => 1);
         if ($this->is_supper == "0") {
             $where_tipos = array(
-                'admin_id' => $this->admin_id,
+             
                 'is_active' => 1
             );
             $where_pontos = array(
-                'admin_id' => $this->admin_id,
+          
                 'is_active' => 1
             );
         }

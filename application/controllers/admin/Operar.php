@@ -3,12 +3,15 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Operar extends MY_Controller {
+    
+     private $modulo_name = 'operar';
+    
 
     public function __construct() {
 
         parent::__construct();
-        //   auth_check(); 
-        //$this->rbac->check_module_access();
+         auth_check(); 
+        $this->rbac->check_module_access();
         $this->load->model('admin/operar_model', 'operar_model');
         $this->load->model('admin/machine_model', 'machine_model');
         $this->load->model('admin/item_model', 'item_model');
@@ -175,6 +178,7 @@ class Operar extends MY_Controller {
           //  $valorcomissao = ((($valorpremio) * $comissao) / 100);
             // --------------------------------------------------------
 
+            $sangria = $this->input->post('sangria') == null ? 0 : $this->input->post('sangria') ;
             
             $data = array(
                 'ponto' => (int) $this->input->post('pontodevenda'),
@@ -182,6 +186,7 @@ class Operar extends MY_Controller {
                 'maq_id' => (int) $this->input->post('maq_id'),
                 'cont_anterior' => (int) $this->input->post('cont_anterior'),
                 'cont_atual' => (int) $this->input->post('cont_atual'),
+                'valorvenda' => grava_money($sangria ,2),
                 'cont_saida_anterior' => (int) $this->input->post('cont_saida_anterior') ,
                 'cont_saida_atual' => (int) $this->input->post('cont_saida_atual'),
                 'vendas' => $valor_total_jogadas,
@@ -271,10 +276,12 @@ class Operar extends MY_Controller {
         }
 
 
-        if ($this->session->userdata('user_id')) {
-            $where = array('OP.user_id = ' . $this->session->userdata('user_id'));
-        }else{
+
+         if($this->session->userdata() == 1){
+          
             $where = array();
+        }else{
+              $where = array('OP.user_id = ' . $this->session->userdata('admin_id'));
         }
 
 
@@ -289,9 +296,28 @@ class Operar extends MY_Controller {
         foreach ($records['data'] as $row) {
             $status = ($row['is_active'] == 1) ? 'checked' : '';
 
-            $id = $row['id'];
             
-            $ponto = $row['ponto'];
+ if(verifica_permissao($this->modulo_name, 'view'))           
+$view='<a title="Visualizar" class="delete btn btn-sm btn-info" href=' . base_url("admin/operar/visualizar/" . $row['id']) . ' title="Visualizar"><i class="fa fa-eye"></i></a>';
+
+ if(verifica_permissao($this->modulo_name, 'edit'))           
+$edit ='<a title="Edit" class="update btn btn-sm btn-warning" href="' . base_url('admin/operar/edit/' . $row['id']) . '"> <i class="fa fa-pencil-square-o"></i></a>';
+
+if(verifica_permissao($this->modulo_name, 'delete'))
+$delete ='<a title="Delete" class="delete btn btn-sm btn-danger" href=' . base_url("admin/operar/delete/" . $row['id']) . ' title="Delete" onclick="return confirm(\'Deseja realmente apagar?\')"> <i class="fa fa-trash-o"></i></a>';
+
+if(verifica_permissao($this->modulo_name, 'change_status')){
+$bnt_status = '<input type="checkbox" class="tgl_checkbox tgl-ios" data-id="' . $row['id'] . '" id="cb_' . $row['id'] . '" ' . $status . '><label for="cb_' . $row['id'] . '"></label>';
+}else{
+    if($status)
+        $bnt_status = 'Ativo';
+    else
+        $bnt_status = 'Desativado';
+}
+
+            
+            $id = $row['id'];
+                     $ponto = $row['ponto'];
             $tipo = $row['tipo'];
             $serial = $row['serial'];
 
@@ -304,14 +330,7 @@ class Operar extends MY_Controller {
             $saldo = $row['saldo'];
             $comissao = $row['comissao'];
 
-            if ($this->session->userdata('admin_id')) {
-                $acoes = '<!--<a title="View" class="view btn btn-sm btn-info" href="' . base_url('admin/operar/edit/' . $row['id']) . '"> <i class="fa fa-eye"></i></a>-->
-				<a title="Edit" class="update btn btn-sm btn-warning" href="' . base_url('admin/operar/edit/' . $row['id']) . '"> <i class="fa fa-pencil-square-o"></i></a>
-				<a title="Delete" class="delete btn btn-sm btn-danger" href=' . base_url("admin/operar/delete/" . $row['id']) . ' title="Delete" onclick="return confirm(\'Deseja realmente apagar?\')"> <i class="fa fa-trash-o"></i></a>
-				<a title="Visualizar" class="delete btn btn-sm btn-info" href=' . base_url("admin/operar/visualizar/" . $row['id']) . ' title="Visualizar"><i class="fa fa-eye"></i></a>';
-            } else {
-                $acoes = '<a title="Visualizar" class="delete btn btn-sm btn-info" href=' . base_url("admin/operar/visualizar/" . $row['id']) . ' title="Visualizar"><i class="fa fa-eye"></i></a>';
-            }
+           
 
             $data[] = array(
                 $id,
@@ -323,8 +342,8 @@ class Operar extends MY_Controller {
                 $qtde_jogadas,
                 formatar_moeda($valor_arrecadado),
                 formatar_moeda($saldo),
-                '<input type="checkbox" class="tgl_checkbox tgl-ios" data-id="' . $row['id'] . '" id="cb_' . $row['id'] . '" ' . $status . '><label for="cb_' . $row['id'] . '"></label>',
-                $acoes
+                $bnt_status,
+                @$view.@$delete.@$edit
             );
         }
         $records['data'] = $data;
