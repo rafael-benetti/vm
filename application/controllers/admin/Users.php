@@ -27,12 +27,13 @@ class Users extends MY_Controller {
     
     public function ver_maquinas($user_id) {
 
-          $where_pontos = array('is_active' => 1);
-            if ($this->is_supper == "0") {
+ 
+    
                 $where_pontos = array(
-                    'is_active' => 1
+                    'is_active' => 1,
+                    'user_id'=>$user_id
                 );
-            }
+         
         $dados['pontos'] = $this->ponto_model->getTodosPontos($where_pontos);
 
         
@@ -108,16 +109,25 @@ class Users extends MY_Controller {
 
         $where_tipos = array('is_active' => 1);
         $where_pontos = array('is_active' => 1);
-        if ($this->is_supper == "0") {
+        
+        
+        if ($this->is_supper == 1) {
+            
+            
+            $where_tipos = array('is_active' => 1);
+        $where_pontos = array('is_active' => 1);
+        }else{
+            
             $where_tipos = array(
-                'admin_id' => $this->admin_id,
+                'user_id' => $this->admin_id,
                 'is_active' => 1
             );
             $where_pontos = array(
-                'admin_id' => $this->admin_id,
+                'user_id' => $this->admin_id,
                 'is_active' => 1
             );
         }
+     
         $dados['tipos'] = $this->tipo_model->getTodosTipos($where_tipos);
         $dados['pontos'] = $this->ponto_model->getTodosPontos($where_pontos);
         $dados['item'] = $this->item_model->getTodosItens();

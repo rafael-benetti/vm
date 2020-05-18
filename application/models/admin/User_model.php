@@ -11,7 +11,7 @@ class User_model extends CI_Model {
     public function get_user_machines($user_id) {
         $wh = array();
 
-        $wh[] = " user_id =  '" . $user_id . "'";
+        $wh[] = " um.user_id =  '" . $user_id . "'";
 
         $SQL = 'SELECT 
                                 um.id as id, um.maq_id, m.tipomaquina, m.pontodevenda, m.serial, m.cont_inicial, m.cont_saida_inicial, m.valorvenda,
@@ -44,6 +44,12 @@ class User_model extends CI_Model {
         $this->db->insert('ci_users_machines', $data);
         return $this->db->insert_id();
     }
+    
+    public function update_user_machine($data, $id) {
+        $this->db->where('id', $id);
+        return $this->db->update('ci_users_machines', $data);
+     
+    }
 
     public function delete_user_ponto($user_id) {
         $this->db->where('user_id', $user_id);
@@ -62,14 +68,21 @@ class User_model extends CI_Model {
     // get all users for server-side datatable processing (ajax based)
     public function get_all_users() {
         $wh = array();
-        $SQL = 'SELECT * FROM ci_users';
-        $wh[] = " is_admin = 0";
+        $SQL = 'SELECT * FROM ci_admin';
+        $wh[] = " is_active = 1";
         if (count($wh) > 0) {
             $WHERE = implode(' and ', $wh);
             return $this->datatable->LoadJson($SQL, $WHERE);
         } else {
             return $this->datatable->LoadJson($SQL);
         }
+    }
+    
+     public function getAllUsers() {
+        $this->db->from('ci_admin');
+        $this->db->where('is_active', 1);
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
     public function getPontosByUserId($user_id) {

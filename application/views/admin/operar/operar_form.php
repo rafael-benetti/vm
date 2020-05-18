@@ -7,8 +7,6 @@
         <div class="card card-default">
             <div class="card-header">
                 <div class="d-inline-block">
-                    <h3 class="card-title"> <i class="fa fa-plus"></i>
-                        <a href="<?= base_url('admin') ?>" class="card-title">Dashboard</a> </h3>
                 </div>
                 <div class="d-inline-block float-right">
                     <a href="<?= base_url('admin/operar/operar_list'); ?>" class="btn btn-success"><i class="fa fa-list"></i> Listar operações</a>
@@ -17,8 +15,10 @@
             <div class="card-body">
 
                 <div class="card card-primary">
-                        <?php echo form_open_multipart(current_url(), 'class="form-horizontal"'); ?> 
-                
+                    
+                    <form class="cmxform" enctype="multipart/form-data" action="<?php echo base_url('/admin/operar/save'); ?>" id="dischargeform" method="post" class="form-horizontal">
+
+                  
                     <div class="card-header">
                         <h3 class="card-title">Iniciar operação de ponto</h3>
                     </div>
@@ -261,7 +261,7 @@
                                 </div>
                                 <div class="modal-footer">
 
-                                    <button type="submit" class="btn btn-primary">Salvar Operação</button>
+                                    <button type="button" id="SubForm" class="btn-primary btn" >Confirmar e sallvar</button>
                                 </div>
                             </div>
                         </div>
@@ -269,13 +269,13 @@
 
 
                     <div class="card-footer">
-                        <button type="button" style="float:right" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <button type="submit"  style="float:right" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                           Salvar Operação
                         </button>
                         <!-- <button type="submit" class="btn btn-primary">Gravar Operação</button> -->
                     </div>
 
-                    <?php echo form_close(); ?>
+                    </form>
                 </div>
             </div>
             <!-- /.box-body -->
@@ -303,29 +303,29 @@ document.getElementById("sangria_valor").style.display = "none";
 }
 
   
-                                        $(function () {
-                                            
-                                
-                                            
-                                            $('subscribe-email-form1').on('submit', function (e) {
-                                                e.preventDefault();
-                                                $.ajax({
-                                                    url: "",
-                                                    type: "POST",
-                                                    data: $("subscribe-email-form").serialize(),
-                                                    success: function (data) {
-                                                        alert("Successfully submitted.")
-                                                    }
-                                                });
-                                            });
-                                        });
+                                         $(function () {
+                                                        $("#dischargeform").validate({
+                                                            rules: {
+                                                                cont_saida_atual: "required"
+                                                            },
+                                                            messages: {
+                                                                cont_saida_atual: "Please enter your firstname"
+                                                            },
+                                                            submitHandler: function (form) {
+                                                                $("#exampleModal").modal('show');
+                                                                $('#SubForm').click(function () {
+                                                                    form.submit();
+                                                                });
+                                                            }
+                                                        });
+                                                    });
 
 
                                         $(function () {
                                             $.ajaxSetup({cache: false});
 
 
-                                            $('.select_operar').select2();
+                                   
 
                                             //Flat red color scheme for iCheck
                                             $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({

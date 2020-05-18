@@ -35,6 +35,7 @@
                                     <label for="pontodevenda" class="col-md-6 control-label">Selecione o ponto de venda</label>
                                     <div class="input-group">
                                         <select name="pontodevenda" style="width:100%" class="js-example-basic-single" id="pontodevenda" >
+                                            <option value="0">Nenhum ponto</option>
                                             <?php
                                             foreach ($pontos as $ponto) {
                                                 echo '<option value="' . $ponto->id . '">' . $ponto->ponto .  '</option>';
@@ -63,6 +64,7 @@
 
 
                             </div>
+                      
 
                             <div class="row" style='margin-top:10px'>
                                 <div class="col-12">

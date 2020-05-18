@@ -3,14 +3,13 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Operar extends MY_Controller {
-    
-     private $modulo_name = 'operar';
-    
+
+    private $modulo_name = 'operar';
 
     public function __construct() {
 
         parent::__construct();
-         auth_check(); 
+        auth_check();
         $this->rbac->check_module_access();
         $this->load->model('admin/operar_model', 'operar_model');
         $this->load->model('admin/machine_model', 'machine_model');
@@ -28,7 +27,7 @@ class Operar extends MY_Controller {
 
     //----------------------------------------------------------------
     public function operar() {
-        
+
 
         $dados['title'] = 'operar';
 
@@ -41,15 +40,16 @@ class Operar extends MY_Controller {
 
             $this->load->view('admin/includes/_header');
             //$dados['tipos'] = $this->tipo_model->getTodosTipos(array('is_active'=>1));
-        //    $dados['tipos'] = $this->operar_model->get_maquias_e_tipos();
+            //    $dados['tipos'] = $this->operar_model->get_maquias_e_tipos();
 
-            if ($this->session->userdata('user_id')) {
+            if ($this->session->userdata('is_supper') == 1) {
 
-                $where = array('p.is_active' => 1, 'up.user_id' => $this->session->userdata('user_id'));
-                $dados['pontos'] = $this->ponto_model->getTodosPontosOperador($where);
-            } else {
                 $where = array('is_active' => 1);
                 $dados['pontos'] = $this->ponto_model->getTodosPontos($where);
+            } else {
+
+                $where = array('p.is_active' => 1, 'p.user_id' => $this->session->userdata('admin_id'));
+                $dados['pontos'] = $this->ponto_model->getTodosPontosOperador($where);
             }
 
 
@@ -76,38 +76,36 @@ class Operar extends MY_Controller {
         $this->form_validation->set_rules('status_op', 'trim|required');
         $this->form_validation->set_rules('observacoes_equip', 'trim');
         $errors = array();
-        
-        
-        if($this->input->post('cont_atual') < $this->input->post('cont_anterior')){
-            
-           $errors[] = "O Contador atual não pode ser menor que o contador anterior <b>(".$this->input->post('cont_anterior').")</b>";
+
+
+        if ($this->input->post('cont_atual') < $this->input->post('cont_anterior')) {
+
+            $errors[] = "O Contador atual não pode ser menor que o contador anterior <b>(" . $this->input->post('cont_anterior') . ")</b>";
         }
-        
-        if($this->input->post('cont_saida_atual') < $this->input->post('cont_saida_anterior')){
-            
-           $errors[] = "O Contador de saída atual não pode ser menor que o contador de saida anterior <b>(".$this->input->post('cont_saida_anterior').")</b>";
+
+        if ($this->input->post('cont_saida_atual') < $this->input->post('cont_saida_anterior')) {
+
+            $errors[] = "O Contador de saída atual não pode ser menor que o contador de saida anterior <b>(" . $this->input->post('cont_saida_anterior') . ")</b>";
         }
-        
-        if($_FILES['file_operacao']['name'] == ''){
-            
+
+        if ($_FILES['file_operacao']['name'] == '') {
+
             $errors[] = 'A Foto do contador de entrada atual é obrigatório';
         }
-        
-         if($_FILES['file_img_saida']['name'] == ''){
-            
-             $errors[] = 'A Foto do contador de saida atual é obrigatório';
+
+        if ($_FILES['file_img_saida']['name'] == '') {
+
+            $errors[] = 'A Foto do contador de saida atual é obrigatório';
         }
-        
-        
-        if(count($errors)>0){
-            
+
+
+        if (count($errors) > 0) {
+
             $message_erro = implode("<br>", $errors);
-            
+
             $this->session->set_flashdata('errors', $message_erro);
-              redirect(base_url('admin/operar/operar'), 'refresh');
-        }
-        
-        elseif ($this->form_validation->run() == TRUE) {
+            redirect(base_url('admin/operar/operar'), 'refresh');
+        } elseif ($this->form_validation->run() == TRUE) {
             $data = array(
                 'errors' => validation_errors()
             );
@@ -168,26 +166,26 @@ class Operar extends MY_Controller {
             $valor_jogada = $dados_maquina['valorvenda'];
             $valor_insumo = $dados_itens['valor'];
             $qtde_vendas = $this->input->post('cont_atual') - $this->input->post('cont_anterior');
-          
-            
-            
+
+
+
             $valor_total_jogadas = (float) ($qtde_vendas * $valor_jogada);
-            $qtde_saida = $this->input->post('cont_saida_atual')-$this->input->post('cont_saida_anterior');
+            $qtde_saida = $this->input->post('cont_saida_atual') - $this->input->post('cont_saida_anterior');
             $saldo = $valor_total_jogadas - ($qtde_saida * $valor_insumo);
 
-          //  $valorcomissao = ((($valorpremio) * $comissao) / 100);
+            //  $valorcomissao = ((($valorpremio) * $comissao) / 100);
             // --------------------------------------------------------
 
-            $sangria = $this->input->post('sangria') == null ? 0 : $this->input->post('sangria') ;
-            
+            $sangria = $this->input->post('sangria') == null ? 0 : $this->input->post('sangria');
+
             $data = array(
                 'ponto' => (int) $this->input->post('pontodevenda'),
                 //'tipodemaquina' => (int)$this->input->post('tipodemaquina'),		
                 'maq_id' => (int) $this->input->post('maq_id'),
                 'cont_anterior' => (int) $this->input->post('cont_anterior'),
                 'cont_atual' => (int) $this->input->post('cont_atual'),
-                'valorvenda' => grava_money($sangria ,2),
-                'cont_saida_anterior' => (int) $this->input->post('cont_saida_anterior') ,
+                'sangria' => grava_money($sangria, 2),
+                'cont_saida_anterior' => (int) $this->input->post('cont_saida_anterior'),
                 'cont_saida_atual' => (int) $this->input->post('cont_saida_atual'),
                 'vendas' => $valor_total_jogadas,
                 'saidas' => $qtde_saida * $valor_insumo,
@@ -277,11 +275,11 @@ class Operar extends MY_Controller {
 
 
 
-         if($this->session->userdata() == 1){
-          
+        if ($this->session->userdata() == 1) {
+
             $where = array();
-        }else{
-              $where = array('OP.user_id = ' . $this->session->userdata('admin_id'));
+        } else {
+            $where = array('OP.user_id = ' . $this->session->userdata('admin_id'));
         }
 
 
@@ -296,28 +294,28 @@ class Operar extends MY_Controller {
         foreach ($records['data'] as $row) {
             $status = ($row['is_active'] == 1) ? 'checked' : '';
 
-            
- if(verifica_permissao($this->modulo_name, 'view'))           
-$view='<a title="Visualizar" class="delete btn btn-sm btn-info" href=' . base_url("admin/operar/visualizar/" . $row['id']) . ' title="Visualizar"><i class="fa fa-eye"></i></a>';
 
- if(verifica_permissao($this->modulo_name, 'edit'))           
-$edit ='<a title="Edit" class="update btn btn-sm btn-warning" href="' . base_url('admin/operar/edit/' . $row['id']) . '"> <i class="fa fa-pencil-square-o"></i></a>';
+            if (verifica_permissao($this->modulo_name, 'view'))
+                $view = '<a title="Visualizar" class="delete btn btn-sm btn-info" href=' . base_url("admin/operar/visualizar/" . $row['id']) . ' title="Visualizar"><i class="fa fa-eye"></i></a>';
 
-if(verifica_permissao($this->modulo_name, 'delete'))
-$delete ='<a title="Delete" class="delete btn btn-sm btn-danger" href=' . base_url("admin/operar/delete/" . $row['id']) . ' title="Delete" onclick="return confirm(\'Deseja realmente apagar?\')"> <i class="fa fa-trash-o"></i></a>';
+            if (verifica_permissao($this->modulo_name, 'edit'))
+                $edit = '<a title="Edit" class="update btn btn-sm btn-warning" href="' . base_url('admin/operar/edit/' . $row['id']) . '"> <i class="fa fa-pencil-square-o"></i></a>';
 
-if(verifica_permissao($this->modulo_name, 'change_status')){
-$bnt_status = '<input type="checkbox" class="tgl_checkbox tgl-ios" data-id="' . $row['id'] . '" id="cb_' . $row['id'] . '" ' . $status . '><label for="cb_' . $row['id'] . '"></label>';
-}else{
-    if($status)
-        $bnt_status = 'Ativo';
-    else
-        $bnt_status = 'Desativado';
-}
+            if (verifica_permissao($this->modulo_name, 'delete'))
+                $delete = '<a title="Delete" class="delete btn btn-sm btn-danger" href=' . base_url("admin/operar/delete/" . $row['id']) . ' title="Delete" onclick="return confirm(\'Deseja realmente apagar?\')"> <i class="fa fa-trash-o"></i></a>';
 
-            
+            if (verifica_permissao($this->modulo_name, 'change_status')) {
+                $bnt_status = '<input type="checkbox" class="tgl_checkbox tgl-ios" data-id="' . $row['id'] . '" id="cb_' . $row['id'] . '" ' . $status . '><label for="cb_' . $row['id'] . '"></label>';
+            } else {
+                if ($status)
+                    $bnt_status = 'Ativo';
+                else
+                    $bnt_status = 'Desativado';
+            }
+
+
             $id = $row['id'];
-                     $ponto = $row['ponto'];
+            $ponto = $row['ponto'];
             $tipo = $row['tipo'];
             $serial = $row['serial'];
 
@@ -330,7 +328,7 @@ $bnt_status = '<input type="checkbox" class="tgl_checkbox tgl-ios" data-id="' . 
             $saldo = $row['saldo'];
             $comissao = $row['comissao'];
 
-           
+
 
             $data[] = array(
                 $id,
@@ -343,7 +341,7 @@ $bnt_status = '<input type="checkbox" class="tgl_checkbox tgl-ios" data-id="' . 
                 formatar_moeda($valor_arrecadado),
                 formatar_moeda($saldo),
                 $bnt_status,
-                @$view.@$delete.@$edit
+                @$view . @$delete . @$edit
             );
         }
         $records['data'] = $data;
@@ -521,31 +519,34 @@ $bnt_status = '<input type="checkbox" class="tgl_checkbox tgl-ios" data-id="' . 
                 $pontodevenda = (int) $this->input->post('pontodevenda');
                 $pontodevenda = $this->security->xss_clean($pontodevenda);
                 //$pontodevenda = 31;
+                
+                
 
                 $where = array(
                     'MQ.is_active' => '1',
                     'MQ.pontodevenda' => $pontodevenda
                 );
-                $rs_tipos = $this->operar_model->get_maquias_e_tipos($where);
                 
-            
-																					
+          //      $rs_tipos = $this->operar_model->get_maquias_e_tipos($where);
                 
+                $rs_tipos = $this->operar_model->get_machines_by_user($this->session->userdata('admin_id'), $pontodevenda);
+                
+          
+                ///mostrar so maquina d
 
                 $html_cbo = '';
-                if (count($rs_tipos) >= 1) {
+                if (count($rs_tipos) > 0) {
                     $html_cbo = '
 				<select required name="maq_id" style="width:100%"  class="select_operar" id="maq_id" >
 					<option >- selecione -</option>';
                     foreach ($rs_tipos as $rs_item) {
-                    $qtde_estoque = $this->machine_model->get_estoque_machine($rs_item['id']);
+                        $qtde_estoque = $this->machine_model->get_estoque_machine($rs_item['id_maquina']);
 
-                    if($qtde_estoque>0)
-                      {
-                        $html_cbo .= '<option value="' . $rs_item["id"] . '">' . $rs_item["tipo"] . ' | ' . $rs_item["serial"] . ' ('.$qtde_estoque.')</option>';
-                      }else{
-                          $html_cbo .= '<option>Não tem máquina com estoque para esse ponto</option>';
-                      }
+                        if ($qtde_estoque > 0) {
+                            $html_cbo .= '<option value="' . $rs_item["id_maquina"] . '">' . $rs_item["nome_tipo"] . ' | ' . $rs_item["serial"] . ' (' . $qtde_estoque . ')</option>';
+                        } else {
+                            $html_cbo .= '<option>Não tem máquina com estoque para esse ponto</option>';
+                        }
                     }
                     $html_cbo .= '</select>  <script> $(\'.select_operar\').select2(); </script>';
                 } else {

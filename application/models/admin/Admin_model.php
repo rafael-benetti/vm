@@ -36,7 +36,7 @@ class Admin_model extends CI_Model {
     public function get_all_operadores(){
 			$wh =array();
 			$SQL ='SELECT * FROM ci_admin';
-			$wh[] = " is_admin = 0";
+		
 			if(count($wh)>0)
 			{
 				$WHERE = implode(' and ',$wh);

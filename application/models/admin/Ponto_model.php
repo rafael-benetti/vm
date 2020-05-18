@@ -25,8 +25,7 @@
                        $this->db->select('distinct(p.id) as id, p.ponto');
 		       $this->db->where($condicao);
                        $this->db->from('ci_pontos p');
-                       $this->db->join('ci_users_pontos up', 'up.ponto_id = p.id');
-
+                      
                        return $this->db->get()->result();
 
 		}
@@ -85,6 +84,39 @@
 			return $result = $query->row_array();
 
 		}
+
+		public function get_user_id_by_ponto($id){
+
+	
+        $this->db->from('ci_pontos');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        return $query->row()->user_id;
+
+		}
+                public function get_count_machines_user($user_id, $maq_id){
+
+	
+        $this->db->select('id');
+        $this->db->from('ci_users_machines');
+        $this->db->where('user_id', $user_id);
+        $this->db->where('maq_id', $maq_id);
+        $query = $this->db->get();
+        return $query->row()->id;
+
+		}
+                public function get_count_pontos_user($user_id, $maq_id){
+
+	
+        $this->db->select('ponto_id');
+        $this->db->from('ci_users_machines');
+        $this->db->where('user_id', $user_id);
+        $this->db->where('maq_id', $maq_id);
+        $query = $this->db->get();
+        return $query->row()->ponto_id;
+
+		}
+                
 
 
 

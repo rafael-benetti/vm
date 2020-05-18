@@ -26,17 +26,24 @@
 
           <div class="btn-group margin-bottom-20"> 
 
+              <?php
+              
+              if($this->session->userdata('is_supper')==1){
+                  ?>
+              
+          
             <a href="<?= base_url() ?>admin/pontos/create_pontos_pdf" class="btn btn-secondary">Export as PDF</a>
 
             <a href="<?= base_url() ?>admin/pontos/export_csv" class="btn btn-secondary">Export as CSV</a>
+              <?php } ?>
 
           </div>
 
-          <?php if($this->rbac->Check_operation_permission('add')): ?>
+           <?php  if($this->session->userdata('is_supper')==1){ ?>
 
             <a href="<?= base_url('admin/itens/add_item'); ?>" class="btn btn-success"><i class="fa fa-plus"></i> Adicionar item</a>
 
-          <?php endif; ?>
+           <?php } ?>
 
         </div>
 

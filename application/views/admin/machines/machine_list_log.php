@@ -34,11 +34,11 @@
                     </div>
 -->
 
-                    <?php if ($this->rbac->Check_operation_permission('add')): ?>
+                 
 
                         <a href="#"  data-toggle="modal" data-target="#exampleModal" class="btn btn-success"><i class="fa fa-plus"></i> Adicionar Quantidade</a>
 
-                    <?php endif; ?>
+               
 
                 </div>
 

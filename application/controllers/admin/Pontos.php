@@ -4,11 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pontos extends MY_Controller {
 
-     private $modulo_name = 'ponto';
-    
+    private $modulo_name = 'ponto';
+
     public function __construct() {
-        
-       
+
+
         parent::__construct();
         auth_check(); // check login auth
         $this->rbac->check_module_access();
@@ -31,14 +31,13 @@ class Pontos extends MY_Controller {
 
     public function datatable_json() {
 
-        
-        
-        if($this->session->userdata('is_supper') == 1){
-                 $records = $this->ponto_model->get_all_pontos();
-   
-        }else{
-        
-        $records = $this->ponto_model->get_all_pontos($this->session->userdata('admin_id'));
+
+
+        if ($this->session->userdata('is_supper') == 1) {
+            $records = $this->ponto_model->get_all_pontos();
+        } else {
+
+            $records = $this->ponto_model->get_all_pontos($this->session->userdata('admin_id'));
         }
 
 
@@ -53,24 +52,29 @@ class Pontos extends MY_Controller {
 
 
             $status = ($row['is_active'] == 1) ? 'checked' : '';
-            $bnt_status ='';
+            $bnt_status = '';
 
             $operador = $this->user_model->getUserByPonto($row['user_id']);
+            $dados_operador = '';
             
+            if($operador)
+             $dados_operador = $operador[0]['firstname'] . ' ' . $operador[0]['lastname'];
             
 
-            
-             
-       
 
-if(verifica_permissao($this->modulo_name, 'edit'))           
-$edit ='<a title="Edit" class="update btn btn-sm btn-warning" href="' . base_url('admin/pontos/edit/' . $row['id']) . '"> <i class="fa fa-pencil-square-o"></i></a>&nbsp;';
 
-if(verifica_permissao($this->modulo_name, 'delete'))
-$delete ='<a title="Delete" class="delete btn btn-sm btn-danger" href=' . base_url("admin/pontos/delete/" . $row['id']) . ' title="Delete" onclick="return confirm(\'Deseja realmente apagar ?\')"> <i class="fa fa-trash-o"></i></a>';
 
-if(verifica_permissao($this->modulo_name, 'change_status')){
-$bnt_status = '<input class="tgl_checkbox tgl-ios" 
+
+
+
+            if (verifica_permissao($this->modulo_name, 'edit'))
+                $edit = '<a title="Edit" class="update btn btn-sm btn-warning" href="' . base_url('admin/pontos/edit/' . $row['id']) . '"> <i class="fa fa-pencil-square-o"></i></a>&nbsp;';
+
+            if (verifica_permissao($this->modulo_name, 'delete'))
+                $delete = '<a title="Delete" class="delete btn btn-sm btn-danger" href=' . base_url("admin/pontos/delete/" . $row['id']) . ' title="Delete" onclick="return confirm(\'Deseja realmente apagar ?\')"> <i class="fa fa-trash-o"></i></a>';
+
+            if (verifica_permissao($this->modulo_name, 'change_status')) {
+                $bnt_status = '<input class="tgl_checkbox tgl-ios" 
 
 				data-id="' . $row['id'] . '" 
 
@@ -79,23 +83,23 @@ $bnt_status = '<input class="tgl_checkbox tgl-ios"
 				type="checkbox"  
 
 				' . $status . '><label for="cb_' . $row['id'] . '"></label>';
-}else{
-    if($status)
-        $bnt_status = 'Ativo';
-    else
-        $bnt_status = 'Desativado';
-}
+            } else {
+                if ($status)
+                    $bnt_status = 'Ativo';
+                else
+                    $bnt_status = 'Desativado';
+            }
 
 
-$data[] = array(
+            $data[] = array(
                 $row['id'],
                 $row['ponto'],
-                $operador[0]['firstname'] . ' ' . $operador[0]['lastname'],
+                $dados_operador,
                 $row['email'],
                 $row['telefone'],
                 inverteDataHora($row['created_at']),
                 $bnt_status,
-                @$delete.@$edit
+                @$delete . @$edit
             );
         }
 
@@ -116,9 +120,8 @@ $data[] = array(
     public function add() {
 
 
-        if(!verifica_permissao($this->modulo_name, 'add')){
-                               redirect('access_denied/index/'); 
-
+        if (!verifica_permissao($this->modulo_name, 'add')) {
+            redirect('access_denied/index/');
         }
 
 
@@ -226,9 +229,11 @@ $data[] = array(
             }
         } else {
 
+            $dados['operadores'] = $this->user_model->getAllUsers();
+
             $this->load->view('admin/includes/_header');
 
-            $this->load->view('admin/pontos/ponto_add');
+            $this->load->view('admin/pontos/ponto_add', $dados);
 
             $this->load->view('admin/includes/_footer');
         }
@@ -240,9 +245,8 @@ $data[] = array(
 
 
 
-      if(!verifica_permissao($this->modulo_name, 'edit')){
-                               redirect('access_denied/index/'); 
-
+        if (!verifica_permissao($this->modulo_name, 'edit')) {
+            redirect('access_denied/index/');
         }
 
 
@@ -302,6 +306,7 @@ $data[] = array(
                 $data = array(
                     'ponto' => $this->input->post('ponto'),
                     'email' => $this->input->post('email'),
+                    'user_id' => $this->input->post('user_id'),
                     'responsavel' => $this->input->post('responsavel'),
                     'telefone' => $this->input->post('telefone'),
                     'endereco' => $this->input->post('endereco'),
@@ -331,8 +336,13 @@ $data[] = array(
             }
         }
 
+        
+        
         $data['ponto'] = $this->ponto_model->get_ponto_by_id($id);
         $this->load->view('admin/includes/_header');
+
+        $data['operadores'] = $this->user_model->getAllUsers();
+        
 
         $this->load->view('admin/pontos/ponto_edit', $data);
 

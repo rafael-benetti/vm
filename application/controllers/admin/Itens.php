@@ -149,13 +149,21 @@ class Itens extends MY_Controller {
 		$data = array();
 
 		$i=0;
+          
 
 		foreach ($records['data']  as $row) 
 
 		{
                          $status = ($row['is_active'] == 1) ? 'checked' : '';
+                          $qtde_estoque = $this->item_model->get_total_estoque_itens($row['id']);
+        
 
-                    
+if($this->session->userdata('is_supper')==1){          
+ $estoque_itens =  '<a title="View" class="view btn btn-sm btn-info" href="' . base_url('admin/itens/view_logs/' . $row['id']) . '"> <i class="fa fa-list"></i> ('.$qtde_estoque.') </a>';                   
+}else{
+          $estoque_itens =$qtde_estoque==null?0:$qtde_estoque;
+}
+                         
 if(verifica_permissao($this->modulo_name, 'edit'))           
 $edit ='<a title="Edit" class="update btn btn-sm btn-warning" href="'.base_url('admin/itens/edit/'.$row['id']).'"> <i class="fa fa-pencil-square-o"></i></a>';
 
@@ -181,13 +189,12 @@ $bnt_status = '<input class="tgl_checkbox tgl-ios"
 
 
 			$status = ($row['is_active'] == 1)? 'checked': '';
-                         $qtde_estoque = $this->item_model->get_total_estoque_itens($row['id']);
-        
+                        
 			$data[]= array(
 			
 			$row['id'],
 			$row['item'],
-                         '<a title="View" class="view btn btn-sm btn-info" href="' . base_url('admin/itens/view_logs/' . $row['id']) . '"> <i class="fa fa-list"></i> ('.$qtde_estoque.') </a>',
+                        $estoque_itens,
                                            $row['valor'],
                          
 			$bnt_status,		
