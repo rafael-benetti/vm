@@ -86,13 +86,6 @@
 
 
 
-<!-- DataTables -->
-
-<script src="<?= base_url() ?>assets/plugins/datatables/jquery.dataTables.js"></script>
-
-<script src="<?= base_url() ?>assets/plugins/datatables/dataTables.bootstrap4.js"></script>
-
-
 
 <script>
 
@@ -109,23 +102,25 @@
 
     "ajax": "<?=base_url('admin/pontos/datatable_json')?>",
 
-    "order": [[4,'desc']],
+    "order": [[0,'desc']],
 
     "columnDefs": [
 
     { "targets": 0, "name": "id", 'searchable':true, 'orderable':true},
 
     { "targets": 1, "name": "ponto", 'searchable':true, 'orderable':true},
+    
+    { "targets": 2, "name": "ponto", 'searchable':true, 'orderable':true},
 
-    { "targets": 2, "name": "email", 'searchable':true, 'orderable':true},
+    { "targets": 3, "name": "email", 'searchable':true, 'orderable':true},
 
-    { "targets": 3, "name": "telefone", 'searchable':true, 'orderable':true},
+    { "targets": 4, "name": "telefone", 'searchable':true, 'orderable':true},
 
-    { "targets": 4, "name": "created_at", 'searchable':false, 'orderable':false},
+    { "targets": 5, "name": "created_at", 'searchable':true, 'orderable':false},
 
-    { "targets": 5, "name": "is_active", 'searchable':true, 'orderable':true},
+    { "targets": 6, "name": "is_active", 'searchable':false, 'orderable':false},
 
-    { "targets": 6, "name": "Action", 'searchable':false, 'orderable':false,'width':'100px'}
+    { "targets": 7, "name": "Action", 'searchable':false, 'orderable':false,'width':'100px'}
 
     ]
 

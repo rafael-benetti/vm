@@ -114,14 +114,10 @@ class Operar_model extends CI_Model {
 
         $SQL = 'SELECT OP.*, 
 				`MQ`.`serial`, 
-				`MQ`.`valorvenda`, 
-				`PT`.`ponto`, 
-                                `PT`.`nomefan`,
-				`PT`.`comissao`, 
+				`MQ`.`valorvenda`,				
 				`TP`.`tipo`
 			FROM `ci_operacoes` OP
 			INNER JOIN `ci_machines` `MQ` ON `MQ`.`id` = OP.`maq_id`
-			INNER JOIN `ci_pontos` `PT` ON `PT`.`id` = `MQ`.`pontodevenda`
 			INNER JOIN `ci_tipos` `TP` ON `TP`.`id` = MQ.`tipomaquina`  ';
 
         if (count($wh) > 0) {
@@ -174,11 +170,9 @@ class Operar_model extends CI_Model {
 
         $this->db->select(" OP.* ")
                 ->select(" MQ.serial, MQ.valorvenda ")
-                ->select(" PT.ponto, PT.comissao ")
                 ->select(" TP.tipo ")
                 ->from('ci_operacoes OP')
                 ->join('ci_machines MQ', 'MQ.id = OP.maq_id', 'INNER')
-                ->join('ci_pontos PT', 'PT.id = MQ.pontodevenda', 'INNER')
                 ->join('ci_tipos TP', 'TP.id = MQ.tipomaquina', 'INNER')
         ;
         $this->db->where(array('OP.id' => $id));

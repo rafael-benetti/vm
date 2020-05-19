@@ -17,14 +17,14 @@
 		$cont_saida_anterior = (int)(isset($rs["cont_anterior"]) ? $rs["cont_saida_anterior"] : "");
 		$cont_saida_atual = (int)(isset($rs["cont_saida_atual"]) ? $rs["cont_saida_atual"] : "");
 
-		$valorvenda = (isset($rs["valorvenda"]) ? $rs["valorvenda"] : "");
-		$comissao = (isset($rs["comissao"]) ? $rs["comissao"] : "");
+		$valorvenda = (float)(isset($rs["valorvenda"]) ? $rs["valorvenda"] : "");
+		$comissao = (float)(isset($rs["comissao"]) ? $rs["comissao"] : "");
 
 		$vendas = (int)($cont_saida_atual - $cont_saida_anterior);
 		$valorpremio =  (float)(($cont_atual - $cont_anterior) * $valorvenda);
                 $totalcontador =  (float)($cont_atual - $cont_anterior);	
 		$valorpremio = (float)$valorpremio;
-		$valorcomissao = ((($valorpremio) * $comissao) / 100);
+		$valorcomissao = ((($valorpremio) * $dados_ponto->comissao) / 100);
 
 		$valorcomissao = number_format($valorcomissao, 2, ',', '.');
 		$valorpremio = number_format($valorpremio, 2, ',', '.');
@@ -46,7 +46,7 @@
                 <div class="col-12">
                   <h4>
                     <i class="fa fa-globe"></i> Operação.
-                    <small class="float-right">Data: <?php echo($created_at); ?></small>
+                    <small class="float-right">Data: <?php echo(inverteDataHora($created_at)); ?></small>
                   </h4>
                 </div>
                 <!-- /.col -->
@@ -59,7 +59,7 @@
 						<div>
 							<address>
 								<strong>Ponto de Venda:</strong><br>
-								<?php echo($ponto); ?><br>
+                                                                <?php echo($dados_ponto->ponto); ?><br>
 							</address>
 						</div>
 						<div>
@@ -74,10 +74,16 @@
 								<?php echo($serial); ?><br>
 							</address>
 						</div>
+                                            <div>
+							<address>
+								<strong>Sangria:</strong><br>
+								<?php echo formatar_moeda($rs['sangria']); ?><br>
+							</address>
+						</div>
 						<div>
 							<address>
 								<b>Percentual de ponto:</b> <br>
-								<?php echo($comissao); ?>% &nbsp; - &nbsp; R$ <?php echo($valorcomissao); ?><br>
+								<?php echo($dados_ponto->comissao); ?>% &nbsp; - &nbsp; R$ <?php echo($valorcomissao); ?><br>
 							</address>
 						</div>
 					</div><!-- /.col -->

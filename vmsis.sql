@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 19-Maio-2020 às 01:08
+-- Tempo de geração: 19-Maio-2020 às 17:39
 -- Versão do servidor: 10.4.11-MariaDB
 -- versão do PHP: 7.2.29
 
@@ -173,7 +173,10 @@ CREATE TABLE `ci_estoque_itens` (
 
 INSERT INTO `ci_estoque_itens` (`id`, `qtde`, `item_id`, `maq_id`, `user_id`, `created_at`, `updated_at`, `tipo_operacao`) VALUES
 (28, -10, 0, 0, 33, '2020-05-17 00:00:00', '2020-05-17 00:00:00', 'saida'),
-(29, 500, 83, 0, 31, '2020-05-18 00:00:00', '2020-05-18 00:00:00', 'entrada');
+(29, 500, 83, 0, 31, '2020-05-18 00:00:00', '2020-05-18 00:00:00', 'entrada'),
+(30, -10, 83, 0, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'saida'),
+(31, -100, 83, 0, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'saida'),
+(32, -90, 83, 0, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'saida');
 
 -- --------------------------------------------------------
 
@@ -198,7 +201,13 @@ CREATE TABLE `ci_estoque_machine` (
 --
 
 INSERT INTO `ci_estoque_machine` (`id`, `qtde`, `item_id`, `maq_id`, `user_id`, `created_at`, `updated_at`, `tipo_operacao`, `id_operacao`) VALUES
-(86, 10, 0, 57, 33, '2020-05-17 00:00:00', '2020-05-17 00:00:00', 'entrada', 0);
+(86, 10, 0, 57, 33, '2020-05-17 00:00:00', '2020-05-17 00:00:00', 'entrada', 0),
+(87, 10, 83, 57, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'entrada', 0),
+(88, -10, 83, 57, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'saida', 66),
+(89, -30, 83, 57, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'saida', 67),
+(90, 100, 83, 57, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'entrada', 0),
+(91, -40, 83, 57, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'saida', 68),
+(92, 90, 83, 57, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'entrada', 0);
 
 -- --------------------------------------------------------
 
@@ -355,6 +364,9 @@ CREATE TABLE `ci_operacoes` (
 --
 
 INSERT INTO `ci_operacoes` (`id`, `maq_id`, `cont_anterior`, `cont_atual`, `cont_saida_anterior`, `cont_saida_atual`, `vendas`, `qnt_vendas`, `saldo`, `imagem`, `imagem_cont_saida`, `status_op`, `observacoes_equip`, `is_active`, `created_at`, `updated_at`, `ponto`, `user_id`, `qtde_saida`, `valor_insumo`, `saidas`, `sangria`) VALUES
+(68, 57, 30, 40, 30, 40, '100', '10', '55', '1.jpg', '21.jpg', '0', 'teste', '1', '2020-05-19 11:52:34', '2020-05-19 11:52:34', 50, 33, 10, 4.5, 45, 10),
+(67, 57, 10, 30, 10, 30, '200', '20', '110', '2.jpg', '4.jpg', '0', 'teste', '1', '2020-05-19 11:27:07', '2020-05-19 11:27:07', 50, 33, 20, 4.5, 90, 25),
+(66, 57, 10, 10, 10, 10, '0', '0', '0', '', '', '0', 'teste', '1', '2020-05-19 10:25:55', '2020-05-19 10:25:55', 50, 33, 0, 4.5, 0, 10),
 (65, 57, 0, 10, 0, 10, '0', '10', '0', '', '', '0', '', '1', '2020-05-18 19:47:17', '2020-05-18 19:47:17', 49, 33, 10, 0, 0, 12);
 
 -- --------------------------------------------------------
@@ -394,7 +406,8 @@ CREATE TABLE `ci_pontos` (
 INSERT INTO `ci_pontos` (`id`, `ponto`, `nomefan`, `email`, `comissao`, `responsavel`, `telefone`, `endereco`, `numero`, `cidade`, `estado`, `latitude`, `longitude`, `is_admin`, `is_active`, `created_at`, `updated_at`, `bairro`, `cep`, `tipo_comissao`, `user_id`) VALUES
 (51, 'Sem dono', '', 'semdono@teste.com', 10, 'teste', '(11) 98010-2250', 'Rua Pascoal Ruiz', '25', 'São Paulo', 'SP', '-23.7707827', '-46.6767842', 0, 1, '2020-05-18 07:42:13', '2020-05-18 07:42:13', 'Jardim Noronha', '04853-100', 'percentual', 31),
 (50, 'santa casa 12', '', 'santa@santaca.com', 10, 'junior', '(11) 19801-0250', 'Rua Pascoal Ruiz', '23', 'São Paulo', 'SP', '-23.7707293', '-46.6771045', 0, 1, '2020-05-17 07:49:38', '2020-05-18 00:00:00', 'Jardim Noronha', '04853-100', '', 33),
-(49, 'RIO GRANDE', '', 'TESTE@TESTE.COM', 10, 'rafael', '(46) 54654-6545', 'Rua Tenente Timbauva', '174', 'Sapucaia do Sul', 'RS', '-29.8414212', '-51.1505997', 0, 1, '2020-05-17 07:11:48', '2020-05-17 00:00:00', 'Capão da Cruz', '93226-540', '', 33);
+(49, 'RIO GRANDE', '', 'TESTE@TESTE.COM', 10, 'rafael', '(46) 54654-6545', 'Rua Tenente Timbauva', '174', 'Sapucaia do Sul', 'RS', '-29.8414212', '-51.1505997', 0, 1, '2020-05-17 07:11:48', '2020-05-17 00:00:00', 'Capão da Cruz', '93226-540', '', 33),
+(52, 'POnto teste atualizar', '', 'pontoatualizar@tste.com', 11, 'responsavel atualizar', '(22) 22222-2222', 'Rua Riachuelo', '617', 'São Carlos', 'SP', '-22.0168508', '-47.8958752', 0, 1, '2020-05-19 09:15:12', '2020-05-19 00:00:00', 'Centro', '13560-110', '', 33);
 
 -- --------------------------------------------------------
 
@@ -505,7 +518,7 @@ CREATE TABLE `ci_users_machines` (
 
 INSERT INTO `ci_users_machines` (`id`, `user_id`, `maq_id`, `ponto_id`, `created_at`, `updated_at`) VALUES
 (15, 0, 57, 0, '2020-05-18 12:48:53', '2020-05-18 12:48:53'),
-(19, 33, 57, 0, '2020-05-18 19:44:38', '2020-05-18 19:49:52');
+(19, 33, 57, 52, '2020-05-18 19:44:38', '2020-05-19 12:25:47');
 
 -- --------------------------------------------------------
 
@@ -802,13 +815,13 @@ ALTER TABLE `ci_clientes`
 -- AUTO_INCREMENT de tabela `ci_estoque_itens`
 --
 ALTER TABLE `ci_estoque_itens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de tabela `ci_estoque_machine`
 --
 ALTER TABLE `ci_estoque_machine`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT de tabela `ci_financeiro`
@@ -838,13 +851,13 @@ ALTER TABLE `ci_machines`
 -- AUTO_INCREMENT de tabela `ci_operacoes`
 --
 ALTER TABLE `ci_operacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT de tabela `ci_pontos`
 --
 ALTER TABLE `ci_pontos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de tabela `ci_rotas`

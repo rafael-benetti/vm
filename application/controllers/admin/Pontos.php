@@ -317,6 +317,7 @@ class Pontos extends MY_Controller {
                     'latitude' => $latitude,
                     'longitude' => $longitude,
                     'bairro' => $this->input->post('bairro'),
+                    'comissao' => $this->input->post('comissao'),
                     'tipo_comissao' => $this->input->post('tipo_comissao'),
                     'cep' => $this->input->post('cep'),
                     'is_active' => $this->input->post('is_active'),

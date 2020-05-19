@@ -35,7 +35,7 @@ class Machine_model extends CI_Model {
 				INNER JOIN ci_itens as i ON i.id = e.item_id 
 				INNER JOIN ci_tipos as t ON t.id = m.tipomaquina';        
         
-        if (count($wh) > 0) {
+       if (count($wh) > 0) {
 
             $WHERE = implode(' and ', $wh);
 
@@ -105,11 +105,10 @@ class Machine_model extends CI_Model {
 
         $this->db->select('m.id as id_maquina, m.nome_imagem, m.item_id, m.tipomaquina, m.pontodevenda, m.serial, m.cont_inicial, m.cont_saida_inicial, m.valorvenda,
 				m.imagem,m.noteiro,m.ficheiro,m.observacoes_equip,m.is_active, m.created_at,m.updated_at,
-				t.tipo as nome_tipo, p.ponto as nome_ponto, p.nomefan as nomefan, t.id as id_tipo, p.id as id_ponto');
+				t.tipo as nome_tipo, t.id as id_tipo');
         $this->db->from('ci_machines m');
         $this->db->where('m.id', $id);
         $this->db->join('ci_tipos t', 't.id = m.tipomaquina');
-        $this->db->join('ci_pontos p', 'p.id = m.pontodevenda');
 
         return $this->db->get()->row_array();
     }

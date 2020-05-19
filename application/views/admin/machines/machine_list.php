@@ -110,8 +110,8 @@
 
     { "targets": 0, "name": "id_maquina", 'searchable':false, 'orderable':true},
     { "targets": 1, "name": "tipo", 'searchable':true, 'orderable':true},
-    { "targets": 2, "name": "ponto", 'searchable':true, 'orderable':true},
-    { "targets": 3, "name": "operador", 'searchable':true, 'orderable':true},
+    { "targets": 2, "name": "ponto", 'searchable':false, 'orderable':false},
+    { "targets": 3, "name": "operador", 'searchable':false, 'orderable':false},
     { "targets": 4, "name": "descricao", 'searchable':false, 'orderable':false},
     { "targets": 5, "name": "serial", 'searchable':false, 'orderable':false},
     { "targets": 6, "name": "cont_inicial", 'searchable':false, 'orderable':false},

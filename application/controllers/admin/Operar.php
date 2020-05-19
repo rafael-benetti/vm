@@ -273,14 +273,13 @@ class Operar extends MY_Controller {
             }
         }
 
-
-
-        if ($this->session->userdata() == 1) {
+        if ($this->session->userdata('is_supper') == 1) {
 
             $where = array();
         } else {
             $where = array('OP.user_id = ' . $this->session->userdata('admin_id'));
         }
+     
 
 
 
@@ -293,6 +292,8 @@ class Operar extends MY_Controller {
 
         foreach ($records['data'] as $row) {
             $status = ($row['is_active'] == 1) ? 'checked' : '';
+                                $ponto = $this->ponto_model->get_ponto($row['ponto']);
+
 
 
             if (verifica_permissao($this->modulo_name, 'view'))
@@ -315,7 +316,7 @@ class Operar extends MY_Controller {
 
 
             $id = $row['id'];
-            $ponto = $row['ponto'];
+            $nome_ponto = $ponto->ponto;
             $tipo = $row['tipo'];
             $serial = $row['serial'];
 
@@ -326,13 +327,13 @@ class Operar extends MY_Controller {
             $qtde_jogadas = $row['qnt_vendas'];
             $valor_arrecadado = $row['vendas'];
             $saldo = $row['saldo'];
-            $comissao = $row['comissao'];
+            $comissao = $ponto->ponto;
 
 
 
             $data[] = array(
                 $id,
-                $ponto,
+                $nome_ponto,
                 $tipo,
                 $serial,
                 $cont_anterior,
@@ -385,7 +386,14 @@ class Operar extends MY_Controller {
         $result = $this->operar_model->get_operacao_inner_by_id($id);
         if ($result) {
             $dados['rs'] = $result;
+             $ponto = $this->ponto_model->get_ponto($result['ponto']);
+             $dados['dados_ponto'] = $ponto;
+
         }
+       
+        
+       
+
 
         $this->load->view('admin/includes/_header');
         $this->load->view('admin/operar/operar_template', $dados);

@@ -39,7 +39,10 @@ class Machines extends MY_Controller {
     public function view_logs($id_maquina) {
 
 
-        $dados['machine'] = $this->machine_model->get_estoque_machines($id_maquina);
+        $dados['machine'] = $this->machine_model->get_machine_by_id($id_maquina);
+        
+    
+        
         $dados['item'] = $this->item_model->get_itens_by_id($dados['machine']['item_id']);
         $dados['id_maquina'] = $id_maquina;
         $this->load->view('admin/includes/_header');
