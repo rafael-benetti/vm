@@ -1,5 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 class Itens extends MY_Controller {
+         private $modulo_name = 'itens';
+
+    
 	public function __construct(){
 		parent::__construct();
 		auth_check(); // check login auth
@@ -109,6 +112,10 @@ class Itens extends MY_Controller {
         foreach ($records['data'] as $row) {
             
             $dados_usuario = $this->user_model->get_dados_usuario($row['user_id']);
+            $nome_usuario='';
+            if($dados_usuario){
+                $nome_usuario = $dados_usuario->firstname. ' '.$dados_usuario->lastname;
+            }
           //  var_dump($row['user_id']); exit;
           
             $data[] = array(
@@ -116,7 +123,7 @@ class Itens extends MY_Controller {
                 $row['data_log'],
                 $row['tipo_operacao'],
                 $row['qtde'],
-                $dados_usuario->firstname. ' '.$dados_usuario->lastname
+                $nome_usuario
                
             );
         }
@@ -142,30 +149,56 @@ class Itens extends MY_Controller {
 		$data = array();
 
 		$i=0;
+          
 
 		foreach ($records['data']  as $row) 
 
-		{  
-
-			$status = ($row['is_active'] == 1)? 'checked': '';
-                         $qtde_estoque = $this->item_model->get_total_estoque_itens($row['id']);
+		{
+                         $status = ($row['is_active'] == 1) ? 'checked' : '';
+                          $qtde_estoque = $this->item_model->get_total_estoque_itens($row['id']);
         
-			$data[]= array(
-			
-			$row['id'],
-			$row['item'],
-                         '<a title="View" class="view btn btn-sm btn-info" href="' . base_url('admin/itens/view_logs/' . $row['id']) . '"> <i class="fa fa-list"></i> ('.$qtde_estoque.') </a>',
-                                           $row['valor'],
+
+if($this->session->userdata('is_supper')==1){          
+ $estoque_itens =  '<a title="View" class="view btn btn-sm btn-info" href="' . base_url('admin/itens/view_logs/' . $row['id']) . '"> <i class="fa fa-list"></i> ('.$qtde_estoque.') </a>';                   
+}else{
+          $estoque_itens =$qtde_estoque==null?0:$qtde_estoque;
+}
                          
-				'<input class="tgl_checkbox tgl-ios" 
+if(verifica_permissao($this->modulo_name, 'edit'))           
+$edit ='<a title="Edit" class="update btn btn-sm btn-warning" href="'.base_url('admin/itens/edit/'.$row['id']).'"> <i class="fa fa-pencil-square-o"></i></a>';
+
+if(verifica_permissao($this->modulo_name, 'delete'))
+$delete ='<a title="Delete" class="delete btn btn-sm btn-danger" href='.base_url("admin/itens/delete/".$row['id']).' title="Delete" onclick="return confirm(\'Tem certeza que deseja apagar ?\')"> <i class="fa fa-trash-o"></i></a>';
+
+if(verifica_permissao($this->modulo_name, 'view'))
+$view ='<a title="View" class="view btn btn-sm btn-info" href="'.base_url('admin/itens/edit/'.$row['id']).'"> <i class="fa fa-eye"></i></a>';
+
+if(verifica_permissao($this->modulo_name, 'change_status')){
+$bnt_status = '<input class="tgl_checkbox tgl-ios" 
 				data-id="'.$row['id'].'" 
 				id="cb_'.$row['id'].'"
 				type="checkbox"  
 				'.$status.'><label for="cb_'.$row['id'].'">
-                                </label>',		
-                                '<!--<a title="View" class="view btn btn-sm btn-info" href="'.base_url('admin/itens/edit/'.$row['id']).'"> <i class="fa fa-eye"></i></a>-->
-                                 <a title="Edit" class="update btn btn-sm btn-warning" href="'.base_url('admin/itens/edit/'.$row['id']).'"> <i class="fa fa-pencil-square-o"></i></a>
-				<a title="Delete" class="delete btn btn-sm btn-danger" href='.base_url("admin/itens/delete/".$row['id']).' title="Delete" onclick="return confirm(\'Tem certeza que deseja apagar ?\')"> <i class="fa fa-trash-o"></i></a>'
+                                </label>';
+}else{
+    if($status)
+        $bnt_status = 'Ativo';
+    else
+        $bnt_status = 'Desativado';
+}
+
+
+			$status = ($row['is_active'] == 1)? 'checked': '';
+                        
+			$data[]= array(
+			
+			$row['id'],
+			$row['item'],
+                        $estoque_itens,
+                                           $row['valor'],
+                         
+			$bnt_status,		
+                         @$delete.@$edit
 
 			);
 
@@ -188,7 +221,11 @@ class Itens extends MY_Controller {
 
 	public function add(){	
             
-		$this->rbac->check_operation_access(); // check opration permission
+		
+      if(!verifica_permissao($this->modulo_name, 'add')){
+                               redirect('access_denied/index/'); 
+
+        }
 
                 if($this->input->post('submit')){		
 			

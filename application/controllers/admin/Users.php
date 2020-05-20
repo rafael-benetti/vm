@@ -13,6 +13,8 @@ class Users extends MY_Controller {
         $this->load->model('admin/user_model', 'user_model');
         $this->load->model('admin/ponto_model', 'ponto_model');
         $this->load->model('admin/machine_model', 'machine_model');
+                $this->load->model('admin/admin_model', 'admin');
+
     }
 
     //-----------------------------------------------------------
@@ -25,17 +27,17 @@ class Users extends MY_Controller {
     
     public function ver_maquinas($user_id) {
 
-          $where_pontos = array('is_active' => 1);
-            if ($this->is_supper == "0") {
+ 
+    
                 $where_pontos = array(
-                    'admin_id' => $this->admin_id,
-                    'is_active' => 1
+                    'is_active' => 1,
+                    'user_id'=>$user_id
                 );
-            }
+         
         $dados['pontos'] = $this->ponto_model->getTodosPontos($where_pontos);
 
         
-        $dados['user'] = $this->user_model->get_user_by_id($user_id);
+        $dados['user'] = $this->admin->get_admin_by_id($user_id);
         $dados['user_id'] = $user_id;
         $this->load->view('admin/includes/_header');
         $this->load->view('admin/users/user_list_maquinas', $dados);
@@ -107,16 +109,25 @@ class Users extends MY_Controller {
 
         $where_tipos = array('is_active' => 1);
         $where_pontos = array('is_active' => 1);
-        if ($this->is_supper == "0") {
+        
+        
+        if ($this->is_supper == 1) {
+            
+            
+            $where_tipos = array('is_active' => 1);
+        $where_pontos = array('is_active' => 1);
+        }else{
+            
             $where_tipos = array(
-                'admin_id' => $this->admin_id,
+                'user_id' => $this->admin_id,
                 'is_active' => 1
             );
             $where_pontos = array(
-                'admin_id' => $this->admin_id,
+                'user_id' => $this->admin_id,
                 'is_active' => 1
             );
         }
+     
         $dados['tipos'] = $this->tipo_model->getTodosTipos($where_tipos);
         $dados['pontos'] = $this->ponto_model->getTodosPontos($where_pontos);
         $dados['item'] = $this->item_model->getTodosItens();
@@ -148,7 +159,7 @@ class Users extends MY_Controller {
     }
 
     public function datatable_json() {
-        $records = $this->user_model->get_all_users();
+        $records = $this->admin->get_all_operadores();
         $data = array();
         
                   
@@ -163,7 +174,7 @@ class Users extends MY_Controller {
                 $row['username'],
                 $row['email'],
                 $row['mobile_no'],
-                date_time($row['created_at']),
+                inverteDataHora($row['created_at']),
                 '<a title="View" class="view btn btn-sm btn-info" href="' . base_url('admin/users/ver_maquinas/' . $row['id']) . '"> <i class="fa fa-list"></i> ('.$qtde_maquinas.') </a>',
              
                 '<input class="tgl_checkbox tgl-ios" 
@@ -171,7 +182,7 @@ class Users extends MY_Controller {
 				id="cb_' . $row['id'] . '"
 				type="checkbox"  
 				' . $status . '><label for="cb_' . $row['id'] . '"></label>',
-                '<a title="Edit" class="update btn btn-sm btn-warning" href="' . base_url('admin/users/edit/' . $row['id']) . '"> <i class="fa fa-pencil-square-o"></i></a>
+                '<a title="Edit" class="update btn btn-sm btn-warning" href="' . base_url('admin/admin/edit/' . $row['id']) . '"> <i class="fa fa-pencil-square-o"></i></a>
 				<a title="Delete" class="delete btn btn-sm btn-danger" href=' . base_url("admin/users/delete/" . $row['id']) . ' title="Delete" onclick="return confirm(\'Do you want to delete ?\')"> <i class="fa fa-trash-o"></i></a>'
             );
         }
@@ -181,7 +192,7 @@ class Users extends MY_Controller {
 
     //-----------------------------------------------------------
     function change_status() {
-        $this->user_model->change_status();
+        $this->admin->change_status();
     }
 
     //---------------------------------------------------------------

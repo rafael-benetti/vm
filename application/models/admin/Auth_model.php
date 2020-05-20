@@ -25,7 +25,8 @@ class Auth_model extends CI_Model{
         public function user_login($data){
 
 		$this->db->from('ci_users');
-		$this->db->where('ci_users.username', $data['username']);
+          	$this->db->join('ci_admin_roles','ci_admin_roles.admin_role_id = ci_users.role');
+                $this->db->where('ci_users.username', $data['username']);
 
 		$query = $this->db->get();
 		if ($query->num_rows() == 0){

@@ -1,105 +1,84 @@
 <?php
-class Datatable 
 
-{	
+class Datatable {
 
-	function __construct()
+    function __construct() {
 
-	{
+        $this->obj = & get_instance();
+    }
 
-		$this->obj =& get_instance();
+    //--------------------------------------------
 
-	}
+    function LoadJson($SQL, $EXTRA_WHERE = '', $GROUP_BY = '') {
 
-	//--------------------------------------------
+        if (!empty($EXTRA_WHERE)) {
 
-	function LoadJson($SQL,$EXTRA_WHERE='',$GROUP_BY='')
+            $SQL .= " WHERE ( $EXTRA_WHERE )";
+        } else {
 
-	{
+            $SQL .= " WHERE (1)";
+        }
 
-		if(!empty($EXTRA_WHERE))
+        $query = $this->obj->db->query($SQL);
 
-		{
-
-			$SQL.= " WHERE ( $EXTRA_WHERE )";
-
-		}
-
-		else
-
-		{
-
-			$SQL.= " WHERE (1)";
-
-		}
-
-		$query = $this->obj->db->query($SQL);
-
-		$total = $query->num_rows();
-
-		//------------------------------------------------
-
-		if(!empty($_GET['search']['value']))
-
-		{
-
-			$qry = array();
-
-			foreach($_GET['columns'] as $cl)
-
-			{
-
-				if($cl['searchable']=='true')
-
-				$qry[] =" ".$cl['name']." like '%".$_GET['search']['value']."%' ";
-
-			}
-
-			$SQL.= "AND ( ";
-
-			$SQL.= implode("OR",$qry);
-
-			$SQL.= " ) ";	
-
-		}
+        $total = $query->num_rows();
 
         //------------------------------------------------
 
-		if(!empty($GROUP_BY))
+        if (!empty($_GET['search']['value'])) {
 
-		{
+            $qry = array();
 
-			$SQL.= $GROUP_BY;
+            foreach ($_GET['columns'] as $cl) {
 
-		}
+                if ($cl['searchable'] == 'true')
+                    $qry[] = " " . $cl['name'] . " like '%" . $_GET['search']['value'] . "%' ";
+            }
 
-	 	//------------------------------------------------
+            $SQL .= "AND ( ";
 
-		$query = $this->obj->db->query($SQL);
+            $SQL .= implode("OR", $qry);
 
-		$filtered = $query->num_rows();
+            $SQL .= " ) ";
+        }
+
+        //------------------------------------------------
+
+        if (!empty($GROUP_BY)) {
+
+            $SQL .= $GROUP_BY;
+        }
+
+        //------------------------------------------------
+
+        $query = $this->obj->db->query($SQL);
+
+        $filtered = $query->num_rows();
+
+
+       $tamanho = $_GET['length']==null?1:$_GET['length'];
+        $start = $_GET['start']==null?1:$_GET['start'];
+  //     $tamanho = $_GET['length'];
+   //     $start = $_GET['start'];
+//
+        $SQL .= " ORDER BY ";
+
+        $SQL .= $_GET['columns'][$_GET['order'][0]['column']]['name'] . " ";
+
+        $SQL .= $_GET['order'][0]['dir'];
+
+        $SQL .= " LIMIT " . $tamanho . " OFFSET " . $start . " ";
 
 
 
-		$SQL.= " ORDER BY ";
+        $query = $this->obj->db->query($SQL);
 
-		$SQL.= $_GET['columns'][$_GET['order'][0]['column']]['name']." ";
-
-		$SQL.= $_GET['order'][0]['dir'];
-
-		$SQL.= " LIMIT ".$_GET['length']." OFFSET ".$_GET['start']." ";
+        $data = $query->result_array();
 
 
 
-		$query = $this->obj->db->query($SQL);
-
-		$data = $query->result_array();
-
-		
-
-		return array("recordsTotal"=>$total,"recordsFiltered"=>$filtered,'data' => $data);
-
-	}	
+        return array("recordsTotal" => $total, "recordsFiltered" => $filtered, 'data' => $data);
+    }
 
 }
 

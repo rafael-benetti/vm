@@ -2,6 +2,7 @@
 class RBAC 
 {	
 	private $module_access;
+        
 	function __construct()
 	{
 		$this->obj =& get_instance();
@@ -29,28 +30,62 @@ class RBAC
 	//--------------------------------------------------------------	
 	function check_module_access()
 	{
+            $error = true;
+
 		if($this->obj->is_supper){
 			return 1;
-		}
-		elseif(!$this->check_module_permission($this->obj->uri->segment(2))) //sending controller name
+		}             
+                elseif($this->check_module_permission($this->obj->uri->segment(1),$this->obj->uri->segment(2))) //sending controller name
 		{
-			$back_to = $_SERVER['REQUEST_URI'];
-			$back_to = $this->obj->functions->encode($back_to);
-			redirect('access_denied/index/'.$back_to);
+			 $error = false;
 		}
+		elseif($this->check_module_permission($this->obj->uri->segment(2), $this->obj->uri->segment(3))) //sending controller name
+		{
+              
+			
+                         $error = false;
+		
+		}
+               
+                elseif($this->check_module_permission($this->obj->uri->segment(3),$this->obj->uri->segment(4))) //sending controller name
+		{
+			 $error = false;
+		}
+		elseif(!$this->check_module_permission($this->obj->uri->segment(4), $this->obj->uri->segment(5))) //sending controller name
+		{
+			
+                         $error = false;
+		
+		}
+
+       
+                       $back_to = $_SERVER['REQUEST_URI'];
+			$back_to = $this->obj->functions->encode($back_to);
+                if($error){
+                   redirect('access_denied/index/'.$back_to); 
+                }
+                
 	}
 
 	//--------------------------------------------------------------	
-	function check_module_permission($module) // $module is controller name
+	function check_module_permission($module, $tipo_acesso='') // $module is controller name
 	{
 		$access = false;
+                
+     
 		
 		if($this->obj->is_supper)
 			return true;
+       
+                
 		elseif(isset($this->obj->module_access[$module])){
+             
 			foreach($this->obj->module_access[$module] as $key => $value)
 			{
 			  if($key == 'access'){
+			  	$access = true;
+			  }
+                          if($tipo_acesso == $key){
 			  	$access = true;
 			  }
 			}
@@ -82,8 +117,25 @@ class RBAC
 		if($this->obj->is_supper){
 			return 1;
 		}
+                elseif(isset($this->obj->module_access[$this->obj->uri->segment(1)][$operation])) 
+			return 1;
 		elseif(isset($this->obj->module_access[$this->obj->uri->segment(2)][$operation])) 
 			return 1;
+                elseif(isset($this->obj->module_access[$this->obj->uri->segment(3)][$operation])) 
+			return 1;
+		else 
+		 	return 0;
+	}
+        
+        //--------------------------------------------------------------	
+	function verifica_permissao($modulo, $operacao)
+	{
+		if($this->obj->is_supper){
+			return 1;
+		}
+                elseif(isset($this->obj->module_access[$modulo][$operacao])) 
+			return 1;
+		
 		else 
 		 	return 0;
 	}

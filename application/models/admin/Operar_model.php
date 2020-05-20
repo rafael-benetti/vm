@@ -6,6 +6,23 @@ class Operar_model extends CI_Model {
         $this->db->insert('ci_operacoes', $data);
             return $this->db->insert_id();
     }
+    
+    
+     public function get_machines_by_user($user_id, $ponto_id) {
+
+    
+         
+        $this->db->select('m.id as id_maquina, m.nome_imagem, m.item_id, m.tipomaquina, m.pontodevenda, m.serial, m.cont_inicial, m.cont_saida_inicial, m.valorvenda,
+				m.imagem,m.noteiro,m.ficheiro,m.observacoes_equip,m.is_active, m.created_at,m.updated_at,
+				t.tipo as nome_tipo, t.id as id_tipo');
+        $this->db->from('ci_users_machines um');
+        $this->db->where('um.user_id', $user_id);
+        $this->db->where('um.ponto_id', $ponto_id);
+        $this->db->join('ci_machines m', 'um.maq_id = m.id');
+        $this->db->join('ci_tipos t', 't.id = m.tipomaquina');
+
+        return $this->db->get()->result_array();
+    }
 
     public function get($condicao = array(), $primeiraLinha = FALSE, $pagina = 0, $limite = LINHAS_PESQUISA_DASHBOARD) {
       
@@ -97,14 +114,10 @@ class Operar_model extends CI_Model {
 
         $SQL = 'SELECT OP.*, 
 				`MQ`.`serial`, 
-				`MQ`.`valorvenda`, 
-				`PT`.`ponto`, 
-                                `PT`.`nomefan`,
-				`PT`.`comissao`, 
+				`MQ`.`valorvenda`,				
 				`TP`.`tipo`
 			FROM `ci_operacoes` OP
 			INNER JOIN `ci_machines` `MQ` ON `MQ`.`id` = OP.`maq_id`
-			INNER JOIN `ci_pontos` `PT` ON `PT`.`id` = `MQ`.`pontodevenda`
 			INNER JOIN `ci_tipos` `TP` ON `TP`.`id` = MQ.`tipomaquina`  ';
 
         if (count($wh) > 0) {
@@ -157,11 +170,9 @@ class Operar_model extends CI_Model {
 
         $this->db->select(" OP.* ")
                 ->select(" MQ.serial, MQ.valorvenda ")
-                ->select(" PT.ponto, PT.comissao ")
                 ->select(" TP.tipo ")
                 ->from('ci_operacoes OP')
                 ->join('ci_machines MQ', 'MQ.id = OP.maq_id', 'INNER')
-                ->join('ci_pontos PT', 'PT.id = MQ.pontodevenda', 'INNER')
                 ->join('ci_tipos TP', 'TP.id = MQ.tipomaquina', 'INNER')
         ;
         $this->db->where(array('OP.id' => $id));

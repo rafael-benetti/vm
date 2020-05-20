@@ -46,7 +46,7 @@
 
       <div class="card-body table-responsive">
 
-		<div class="row" style="margin-bottom: 15px;">
+          <div class="row" style="margin-bottom: 15px;display:none;">
 			<div class="col-12 col-md-4">
 
 				<div class="form-group">

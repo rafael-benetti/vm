@@ -27,6 +27,33 @@
                   <input type="text" name="ponto" class="form-control" id="ponto" placeholder="">
                 </div>
               </div>
+           
+            <?php
+           
+           if($this->session->userdata('is_supper')==1){
+           ?>
+                       <div class="form-group">
+                                <div class="col-lg-12"  style='margin-top:10px'>
+                                    <label for="user_id" class="col-md-6 control-label">Selecione Operador</label>
+                                    <div class="input-group">
+                                        <select name="user_id" style="width:100%" class="select-operar" id="user_id" >
+                                            <option value="-1">Nenhum operador</option>
+                                            <?php
+                                            foreach ($operadores as $operador) {
+                                                echo '<option value="' . $operador['id'] . '">' . $operador['firstname'] .  ' ' . $operador['lastname'] .  '</option>';
+                                            }
+                                            ?> 
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+              <?php }else{
+               
+               echo '<input name="user_id" value="'.$this->session->userdata('admin_id').'" type="hidden">';
+           } ?>
+
+           
+                     
 
               
 			

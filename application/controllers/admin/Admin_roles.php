@@ -62,7 +62,7 @@ class Admin_roles extends MY_Controller
 				$data = $this->security->xss_clean($data);
 				$result = $this->admin_roles->add_module($data);
 				if($result){
-					$this->session->set_flashdata('success', 'Module has been added successfully!');
+					$this->session->set_flashdata('success', 'Modulo adicionado com sucesso');
 					redirect(base_url('admin/admin_roles/module'));
 				}
 			}

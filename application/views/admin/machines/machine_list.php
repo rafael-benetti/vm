@@ -26,11 +26,11 @@
         <div class="d-inline-block float-right">
 
           <div class="btn-group margin-bottom-20"> 
-
+<!--
             <a href="<?= base_url() ?>admin/machines/create_machines_pdf" class="btn btn-secondary">Export para PDF</a>
 
             <a href="<?= base_url() ?>admin/machines/export_csv" class="btn btn-secondary">Export para CSV</a>
-
+-->
           </div>
 
           <?php if($this->rbac->Check_operation_permission('add')): ?>
@@ -110,8 +110,8 @@
 
     { "targets": 0, "name": "id_maquina", 'searchable':false, 'orderable':true},
     { "targets": 1, "name": "tipo", 'searchable':true, 'orderable':true},
-    { "targets": 2, "name": "ponto", 'searchable':true, 'orderable':true},
-    { "targets": 3, "name": "operador", 'searchable':true, 'orderable':true},
+    { "targets": 2, "name": "ponto", 'searchable':false, 'orderable':false},
+    { "targets": 3, "name": "operador", 'searchable':false, 'orderable':false},
     { "targets": 4, "name": "descricao", 'searchable':false, 'orderable':false},
     { "targets": 5, "name": "serial", 'searchable':false, 'orderable':false},
     { "targets": 6, "name": "cont_inicial", 'searchable':false, 'orderable':false},
