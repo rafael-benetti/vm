@@ -84,6 +84,14 @@ class User_model extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
     }
+    
+     public function getAllOperadores() {
+        $this->db->from('ci_admin');
+        $this->db->where('is_active', 1);
+        $this->db->where('admin_role_id', 2);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 
     public function getPontosByUserId($user_id) {
         $query = $this->db->get_where('ci_users_pontos', array('user_id' => $user_id));

@@ -140,7 +140,8 @@
     <script type="text/javascript" src="<?php echo base_url().'assets/plugins/fullcalendar/fullcalendar.js'; ?>"></script>      
     <script type="text/javascript">
         var get_data        = '<?php echo $get_data; ?>';
-        var backend_url     = '<?php echo base_url(); ?>';
+        var backend_url     = '<?php echo base_url(); ?>admin/';
+     
 
         $(document).ready(function() {
             $('.date-picker').datepicker();

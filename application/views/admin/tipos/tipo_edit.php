@@ -38,7 +38,7 @@
 
            
 
-            <?php echo form_open(base_url('admin/tipos/edit/'.$tipo['id']), 'class="form-horizontal"' )?> 
+            <?php echo form_open(base_url('admin/tipos/edit/'.$tipo['id']), 'class="form-horizontal" enctype="multipart/form-data"'); ?> 
 
               <div class="form-group">
 
@@ -56,15 +56,11 @@
            
              <div class="col-6">
                     <label for="firstname" class="col-md-12 control-label">Envie uma foto de sua máquina</label>                        <div class="col-12">
-                        
-                        <?php $file_img_tipos = (isset($rs["bosta"]) ? $rs["bosta"] : ""); ?>
+
+                        <?php $file_img_tipos = (isset($tipo["nome_imagem"]) ? $tipo["nome_imagem"] : ""); ?>
                         <div class="form-group row">
                             <div class="col-md-12 text-center">
-                                <input type="hidden" name="file_img_tipos" id="file_img_tipos" value="<?php echo($file_img_tipos); ?>" />
-                                
                                 <div class="wrapper-image-preview text-center">
-                                    
-                                    
                                     <div class="box" style="margin: 0 auto;">
                                         <?php
                                         $label_upload = "Enviar foto da máquina";
@@ -74,6 +70,8 @@
                                             $placeholder = base_url($image_path);
                                         }
                                         ?>
+
+                                       
                                         <div class="js--image-preview" style="background-image: url(<?php echo($placeholder); ?>); background-color: #F5F5F5;"></div>
                                         <div class="upload-options">
                                             <label for="file_img_tipos" class="btn btn-white-sp"> <i class="mdi mdi-camera"></i> <?php echo $label_upload; ?> </label>

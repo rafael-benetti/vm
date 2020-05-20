@@ -33,7 +33,7 @@
                 <div class="col-6">
                     <label for="firstname" class="col-md-12 control-label">Envie uma foto de sua máquina</label>                        <div class="col-12">
 
-                        <?php $file_img_tipos = (isset($rs["nome_imagem"]) ? $rs["nome_imagem"] : ""); ?>
+                        <?php $file_img_tipos = (isset($tipo["nome_imagem"]) ? $tipo["nome_imagem"] : ""); ?>
                         <div class="form-group row">
                             <div class="col-md-12 text-center">
                                 <div class="wrapper-image-preview text-center">

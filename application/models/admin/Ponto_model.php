@@ -15,6 +15,9 @@ class Ponto_model extends CI_Model {
         $this->db->from('ci_pontos');
         return $this->db->get()->result();
     }
+    
+    
+    
 
     public function getTodosPontosOperador($condicao = array()) {
 

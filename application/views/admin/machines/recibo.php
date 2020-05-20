@@ -17,14 +17,14 @@
                 <?php $this->load->view('admin/includes/_messages.php') ?>
 
 
-                <div class="card card-primary">
+                <div class="card card-primary" id='DivIdToPrint' >
                     
                     <div class="container">
 <div class="row d-flex justify-content-center">
         <div class="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
               <div class="text-center">
                     <h1>Recibo</h1>
-                    <h1>Recibi de Altech Industria</h1>
+                    <h1>Recibi de <?php echo $proprietario['proprietario'] ; ?></h1>
                 </div>
             <div class="row">
               
@@ -32,23 +32,24 @@
                     <address>
                         <strong>Operador</strong>
                         <br>
-                        jeronimo Cardoso
+                       <?php echo $user->firstname.' '.$user->lastname; ?>
                         <br>
-                        Rua Miguel Salcedo
-                        <br>
-                        Jardim Noronha
-                        <br>
-                        São Paulo SP<br>
-                        <abbr title="Phone">Whatsapp:</abbr> (11) 9484-6829
+                       <?php echo $user->email; ?>
+                        <abbr title="Phone">Contato:</abbr>  <?php echo $user->mobile_no; ?>
                     </address>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 text-right">
                     <p>
-                        <em>Data: 02/02/2019 08:00</em>
+                        <em>Data: <?php echo date('d/m/Y H:i'); ?></em>
                     </p>
                     <p>
-                        <em>Canhoto #: 000000001</em>
+                        <em>Canhoto #: <?php echo $user->user_id.$machine['id_maquina'].$user->id_user_machine; ?></em>
                     </p>
+                      <p>
+                    
+                        _______________________<br>
+                        <em>Assinatura</em>
+                      </p>
                 </div>
             </div>
             <div class="row">
@@ -65,17 +66,15 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="col-md-5"><em>Grua Black </em></td>
-                            <td class="col-md-5"><em>123456/em></td>
-                            <td class="col-md-2" style="text-align: center"> R$ 5.0000,00 </td>
+                            <td class="col-md-5"><em><?php echo $machine['nome_tipo']; ?> </em></td>
+                            <td class="col-md-5"><em><?php echo $machine['serial']; ?></em></td>
+                            <td class="col-md-2" style="text-align: center"><?php echo formatar_moeda($machine['valorvenda']); ?></td>
 
                         </tr>
                       
                     </tbody>
                 </table>
-                <button type="button" class="btn btn-success btn-lg btn-block">
-                   Imprimir   <span class="glyphicon glyphicon-chevron-right"></span>
-                </button></td>
+            
             </div>
         </div>
     </div>
@@ -83,6 +82,10 @@
                     
                     
                 </div>
+                <button onclick='printDiv();' type="button" class="btn btn-success btn-lg btn-block">
+                   Imprimir   <span class="glyphicon glyphicon-chevron-right"></span>
+                </button>
+                
 
 
             </div>
@@ -98,6 +101,24 @@
 <link rel="stylesheet" href="<?= base_url() ?>assets/plugins/iCheck/all.css">
 <script src="<?= base_url() ?>assets/plugins/iCheck/icheck.min.js"></script>
 <script>
+    
+    function printDiv() 
+{
+
+  var divToPrint=document.getElementById('DivIdToPrint');
+
+  var newWin=window.open('','Print-Window');
+
+  newWin.document.open();
+
+  newWin.document.write('<html><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+
+  newWin.document.close();
+
+  setTimeout(function(){newWin.close();},10);
+
+}
+    
     $(function () {
 
 

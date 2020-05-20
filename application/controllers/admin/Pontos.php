@@ -21,23 +21,29 @@ class Pontos extends MY_Controller {
     public function index() {
 
 
+          $dados['operadores'] = $this->user_model->getAllOperadores();
 
         $this->load->view('admin/includes/_header');
 
-        $this->load->view('admin/pontos/ponto_list');
+        $this->load->view('admin/pontos/ponto_list', $dados);
 
         $this->load->view('admin/includes/_footer');
     }
 
-    public function datatable_json() {
+    public function datatable_json($user_id=0) {
 
 
+        if($user_id > 0){
+                        $records = $this->ponto_model->get_all_pontos($user_id);
 
+        }else{
+        
         if ($this->session->userdata('is_supper') == 1) {
             $records = $this->ponto_model->get_all_pontos();
         } else {
 
             $records = $this->ponto_model->get_all_pontos($this->session->userdata('admin_id'));
+        }
         }
 
 

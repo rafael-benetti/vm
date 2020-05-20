@@ -119,7 +119,7 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2);
 
                 <?php if ($this->rbac->check_module_permission('users')): ?>
 
-                    <li id="usuarios" class="nav-item has-treeview">
+                    <li style="display: none;" id="usuarios" class="nav-item has-treeview">
 
                         <a href="#" class="nav-link">
 

@@ -18,21 +18,43 @@ class Machines extends MY_Controller {
         $this->load->model('admin/ponto_model', 'ponto_model');
         $this->load->model('admin/item_model', 'item_model');
         $this->load->model('admin/user_model', 'user_model');
+        $this->load->model('admin/setting_model', 'settings');
     }
 
     //-----------------------------------------------------------
 
     public function index() {
 
-        $this->load->view('admin/includes/_header');
-        $this->load->view('admin/machines/machine_list');
-        $this->load->view('admin/includes/_footer');
-    }
-    
-    public function recibo($maq_id) {
+        $dados['operadores'] = $this->user_model->getAllOperadores();
+
+        if ($this->is_supper == 1) {
+            $where_pontos = array(
+                'is_active' => 1
+            );
+        } else {
+            $where_pontos = array('is_active' => 1, 'user_id' => $this->session->userdata('admin_id'));
+        }
+
+        $dados['pontos'] = $this->ponto_model->getTodosPontos($where_pontos);
 
         $this->load->view('admin/includes/_header');
-        $this->load->view('admin/machines/recibo');
+        $this->load->view('admin/machines/machine_list', $dados);
+        $this->load->view('admin/includes/_footer');
+    }
+
+    public function recibo($id) {
+        
+        $dados['proprietario'] = $this->settings->get_general_settings();
+
+        $dados['machine'] = $this->machine_model->get_machine_by_id($id);
+        $dados['user'] = $this->machine_model->get_operador_by_machine($id);
+
+     //   echo '<pre>';
+      //  var_dump($dados); exit;
+        
+        
+        $this->load->view('admin/includes/_header');
+        $this->load->view('admin/machines/recibo', $dados);
         $this->load->view('admin/includes/_footer');
     }
 
@@ -40,9 +62,9 @@ class Machines extends MY_Controller {
 
 
         $dados['machine'] = $this->machine_model->get_machine_by_id($id_maquina);
-        
-    
-        
+
+
+
         $dados['item'] = $this->item_model->get_itens_by_id($dados['machine']['item_id']);
         $dados['id_maquina'] = $id_maquina;
         $this->load->view('admin/includes/_header');
@@ -74,19 +96,23 @@ class Machines extends MY_Controller {
         echo json_encode($records);
     }
 
-    public function datatable_json() {
+    public function datatable_json($user_id = 0, $ponto_id = 0) {
 
-
-        if ($this->session->userdata('is_supper') == 1) {
-            $records = $this->machine_model->get_all_machines();
+        if ($user_id > 0 || $ponto_id > 0) {
+            $records = $this->machine_model->get_all_machines($user_id, $ponto_id);
         } else {
-    
-            $records = $this->machine_model->get_all_machines($this->session->userdata('admin_id'));
+
+            if ($this->session->userdata('is_supper') == 1) {
+                $records = $this->machine_model->get_all_machines();
+            } else {
+
+                $records = $this->machine_model->get_all_machines($this->session->userdata('admin_id'));
+            }
         }
 
 
 
-        $operadores = $this->user_model->getAllUsers();
+        $operadores = $this->user_model->getAllOperadores();
 
         $data = array();
         $i = 0;
@@ -118,7 +144,7 @@ class Machines extends MY_Controller {
         </button>
       </div>
       <div class="modal-body">
-             <form action="'.base_url().'admin/machines/add_operador" method="post">
+             <form action="' . base_url() . 'admin/machines/add_operador" method="post">
 
                     
                       
@@ -131,7 +157,7 @@ class Machines extends MY_Controller {
             }
 
             $dados_operador .= '         </select>
-                <input type="hidden" name="maq_id" value="'.$row['id_maquina'].'">
+                <input type="hidden" name="maq_id" value="' . $row['id_maquina'] . '">
                                     </div>
                               
 
@@ -150,27 +176,28 @@ class Machines extends MY_Controller {
 ';
 
 
-            if ($operador){
+            if ($operador) {
                 $dados_operador = $operador->firstname . ' ' . $operador->lastname;
-                if($this->is_supper == 1){
-                    $dados_operador .=  '<br><a title="Delete" class="delete btn btn-sm btn-danger" href=' . base_url("admin/machines/delete_operador/" . $row['id_maquina']."/".$operador->user_id) . ' title="Delete" onclick="return confirm(\'Deseja realmente apagar?\')"> <i class="fa fa-trash-o"></i></a>';
+                if ($this->is_supper == 1) {
+                    $dados_operador .= '<br><a title="Delete" class="delete btn btn-sm btn-danger" href=' . base_url("admin/machines/delete_operador/" . $row['id_maquina'] . "/" . $operador->user_id) . ' title="Delete" onclick="return confirm(\'Deseja realmente apagar?\')"> <i class="fa fa-trash-o"></i></a>';
                 }
-             }
+            }
 
 
-  
-            
-              
-        if ($this->is_supper == 1) {
-            $where_pontos = array(
-                'is_active' => 1
-            );
-        }else{
-            $where_pontos = array('is_active' => 1, 'user_id'=>$this->session->userdata('admin_id'));
-        }
-       
-        $pontos = $this->ponto_model->getTodosPontos($where_pontos);
-            
+
+
+
+            if ($this->is_supper == 1) {
+                $where_pontos = array(
+                    'is_active' => 1
+                );
+            } else {
+                $where_pontos = array('is_active' => 1, 'user_id' => $this->session->userdata('admin_id'));
+            }
+
+            $pontos = $this->ponto_model->getTodosPontos($where_pontos);
+            $itens = $this->item_model->getTodosItens(array('is_active'=>1));
+
             $dados_ponto = '
                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ponto_' . $row['id_maquina'] . '">
  Adicionar Ponto
@@ -190,7 +217,7 @@ class Machines extends MY_Controller {
         </button>
       </div>
       <div class="modal-body">
-             <form action="'.base_url().'admin/machines/add_ponto" method="post">
+             <form action="' . base_url() . 'admin/machines/add_ponto" method="post">
 
                     
                       
@@ -203,7 +230,20 @@ class Machines extends MY_Controller {
             }
 
             $dados_ponto .= '         </select>
-                <input type="hidden" name="maq_id" value="'.$row['id_maquina'].'">
+                <input type="hidden" name="maq_id" value="' . $row['id_maquina'] . '">
+                                    </div>
+                                    
+ <div class="input-group">
+   <label for="user_id" class="col-md-6 control-label">Selecione o Insumo</label>
+                                  
+                                        <select name="item_id" style="width:100%" class="select_operar" id="ponto_id" >';
+
+            foreach ($itens as $item) {
+                $dados_ponto .= '<option value="' . $item->id . '">' . $item->item . '</option>';
+            }
+
+            $dados_ponto .= '         </select>
+                <input type="hidden" name="maq_id" value="' . $row['id_maquina'] . '">
                                     </div>
                               
 
@@ -220,16 +260,16 @@ class Machines extends MY_Controller {
 </div>
 
 ';
-                      $ponto = $this->machine_model->get_ponto_by_machine($row['id_maquina']);
-                      
-                      
-     
-            
-             if ($ponto){
+            $ponto = $this->machine_model->get_ponto_by_machine($row['id_maquina']);
+
+
+
+
+            if ($ponto) {
                 $dados_ponto = $ponto->ponto;
-          
-                    $dados_ponto .=  '<br><a title="Delete" class="delete btn btn-sm btn-danger" href=' . base_url("admin/machines/delete_ponto/" . $row['id_maquina']."/" . $ponto->ponto_id) . ' title="Delete" onclick="return confirm(\'Deseja realmente apagar?\')"> <i class="fa fa-trash-o"></i></a>';
-             }
+
+                $dados_ponto .= '<br><a title="Delete" class="delete btn btn-sm btn-danger" href=' . base_url("admin/machines/delete_ponto/" . $row['id_maquina'] . "/" . $ponto->ponto_id) . ' title="Delete" onclick="return confirm(\'Deseja realmente apagar?\')"> <i class="fa fa-trash-o"></i></a>';
+            }
 
 
 
@@ -293,17 +333,18 @@ class Machines extends MY_Controller {
 
     //---------------------------------------------------------------
 
-     public function add_ponto() {
+    public function add_ponto() {
 
-  
+
 
         $ponto_id = $this->input->post('ponto_id');
         $user_id = $this->ponto_model->get_user_id_by_ponto($ponto_id);
         $maq_id = $this->input->post('maq_id');
-        
-        
-       
-        
+        $item_id = $this->input->post('item_id');
+
+
+
+
 
 
         if ($this->input->post('ponto_id')) {
@@ -321,15 +362,16 @@ class Machines extends MY_Controller {
                 redirect(base_url('admin/machines'), 'refresh');
             } else {
 
-                
-               // $this->user_model->delete_user_machines($user_id, $pontodevenda);
 
-            
-                $get_machine_user =   $this->ponto_model->get_count_machines_user($user_id, $maq_id);
-              
-              
-                if(!$get_machine_user){
-                     $data_users_machines = array(
+                 $this->machine_model->update_item_machine(array('item_id'=>$item_id), $maq_id);
+                // $this->user_model->delete_user_machines($user_id, $pontodevenda);
+
+
+                $get_machine_user = $this->ponto_model->get_count_machines_user($user_id, $maq_id);
+
+
+                if (!$get_machine_user) {
+                    $data_users_machines = array(
                         'ponto_id' => $ponto_id,
                         'user_id' => $user_id,
                         'maq_id' => $maq_id,
@@ -337,32 +379,31 @@ class Machines extends MY_Controller {
                         'updated_at' => date('Y-m-d H:i:s')
                     );
                     $result = $this->user_model->add_user_machine($data_users_machines);
-                }else{
-                    
-                     $data_users_machines = array(
+                } else {
+
+                    $data_users_machines = array(
                         'ponto_id' => $ponto_id,
                         'user_id' => $user_id,
                         'maq_id' => $maq_id,
                         'updated_at' => date('Y-m-d H:i:s')
                     );
-                   $result = $this->user_model->update_user_machine($data_users_machines, $get_machine_user); 
+                    $result = $this->user_model->update_user_machine($data_users_machines, $get_machine_user);
                 }
-                
-              
-                   
-                    if ($result) {
-                        $this->session->set_flashdata('success', 'maquina cadastrada com sucesso!');
+
+
+
+                if ($result) {
+                    $this->session->set_flashdata('success', 'maquina cadastrada com sucesso!');
 
                     redirect(base_url('admin/machines/'), 'refresh');
-                    }
-                
-
+                }
             }
         }
     }
+
     public function add_operador() {
 
-  
+
 
         $user_id = $this->input->post('user_id');
         $maq_id = $this->input->post('maq_id');
@@ -386,26 +427,24 @@ class Machines extends MY_Controller {
                 redirect(base_url('admin/machines'), 'refresh');
             } else {
 
-                
-               // $this->user_model->delete_user_machines($user_id, $pontodevenda);
 
-            
-             
+                // $this->user_model->delete_user_machines($user_id, $pontodevenda);
 
-                    $data_users_machines = array(
-                        'ponto_id' => $ponto_id,
-                        'user_id' => $user_id,
-                        'maq_id' => $maq_id,
-                        '	created_at' => date('Y-m-d H:i:s'),
-                        '	updated_at' => date('Y-m-d H:i:s')
-                    );
-                    if ($this->user_model->add_user_machine($data_users_machines)) {
-                        $this->session->set_flashdata('success', 'maquina cadastrada com sucesso!');
+
+
+
+                $data_users_machines = array(
+                    'ponto_id' => $ponto_id,
+                    'user_id' => $user_id,
+                    'maq_id' => $maq_id,
+                    '	created_at' => date('Y-m-d H:i:s'),
+                    '	updated_at' => date('Y-m-d H:i:s')
+                );
+                if ($this->user_model->add_user_machine($data_users_machines)) {
+                    $this->session->set_flashdata('success', 'Operador adicionado com sucesso!');
 
                     redirect(base_url('admin/machines/recibo/' . $maq_id), 'refresh');
-                    }
-                
-
+                }
             }
         }
     }
@@ -422,6 +461,7 @@ class Machines extends MY_Controller {
             $this->form_validation->set_rules('serial', 'trim|required');
             $this->form_validation->set_rules('quant_insumo', 'required');
             $this->form_validation->set_rules('descricao', 'trim');
+
 
 
             $serial = $this->input->post('serial');
@@ -453,6 +493,7 @@ class Machines extends MY_Controller {
                     'cont_inicial' => $this->input->post('cont_inicial'),
                     'cont_saida_inicial' => $this->input->post('cont_saida_inicial'),
                     'valorvenda' => grava_money($this->input->post('valorvenda'), 2),
+                    'valordoequipamento' => grava_money($this->input->post('valordoequipamento'), 2),
                     'serial' => $this->input->post('serial'),
                     'item_id' => $this->input->post('item'),
                     'noteiro' => (int) $this->input->post('noteiro'),
@@ -471,25 +512,16 @@ class Machines extends MY_Controller {
                 if ($result > 0) {
 
                     if (isset($_FILES)) {
+
+
+
                         // --------------------------------------------------------
                         // FOTO DO CONTADOR INICIAL DA MAQUINA
                         // --------------------------------------------------------
-                        $file_cont_inicial = '';
 
-                        $config = array(
-                            'upload_path' => $this->config->item('folder_images') . 'maquinas/',
-                            'allowed_types' => 'jpg|jpeg|png|gif|JPG|PNG|JPEG',
-                            'file_name' => 'contador_inicial_' . $result,
-                            'overwrite' => true,
-                            'max_size' => '50000',
-                            'user_file' => 'file_cont_inicial'
-                        );
 
-                        $this->load->library('upload', $config);
-                        if (!$this->upload->do_upload('file_cont_inicial')) {
 
-                            $this->session->set_flashdata('errors', 'Falha no envio do arquivo, ' . $this->upload->display_errors());
-                        } else {
+                        if ($this->ddoo_upload('file_cont_inicial', $result)) {
 
                             $upload_data = $this->upload->data();
                             $file_cont_inicial = $upload_data['file_name'];
@@ -498,10 +530,37 @@ class Machines extends MY_Controller {
                                 'nome_imagem' => $file_cont_inicial
                             );
                             $this->machine_model->edit_machine($maqData, $result);
-
-                            $this->session->set_flashdata('success', 'Máquina adicionada com sucesso!');
-                            redirect(base_url('admin/machines'));
                         }
+
+
+
+
+                        // --------------------------------------------------------
+                        // FOTO DO CONTADOR ANALOGICO DA MAQUINA
+                        // --------------------------------------------------------
+
+                        if ($this->ddoo_upload('file_cont_analogico', $result)) {
+
+                            $upload_data = $this->upload->data();
+                            $file_cont_analogico = $upload_data['file_name'];
+
+                            $maqData = array(
+                                'nome_imagem_analogico' => $file_cont_analogico
+                            );
+                            $this->machine_model->edit_machine($maqData, $result);
+                        }
+
+
+
+                        $this->session->set_flashdata('success', 'Máquina gravada com sucesso');
+
+
+                        //   $this->session->set_flashdata('errors', 'Falha no envio do arquivo, ' . $this->upload->display_errors());
+
+
+                        redirect(base_url('admin/machines'));
+
+
                         // --------------------------------------------------------
                     } // isset : _FILES
                 }
@@ -679,6 +738,7 @@ class Machines extends MY_Controller {
                     'cont_saida_inicial' => $this->input->post('cont_saida_inicial'),
                     'item_id' => $this->input->post('item'),
                     'valorvenda' => grava_money($this->input->post('valorvenda'), 2),
+                    'valordoequipamento' => grava_money($this->input->post('valordoequipamento'), 2),
                     'nome_imagem' => $file_cont_inicial,
                     'noteiro' => (int) $this->input->post('noteiro'),
                     'ficheiro' => (int) $this->input->post('ficheiro'),
@@ -730,37 +790,36 @@ class Machines extends MY_Controller {
 
         redirect(base_url('admin/machines'));
     }
-    
-     public function delete_operador($maq_id, $user_id) {
+
+    public function delete_operador($maq_id, $user_id) {
 
         $this->rbac->check_operation_access(); // check opration permission
-        
         //verificar se existe ponto
-           $get_machine_user =   $this->ponto_model->get_count_pontos_user($user_id, $maq_id);
-           
-         
-              
-              
-                if(!$get_machine_user){
-                      $this->db->delete('ci_users_machines', array('maq_id' => $maq_id,'user_id' => $user_id));
-                }else{
-                      $this->db->where(array('maq_id' => $maq_id,'user_id' => $user_id));
+        $get_machine_user = $this->ponto_model->get_count_pontos_user($user_id, $maq_id);
 
-                      $this->db->update('ci_users_machines', array('user_id' => 0));
-                }
 
-      
+
+
+        if (!$get_machine_user) {
+            $this->db->delete('ci_users_machines', array('maq_id' => $maq_id, 'user_id' => $user_id));
+        } else {
+            $this->db->where(array('maq_id' => $maq_id, 'user_id' => $user_id));
+
+            $this->db->update('ci_users_machines', array('user_id' => 0));
+        }
+
+
 
         $this->session->set_flashdata('success', 'máquina excluida com sucesso!');
 
         redirect(base_url('admin/machines'));
     }
-    
+
     public function delete_ponto($maq_id, $ponto_id) {
 
-     
-        $this->db->where(array('maq_id' => $maq_id,'ponto_id' => $ponto_id));
-        $this->db->update('ci_users_machines', array('ponto_id'=>0));
+
+        $this->db->where(array('maq_id' => $maq_id, 'ponto_id' => $ponto_id));
+        $this->db->update('ci_users_machines', array('ponto_id' => 0));
 
         $this->session->set_flashdata('success', 'ponto excluida com sucesso!');
 
@@ -770,7 +829,13 @@ class Machines extends MY_Controller {
     //---------------------------------------------------------------
 
     public function view($id = 0) {
+        
         $dados['title'] = 'Operar_template';
+        $dados['operador'] = $this->machine_model->get_operador_by_machine($id);
+        $dados['ponto'] = $this->machine_model->get_ponto_by_machine($id);
+        $dados['qtde_estoque'] = $this->machine_model->get_estoque_machine($id);
+     
+
 
 
         $dados['rs'] = array();
@@ -778,6 +843,8 @@ class Machines extends MY_Controller {
         if ($result) {
             $dados['rs'] = $result;
         }
+        
+        $dados['item'] = $this->item_model->get_itens_by_id($result['item_id']);
 
         $this->load->view('admin/includes/_header');
         $this->load->view('admin/machines/machine_view', $dados);
@@ -843,6 +910,28 @@ class Machines extends MY_Controller {
         fclose($file);
 
         exit;
+    }
+
+    function ddoo_upload($filename, $id) {
+
+
+        $config['upload_path'] = $this->config->item('folder_images') . 'maquinas/';
+        $config['allowed_types'] = 'jpg|jpeg|png|gif|JPG|PNG|JPEG';
+        $config['max_size'] = '50000';
+        $config['file_name'] = $filename . '_' . $id;
+        $config['user_file'] = $filename;
+        $config['overwrite'] = false;
+
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload($filename)) {
+            $error = array('error' => $this->upload->display_errors());
+            return false;
+// $this->load->view('upload_form', $error);
+        } else {
+            $data = array('upload_data' => $this->upload->data());
+            return true;
+//$this->load->view('upload_success', $data);
+        }
     }
 
 }
