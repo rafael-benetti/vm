@@ -55,7 +55,7 @@
 
             <tr>
 
-              <th>#ID</th>
+              <th>Data de Cadastro</th>
               <th>Máquina</th>
               <th>Ponto</th>
               <th>Operador</th>
