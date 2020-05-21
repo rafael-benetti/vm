@@ -40,7 +40,7 @@
                         <a href="<?= base_url("admin/admin/edit/" . $row['id']); ?>" class="btn btn-warning btn-xs mr5" >
                             <i class="fa fa-edit"></i>
                         </a>
-                        <a href="<?= base_url("admin/admin/delete/" . $row['id']); ?>" onclick="return confirm('are you sure to delete?')" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
+                        <a href="<?= base_url("admin/admin/delete/" . $row['id']); ?>" onclick="return confirm('Deseja realmente apagar?')" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
                     </td>
                 </tr>
             <?php endforeach; ?>

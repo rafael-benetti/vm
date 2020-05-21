@@ -101,7 +101,7 @@ $.post('<?=base_url("admin/admin/change_status")?>',
 	status : $(this).is(':checked')==true?1:0
 },
 function(data){
-	$.notify("Status Changed Successfully", "success");
+	$.notify("Status atualizado com sucesso", "success");
 });
 });
 </script>

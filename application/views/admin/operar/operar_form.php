@@ -252,7 +252,7 @@
 
                                         <div class="col-12">
                                             <label for="sangria" class="col-md-6 control-label ">Valor da sangria</label>
-                                            <input type="text" name="sangria" class="form-control money" id="valorvenda" pattern="[0-9]+([,\.][0-9]+)?" min="0.1" step="any">
+                                            <input type="text" name="sangria" class="form-control money" id="valorvenda">
                                         </div>
 
                                     </div>

@@ -1,7 +1,11 @@
 <div class="content-wrapper">
     <section class="content">
         <!-- For Messages -->
-        <?php $this->load->view('admin/includes/_messages.php') ?>
+        <?php $this->load->view('admin/includes/_messages.php') ;
+                
+           
+                
+                ?>
         
         <div class="card">
             <div class="card-header">
@@ -25,16 +29,22 @@
                             <th>#ID</th>
                             <th>Nome da Rota</th>
                             <th>Pontos</th>
-                            <th>Quantidade de Máquinas</th>
-                            <th>Ações</th>
+                           <!-- <th>Quantidade de Máquinas</th>
+                            <th>Ações</th>-->
                         </tr>
-                        <?php foreach ($rotas as $rotas) {?>
+                        <?php foreach ($rotas as $rota) {?>
                 <tr>
-                    <td><?= $rotas->id; ?></td>
-                    <td><?= $rotas->nome; ?></td>  
-                    <td><?= $rotas->nome; ?></td>  
-                    <td><?= $rotas->nome; ?></td>  
-                    <td><?= $rotas->nome; ?></td>  
+                    <td><?= $rota['rota']->id; ?></td>
+                    <td><?= $rota['rota']->nome; ?></td>  
+                    <td>
+                        <?php foreach($rota['pontos'] as $ponto){
+                            echo $ponto['ponto'].'<br>';
+                            
+                        } ?>
+                    
+                    </td>  
+                   <!-- <td><?= $rotas->nome; ?></td>  
+                    <td><?= $rotas->nome; ?></td>  -->
                 </tr>
                         <?php }?>
                 </table>

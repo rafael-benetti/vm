@@ -9,7 +9,7 @@
               &nbsp; Update Admin </h3>
           </div>
           <div class="d-inline-block float-right">
-            <a href="<?= base_url('admin/profile/change_pwd'); ?>" class="btn btn-success"><i class="fa fa-list"></i> Change Password</a>
+            <a href="<?= base_url('admin/profile/change_pwd'); ?>" class="btn btn-success"><i class="fa fa-list"></i> Alterar senha</a>
           </div>
         </div>
         <div class="card-body">   
@@ -18,25 +18,25 @@
 
             <?php echo form_open(base_url('admin/profile'), 'class="form-horizontal"' )?> 
               <div class="form-group">
-                <label for="username" class="col-sm-2 control-label">User Name</label>
+                <label for="username" class="col-sm-2 control-label">Login</label>
 
                 <div class="col-md-12">
-                  <input type="text" name="username" value="<?= $admin['username']; ?>" class="form-control" id="username" placeholder="">
+                  <input type="text" name="username" value="<?= $admin->username; ?>" class="form-control" id="username" placeholder="">
                 </div>
               </div>
               <div class="form-group">
-                <label for="firstname" class="col-sm-2 control-label">First Name</label>
+                <label for="firstname" class="col-sm-2 control-label">Nome</label>
 
                 <div class="col-md-12">
-                  <input type="text" name="firstname" value="<?= $admin['firstname']; ?>" class="form-control" id="firstname" placeholder="">
+                  <input type="text" name="firstname" value="<?= $admin->firstname; ?>" class="form-control" id="firstname" placeholder="">
                 </div>
               </div>
 
               <div class="form-group">
-                <label for="lastname" class="col-sm-2 control-label">Last Name</label>
+                <label for="lastname" class="col-sm-2 control-label">Sobrenome</label>
 
                 <div class="col-md-12">
-                  <input type="text" name="lastname" value="<?= $admin['lastname']; ?>" class="form-control" id="lastname" placeholder="">
+                  <input type="text" name="lastname" value="<?= $admin->lastname; ?>" class="form-control" id="lastname" placeholder="">
                 </div>
               </div>
 
@@ -44,19 +44,19 @@
                 <label for="email" class="col-sm-2 control-label">Email</label>
 
                 <div class="col-md-12">
-                  <input type="email" name="email" value="<?= $admin['email']; ?>" class="form-control" id="email" placeholder="">
+                  <input type="email" name="email" value="<?= $admin->email; ?>" class="form-control" id="email" placeholder="">
                 </div>
               </div>
               <div class="form-group">
-                <label for="mobile_no" class="col-sm-2 control-label">Mobile No</label>
+                <label for="mobile_no" class="col-sm-2 control-label">Contato</label>
 
                 <div class="col-md-12">
-                  <input type="number" name="mobile_no" value="<?= $admin['mobile_no']; ?>" class="form-control" id="mobile_no" placeholder="">
+                  <input type="number" name="mobile_no" value="<?= $admin->mobile_no; ?>" class="form-control" id="mobile_no" placeholder="">
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-md-12">
-                  <input type="submit" name="submit" value="Update Profile" class="btn btn-info pull-right">
+                  <input type="submit" name="submit" value="Atualizar Perfil" class="btn btn-info pull-right">
                 </div>
               </div>
             <?php echo form_close(); ?>

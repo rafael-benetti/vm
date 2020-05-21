@@ -170,10 +170,14 @@ class Admin extends MY_Controller {
     //------------------------------------------------------------
     function delete($id = '') {
 
+        if($id == 1){
+            return;
+        }
+        
         $this->rbac->check_operation_access(); // check opration permission
 
         $this->admin->delete($id);
-        $this->session->set_flashdata('success', 'User has been Deleted Successfully.');
+        $this->session->set_flashdata('success', 'Usuario apagado com sucesso.');
         redirect('admin/admin');
     }
 

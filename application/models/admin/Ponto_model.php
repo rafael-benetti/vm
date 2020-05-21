@@ -84,7 +84,7 @@ class Ponto_model extends CI_Model {
     public function get_count_machines_user($user_id, $maq_id) {
 
 
-        $this->db->select('id');
+        $this->db->select('user_id as id');
         $this->db->from('ci_users_machines');
         $this->db->where('user_id', $user_id);
         $this->db->where('maq_id', $maq_id);

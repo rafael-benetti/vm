@@ -82,10 +82,11 @@ class Machines extends MY_Controller {
 
         foreach ($records['data'] as $row) {
 
+            
 
             $data[] = array(
                 $row['id'],
-                $row['data_log'],
+                inverteDataHora($row['data_log']),
                 $row['tipo_operacao'],
                 $row['qtde'],
                 $row['user_id'],
@@ -389,9 +390,7 @@ class Machines extends MY_Controller {
                     );
                     $result = $this->user_model->update_user_machine($data_users_machines, $get_machine_user);
                 }
-
-
-
+         
                 if ($result) {
                     $this->session->set_flashdata('success', 'maquina cadastrada com sucesso!');
 
