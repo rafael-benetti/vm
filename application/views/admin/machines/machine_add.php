@@ -64,7 +64,7 @@
 
 
                             </div>
-                      
+
 
 
                             <div class="row" style='margin-top:10px'>
@@ -96,13 +96,13 @@
 
 
                             <div class="row" style='margin-top:25px'>
-                                <div class="col-lg-5 col-sm-12  col-md-12">
+                                <div class="col-lg-6 col-sm-12  col-md-12">
                                     <label for="firstname" class="col-md-12 control-label">Foto do contador analógico inicial</label>
                                     <div class="col-12">
                                         <?php $file_cont_inicial = (isset($rs["imagem"]) ? $rs["imagem"] : ""); ?>
                                         <div class="form-group row">
                                             <div class="col-md-12 text-center">
-                                                    <!-- <input type="hidden" name="file_img_saida_old" id="file_img_saida_old" value="<?php //echo($file_cont_inicial);    ?>" /> -->
+                                                    <!-- <input type="hidden" name="file_img_saida_old" id="file_img_saida_old" value="<?php //echo($file_cont_inicial);     ?>" /> -->
 
                                                 <div class="wrapper-image-preview text-center">
                                                     <div class="box" style="margin: 0 auto;">
@@ -125,13 +125,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-5 col-sm-12 col-md-12">
+                                <div class="col-lg-6 col-sm-12 col-md-12">
                                     <label for="firstname" class="col-md-12 control-label">Foto do contador analógico de saida</label>
                                     <div class="col-12">
                                         <?php $file_cont_analogico = (isset($rs["imagem_analogico"]) ? $rs["imagem_analogico"] : ""); ?>
                                         <div class="form-group row">
                                             <div class="col-md-12 text-center">
-                                                    <!-- <input type="hidden" name="file_img_saida_old" id="file_img_saida_old" value="<?php //echo($file_cont_inicial);    ?>" /> -->
+                                                    <!-- <input type="hidden" name="file_img_saida_old" id="file_img_saida_old" value="<?php //echo($file_cont_inicial);     ?>" /> -->
 
                                                 <div class="wrapper-image-preview text-center">
                                                     <div class="box" style="margin: 0 auto;">
@@ -154,22 +154,41 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-sm-12  col-md-12" >
-                                
-             
-                                <label for="firstname" class="col-md-12 control-label">Acessórios</label>
-                                <label for="noteiro" class="col-md-12 control-label"> Noteiro 
-                                    <input type="checkbox" value="1" name="noteiro" id="noteiro" class="minimal">
-                                </label><br>
-                                <label for="ficheiro" class="col-md-12 control-label"> Ficheiro
-                                    <input type="checkbox" value="1" name="ficheiro" id="ficheiro" class="minimal">
-                                </label>
+                            </div>
+                            <div class="row" style='margin-top:25px'>
+                                <div class="col-lg-6 col-sm-12  col-md-12" >
+
+
+                                    <label for="firstname" class="col-md-12 control-label">Acessórios</label>
+                                    <label for="noteiro" class="col-md-12 control-label"> Noteiro 
+                                        <input type="checkbox" value="1" name="noteiro" id="noteiro" class="minimal">
+                                    </label><br>
+                                    <label for="ficheiro" class="col-md-12 control-label"> Ficheiro
+                                        <input type="checkbox" value="1" name="ficheiro" id="ficheiro" class="minimal">
+                                    </label>
+
+                                </div>
+                                 <div class="col-lg-6 col-sm-12  col-md-12" >
+                                      <label for="lastname" class="col-md-12 control-label">Selecione o Tipo de Insumo e a quantidade abastecida</label>
+                                    <div class="input-group">
+                                        <select name="item" style="width:100%" class="js-example-basic-single"id="item" >
+                                            <?php
+                                            foreach ($item as $item) {
+
+                                                echo '<option value="' . $item->id . '">' . $item->item . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                     
+                                    </div>
+                                    </div>
+                                    
+                          
+
 
                             </div>
-                                
 
-                            </div>
-                            
+
 
                             <div class="row" style='margin-top:25px'>
                                 <div class="col-12" >

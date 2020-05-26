@@ -13,6 +13,15 @@ class Machine_model extends CI_Model {
         return $this->db->insert_id();
     }
 
+    public function get_machines_by_user($user_id) {
+
+        $this->db->select('um.id as id_user_machine');
+        $this->db->from('ci_users_machines um');
+        $this->db->join('ci_machines m', 'm.id = um.maq_id');
+        $this->db->where('um.user_id', $user_id);
+        return $this->db->get()->result_array();
+    }
+
     public function add_log_machine($data) {
 
         $this->db->insert('ci_estoque_machine', $data);
@@ -90,11 +99,10 @@ class Machine_model extends CI_Model {
             return $this->datatable->LoadJson($SQL);
         }
     }
-    
-     public function update_item_machine($data, $id) {
+
+    public function update_item_machine($data, $id) {
         $this->db->where('id', $id);
         return $this->db->update('ci_machines', $data);
-     
     }
 
     function get_total_estoque_machines($maq_id) {
@@ -106,8 +114,6 @@ class Machine_model extends CI_Model {
 
         return $query->row()->total;
     }
-    
-
 
     //---------------------------------------------------
     // Get machine detial by ID

@@ -4,6 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Rotas extends MY_Controller {
 
+    private $modulo_name = 'rotas';
+
     public function __construct() {
 
         parent::__construct();
@@ -17,55 +19,21 @@ class Rotas extends MY_Controller {
 
     //-----------------------------------------------------------
     public function index() {
-        $this->db->select('*');
-        $array_rotas = array();
-        $rotas = $this->db->get('ci_rotas')->result();
-        
-        
-        
-        foreach($rotas as $rota){
-            $dados['rotas'][] = array('rota'=>$rota,'pontos'=>$this->rotas_model->get_pontos_by_rota_id($rota->id));
-            
-        }
-        
-       
-        
-       
-        $this->load->view('admin/includes/_header');
-        $this->load->view('admin/rotas/rotas_list', $dados);
-        $this->load->view('admin/includes/_footer');
-    }
 
-    public function ver_maquinas($user_id) {
 
         $where_pontos = array('is_active' => 1);
         if ($this->is_supper == "0") {
             $where_pontos = array(
-                'admin_id' => $this->admin_id,
+                'user_id' => $this->admin_id,
                 'is_active' => 1
             );
         }
         $dados['pontos'] = $this->ponto_model->getTodosPontos($where_pontos);
 
 
-        $dados['user'] = $this->user_model->get_user_by_id($user_id);
-        $dados['user_id'] = $user_id;
         $this->load->view('admin/includes/_header');
-        $this->load->view('admin/users/user_list_maquinas', $dados);
+        $this->load->view('admin/rotas/rotas_list', $dados);
         $this->load->view('admin/includes/_footer');
-    }
-
-    public function get_machines() {
-
-        $ponto_id = $this->input->post('pontodevenda');
-
-        $maquinas = $this->machine_model->get_machine_by_ponto($ponto_id);
-
-        foreach ($maquinas as $maquina) {
-            echo '<option value =' . $maquina['id_maquina'] . '>' . $maquina['nome_tipo'] . ' (' . $maquina['observacoes_equip'] . ')</option>';
-        }
-
-        exit;
     }
 
     public function add_rotas() {
@@ -86,12 +54,40 @@ class Rotas extends MY_Controller {
             } else {
 
                 $pontos = $this->input->post('ponto_id');
-                $rota = $this->input->post('rota');
 
-                $rota_id = $this->rotas_model->add_rota(array('nome' => $rota,
-                            'created_at' => date('Y-m-d H:i:s'),
-                            'updated_at' => date('Y-m-d H:i:s')
-                        ));
+                $nomes_ponto = array();
+
+                foreach ($pontos as $ponto) {
+
+                    $where_pontos = array(
+                        'is_active' => 1,
+                        'id' => $ponto);
+
+                    if ($this->is_supper == "0") {
+                        $where_pontos = array(
+                            'user_id' => $this->session->userdata('admin_id'),
+                            'is_active' => 1,
+                            'id' => $ponto
+                        );
+                    }
+
+                    $nomes_ponto[] = $this->ponto_model->getPontosName($where_pontos);
+                }
+
+
+        
+
+                $rota = $this->input->post('rota');
+                $operador = $this->user_model->get_user_by_id($this->session->userdata('admin_id'));
+
+                $rota_id = $this->rotas_model->add_rota(array(
+                    'nome' => $rota,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'user_id' => $this->session->userdata('admin_id'),
+                    'pontos' => implode(',', $nomes_ponto),
+                    'operador' => $operador[0]['firstname'].' '.$operador[0]['lastname'],
+                    'updated_at' => date('Y-m-d H:i:s')
+                ));
 
                 if ($rota_id > 0) {
 
@@ -131,6 +127,70 @@ class Rotas extends MY_Controller {
         }
         $records['data'] = $data;
         echo json_encode($records);
+    }
+
+    public function datatable_json() {
+
+
+        if ($this->session->userdata('is_supper') == 1) {
+            $where = array();
+            $where_pontos = array('is_active' => 1);
+        } else {
+            $where = array('OP.user_id = ' . $this->session->userdata('admin_id'));
+            $where_pontos = array(
+                'admin_id' => $this->admin_id,
+                'is_active' => 1
+            );
+        }
+
+        $records = $this->rotas_model->get_all_rotas($where);
+        $data = array();
+
+        foreach ($records['data'] as $row) {
+
+
+            $pontos_array = $this->rotas_model->get_pontos_by_rota_id($row['id']);
+
+            $status = ($row['is_active'] == 1) ? 'checked' : '';
+
+
+            if (verifica_permissao($this->modulo_name, 'view'))
+                $view = '<a title="Visualizar" class="delete btn btn-sm btn-info" href=' . base_url("admin/rotas/visualizar/" . $row['id']) . ' title="Visualizar"><i class="fa fa-eye"></i></a>';
+
+            if (verifica_permissao($this->modulo_name, 'edit'))
+                $edit = '<a title="Edit" class="update btn btn-sm btn-warning" href="' . base_url('admin/rotas/edit/' . $row['id']) . '"> <i class="fa fa-pencil-square-o"></i></a>';
+
+            if (verifica_permissao($this->modulo_name, 'delete'))
+                $delete = '<a title="Delete" class="delete btn btn-sm btn-danger" href=' . base_url("admin/rotas/delete/" . $row['id']) . ' title="Delete" onclick="return confirm(\'Deseja realmente apagar?\')"> <i class="fa fa-trash-o"></i></a>';
+
+            if (verifica_permissao($this->modulo_name, 'change_status')) {
+                $bnt_status = '<input type="checkbox" class="tgl_checkbox tgl-ios" data-id="' . $row['id'] . '" id="cb_' . $row['id'] . '" ' . $status . '><label for="cb_' . $row['id'] . '"></label>';
+            } else {
+                if ($status)
+                    $bnt_status = 'Ativo';
+                else
+                    $bnt_status = 'Desativado';
+            }
+
+
+            $ponto = '';
+            foreach ($pontos_array as $ponto_result) {
+                $ponto .= $ponto_result['ponto'] . ', ';
+            }
+
+
+
+
+            $data[] = array(
+                $row['id'],
+                $row['firstname'].' '.$row['lastname'],
+                $row['nome'],
+                $ponto
+            );
+        }
+        $records['data'] = $data;
+        echo json_encode($records);
+ 
     }
 
 }

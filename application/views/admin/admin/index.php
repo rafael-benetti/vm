@@ -10,7 +10,7 @@
                 <div class="d-inline-block">
                   <h3 class="card-title">
                     <i class="fa fa-list"></i>
-                    Lista de Clientes / Admin
+                    Lista de Admin
                   </h3>
               </div>
               <div class="d-inline-block float-right">
@@ -41,7 +41,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" name="keyword" class="form-control"  placeholder="Search from here..." onkeyup="filter_data()" />
+                            <input type="text" name="keyword" class="form-control"  placeholder="Pesquisar..." onkeyup="filter_data()" />
                         </div>
                     </div>
                 </div>

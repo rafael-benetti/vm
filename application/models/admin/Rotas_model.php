@@ -13,8 +13,8 @@
                        
                 public function get_all_rotas(){
 			$wh =array();
-			$SQL ='SELECT * FROM ci_rotas';
-			$wh[] = " is_admin = 0";
+			$SQL ='SELECT  u.id as user_id,r.operador, u.firstname, u.lastname,r.is_active as is_active, r.nome, r.id, r.pontos FROM ci_rotas r join ci_admin u ON u.id = r.user_id';
+			//$wh[] = " is_admin = 0";
 			if(count($wh)>0)
 			{
 				$WHERE = implode(' and ',$wh);

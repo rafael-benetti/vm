@@ -145,6 +145,8 @@ $data_cadastro = (isset($rs["data_cadastro"]) ? $rs["data_cadastro"] : "");
                                         <?php
                                         $imagem = (isset($rs["nome_imagem"]) ? $rs["nome_imagem"] : "");
                                         $placeholder = '';
+                         
+                                        
                                         $image_path = $this->config->item('folder_images') . '/maquinas/' . $imagem;
                                         if (file_exists($image_path) and is_file($image_path)) {
                                             ?>

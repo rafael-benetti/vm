@@ -43,16 +43,16 @@ class Machines extends MY_Controller {
     }
 
     public function recibo($id) {
-        
+
         $dados['proprietario'] = $this->settings->get_general_settings();
 
         $dados['machine'] = $this->machine_model->get_machine_by_id($id);
         $dados['user'] = $this->machine_model->get_operador_by_machine($id);
 
-     //   echo '<pre>';
-      //  var_dump($dados); exit;
-        
-        
+        //   echo '<pre>';
+        //  var_dump($dados); exit;
+
+
         $this->load->view('admin/includes/_header');
         $this->load->view('admin/machines/recibo', $dados);
         $this->load->view('admin/includes/_footer');
@@ -82,14 +82,15 @@ class Machines extends MY_Controller {
 
         foreach ($records['data'] as $row) {
 
-            
+            $usuario = $this->user_model->get_dados_usuario($row['user_id']);
+
 
             $data[] = array(
                 $row['id'],
                 inverteDataHora($row['data_log']),
                 $row['tipo_operacao'],
                 $row['qtde'],
-                $row['user_id'],
+                $usuario->firstname . ' ' . $usuario->lastname,
                 $row['item']
             );
         }
@@ -197,7 +198,7 @@ class Machines extends MY_Controller {
             }
 
             $pontos = $this->ponto_model->getTodosPontos($where_pontos);
-            $itens = $this->item_model->getTodosItens(array('is_active'=>1));
+            $itens = $this->item_model->getTodosItens(array('is_active' => 1));
 
             $dados_ponto = '
                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ponto_' . $row['id_maquina'] . '">
@@ -308,6 +309,7 @@ class Machines extends MY_Controller {
 
             $data[] = array(
                 $row['id_maquina'],
+                inverteDataHora($row['created_at']),
                 $row['nome_tipo'],
                 $dados_ponto,
                 $dados_operador,
@@ -364,7 +366,7 @@ class Machines extends MY_Controller {
             } else {
 
 
-                 $this->machine_model->update_item_machine(array('item_id'=>$item_id), $maq_id);
+                $this->machine_model->update_item_machine(array('item_id' => $item_id), $maq_id);
                 // $this->user_model->delete_user_machines($user_id, $pontodevenda);
 
 
@@ -390,7 +392,7 @@ class Machines extends MY_Controller {
                     );
                     $result = $this->user_model->update_user_machine($data_users_machines, $get_machine_user);
                 }
-         
+
                 if ($result) {
                     $this->session->set_flashdata('success', 'maquina cadastrada com sucesso!');
 
@@ -704,28 +706,6 @@ class Machines extends MY_Controller {
             } else {
 
 
-                // --------------------------------------------------------
-                // FOTO DO CONTADOR INICIAL DA MAQUINA
-                // --------------------------------------------------------
-                $file_cont_inicial_old = $this->input->post('file_cont_inicial_old');
-                $file_cont_inicial_old = $this->security->xss_clean($file_cont_inicial_old);
-                $file_cont_inicial = $file_cont_inicial_old;
-
-                $config = array(
-                    'upload_path' => $this->config->item('folder_images') . '/maquinas/',
-                    'allowed_types' => 'jpg|jpeg|png|gif|JPG|PNG|JPEG',
-                    'file_name' => 'contador_inicial_' . $id,
-                    'overwrite' => true,
-                    'max_size' => '50000',
-                        //'user_file' =>'file_cont_inicial'
-                );
-                $this->load->library('upload', $config);
-                if ($this->upload->do_upload('file_cont_inicial')) {
-
-                    $upload_data = $this->upload->data();
-                    $file_cont_inicial = $upload_data['file_name'];
-                }
-                // --------------------------------------------------------
 
                 $data = array(
                     //'id' => $id,
@@ -746,14 +726,63 @@ class Machines extends MY_Controller {
                     'updated_at' => date('Y-m-d : h:m:s'),
                 );
                 $data = $this->security->xss_clean($data);
-                //var_dump( $data );
-                // exit();
+
 
                 $result = $this->machine_model->edit_machine($data, $id);
                 if ($result) {
 
-                    $this->session->set_flashdata('success', 'Maquina atualizada com sucesso!');
-                    redirect(base_url('admin/machines'));
+                    if (isset($_FILES)) {
+
+                        $result = $id;
+
+                        // --------------------------------------------------------
+                        // FOTO DO CONTADOR INICIAL DA MAQUINA
+                        // --------------------------------------------------------
+
+
+
+                        if ($this->ddoo_upload('file_cont_inicial', $result)) {
+
+                            $upload_data = $this->upload->data();
+                            $file_cont_inicial = $upload_data['file_name'];
+
+                            $maqData = array(
+                                'nome_imagem' => $file_cont_inicial
+                            );
+                            $this->machine_model->edit_machine($maqData, $result);
+                        }
+
+
+
+
+                        // --------------------------------------------------------
+                        // FOTO DO CONTADOR ANALOGICO DA MAQUINA
+                        // --------------------------------------------------------
+
+                        if ($this->ddoo_upload('file_cont_analogico', $result)) {
+
+                            $upload_data = $this->upload->data();
+                            $file_cont_analogico = $upload_data['file_name'];
+
+                            $maqData = array(
+                                'nome_imagem_analogico' => $file_cont_analogico
+                            );
+                            $this->machine_model->edit_machine($maqData, $result);
+                        }
+
+
+
+                        $this->session->set_flashdata('success', 'Máquina atualizada com sucesso');
+
+
+                        //   $this->session->set_flashdata('errors', 'Falha no envio do arquivo, ' . $this->upload->display_errors());
+
+
+                        redirect(base_url('admin/machines'));
+
+
+                        // --------------------------------------------------------
+                    }
                 }
             }
         }
@@ -828,12 +857,12 @@ class Machines extends MY_Controller {
     //---------------------------------------------------------------
 
     public function view($id = 0) {
-        
+
         $dados['title'] = 'Operar_template';
         $dados['operador'] = $this->machine_model->get_operador_by_machine($id);
         $dados['ponto'] = $this->machine_model->get_ponto_by_machine($id);
         $dados['qtde_estoque'] = $this->machine_model->get_estoque_machine($id);
-     
+
 
 
 
@@ -842,7 +871,7 @@ class Machines extends MY_Controller {
         if ($result) {
             $dados['rs'] = $result;
         }
-        
+
         $dados['item'] = $this->item_model->get_itens_by_id($result['item_id']);
 
         $this->load->view('admin/includes/_header');

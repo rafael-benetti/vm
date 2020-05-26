@@ -103,9 +103,9 @@
         "columnDefs": [
 
             {"targets": 0, "name": "id", 'searchable': false, 'orderable': true},
-            {"targets": 1, "name": "data", 'searchable': true, 'orderable': true},
+            {"targets": 1, "name": "created_at", 'searchable': false, 'orderable': true},
             {"targets": 2, "name": "tipo_operacao", 'searchable': true, 'orderable': true},
-            {"targets": 3, "name": "qtde", 'searchable': true, 'orderable': true},
+            {"targets": 3, "name": "qtde", 'searchable': false, 'orderable': true},
             {"targets": 4, "name": "usuario", 'searchable': false, 'orderable': false},
             {"targets": 5, "name": "item", 'searchable': false, 'orderable': false}
 

@@ -87,6 +87,7 @@
 
             <tr>
 
+              <th>ID</th>
               <th>Data de Cadastro</th>
               <th>Máquina</th>
               <th>Ponto</th>
@@ -154,21 +155,21 @@ $("body").on("change","#operadores, #ponto",function(){
     "ajax": "<?=base_url('admin/machines/datatable_json/')?>"+user_id+"/"+ponto_id,
 
     "order": [[0,'desc']],
-
     "columnDefs": [
-
-    { "targets": 0, "name": "id_maquina", 'searchable':false, 'orderable':true},
-    { "targets": 1, "name": "tipo", 'searchable':true, 'orderable':true},
-    { "targets": 2, "name": "ponto", 'searchable':false, 'orderable':false},
-    { "targets": 3, "name": "operador", 'searchable':false, 'orderable':false},
-    { "targets": 4, "name": "descricao", 'searchable':false, 'orderable':false},
-    { "targets": 5, "name": "serial", 'searchable':false, 'orderable':false},
-    { "targets": 6, "name": "cont_inicial", 'searchable':false, 'orderable':false},
-    { "targets": 7, "name": "cont_saida_inicial", 'searchable':false, 'orderable':false},
-    { "targets": 8, "name": "valorvenda", 'searchable':false, 'orderable':false},
-    { "targets": 9, "name": "estoque", 'searchable':false, 'orderable':false},
-    { "targets": 10, "name": "is_active", 'searchable':false, 'orderable':false},
-    { "targets": 11, "name": "Ações", 'searchable':false, 'orderable':false,'width':'100px'}
+ 
+    { "targets": 0,"title":"ID", "name": "id_maquina", 'searchable':false, 'orderable':true},
+    { "targets": 1,"title":"Data do cadastro", "name": "created-at", 'searchable':true, 'orderable':true},
+    { "targets": 2,"title":"Máquina", "name": "nome_tipo", 'searchable':false, 'orderable':true},
+    { "targets": 3,"title":"Ponto", "name": "ponto", 'searchable':false, 'orderable':false},
+    { "targets": 4,"title":"Operador", "name": "operador", 'searchable':false, 'orderable':false},
+    { "targets": 5,"title":"Descrição", "name": "descricao", 'searchable':true, 'orderable':true},
+    { "targets": 6,"title":"Serial", "name": "serial", 'searchable':true, 'orderable':true},
+    { "targets": 7,"title":"Cont. Inicial", "name": "cont_inicial", 'searchable':false, 'orderable':false},
+    { "targets": 8,"title":"Cont Saída", "name": "cont_saida_inicial", 'searchable':false, 'orderable':false},
+    { "targets": 9,"title":"Cont. Saída", "name": "valorvenda", 'searchable':false, 'orderable':false},
+    { "targets": 10,"title":"Estoque", "name": "estoque", 'searchable':false, 'orderable':false},
+    { "targets": 11,"title":"Status", "name": "is_active", 'searchable':false, 'orderable':false},
+    { "targets": 12, "title":"Ações", "name": "Ações", 'searchable':false, 'orderable':false,'width':'100px'}
 
     ]
 

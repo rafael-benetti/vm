@@ -16,6 +16,14 @@ class Ponto_model extends CI_Model {
         return $this->db->get()->result();
     }
     
+     public function getPontosName($condicao = array()) {
+
+        $this->db->select('ponto');
+        $this->db->where($condicao);
+        $this->db->from('ci_pontos');
+        return $this->db->get()->row()->ponto;
+    }
+    
     
     
 

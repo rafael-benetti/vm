@@ -152,7 +152,7 @@ class User_model extends CI_Model {
     //---------------------------------------------------
     // Get user detial by ID
     public function get_user_by_id($id) {
-        $query = $this->db->get_where('ci_users', array('id' => $id));
+        $query = $this->db->get_where('ci_admin', array('id' => $id));
         return $result = $query->row_array();
     }
 

@@ -91,7 +91,7 @@
                             </div>
                              <div class="col-6">
                                     <label for="valordoequipamento" class="col-md-6 control-label ">Valor do Equipamento</label>
-                                    <input type="text" name="valordoequipamento" value="<?php echo $machine['valordoequipamento']; ?>" class="form-control money" id="valordoequipamento" pattern="[0-9]+([,\.][0-9]+)?" min="0.1" step="any">
+                                    <input type="text" name="valordoequipamento" value="<?php echo $machine['valordoequipamento']; ?>" class="form-control money" id="valordoequipamento" >
                                 </div>
                             
 
@@ -125,11 +125,11 @@
                             </div>
                         </div>
 
-                        <div class="row" style='margin-top:25px'>
+                  
 
                             
                             <div class="row" style='margin-top:25px'>
-                                <div class="col-lg-5 col-sm-12  col-md-12">
+                                <div class="col-lg-6 col-sm-12  col-md-12">
                                     <label for="firstname" class="col-md-12 control-label">Foto do contador analógico inicial</label>
                                     <div class="col-12">
                                         <?php $file_cont_inicial = (isset($machine["nome_imagem"]) ? $machine["nome_imagem"] : ""); ?>
@@ -158,7 +158,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-5 col-sm-12 col-md-12">
+                                <div class="col-lg-6 col-sm-12 col-md-12">
                                     <label for="firstname" class="col-md-12 control-label">Foto do contador analógico de saida</label>
                                     <div class="col-12">
                                                               <?php $file_cont_analogico= (isset($machine["nome_imagem_analogico"]) ? $machine["nome_imagem_analogico"] : ""); ?> <div class="form-group row">
@@ -186,17 +186,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-sm-12  col-md-12" >
+                               
+                            </div>
+                                  <div class="row" style='margin-top:25px'>
+                         
+                                <div class="col-lg-6 col-sm-12  col-md-12" >
                                 
-                 <label for="firstname" class="col-md-12 control-label">Acessórios</label>
-                                    <?php
-                                    $noteiro = (isset($machine["noteiro"]) ? $machine["noteiro"] : "");
-                                    $check_noteiro = (($noteiro == 0) ? "" : " checked ");
-
-                                    $ficheiro = (isset($machine["ficheiro"]) ? $machine["ficheiro"] : "");
-                                    $check_ficheiro = (($ficheiro == 0) ? "" : " checked ");
-                                    ?>
-                                    <label for="noteiro" class="col-md-3 control-label"> Noteiro 
+                                       <label for="noteiro" class="col-md-3 control-label"> Noteiro 
                                         <input type="checkbox" value="1" name="noteiro" id="noteiro" class="minimal" <?php echo($check_noteiro); ?> >
                                     </label>
                                     <label for="ficheiro" class="col-md-3 control-label"> Ficheiro
@@ -204,12 +200,36 @@
                                     </label>
 
                             </div>
+                                      
+                                <div class="col-lg-6 col-sm-12  col-md-12" >
                                 
+                                   <label for="lastname" class="col-md-12 control-label">Selecione o Tipo de Insumo e a quantidade abastecida</label>
+                                    <div class="input-group">
+                                        <select name="item" style="width:100%" class="js-example-basic-single"id="item" >
+                                            <?php
+                                            $checked = '';
+                                            foreach ($item as $item) {
+
+                                                if($item->id == $machine["item_id"]){
+                                                    $checked = 'selected = "true"';
+                                                }else{
+                                                    $checked = '';
+                                                }
+                                                echo '<option '.$checked.' value="' . $item->id . '">' . $item->item . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                     
+                                    </div>
 
                             </div>
+                            </div>
+                                
+
+                  
                             
                             
-                        </div>
+                    
 
                         <div class="row" style='margin-top:25px'>
                             <div class="col-12" >
