@@ -72,12 +72,6 @@ class Tipos extends MY_Controller {
         $this->tipo_model->change_status();
     }
 
-    
-    
-    
-    
-    
-    
     //---------------------------------------------------------------
 
     public function add() {
@@ -91,45 +85,39 @@ class Tipos extends MY_Controller {
                 $this->session->set_flashdata('errors', $data['errors']);
                 redirect(base_url('admin/tipos/add'), 'refresh');
             } else {
-                
-                
-                 // CONTADOR DE ENTRADA
-            // --------------------------------------------------------
-            $file_img_tipos = $this->input->post('file_img_tipos');
-            $file_img_tipos = $this->security->xss_clean($file_img_tipos);
-            $file_tipo = $file_img_tipos;
-            
-            
-            $config = array(
-                            'upload_path' => $this->config->item('folder_images') . 'tipos/',
-                            'allowed_types' => 'jpg|jpeg|png|gif|JPG|PNG|JPEG',
-                            'file_name' => $this->input->post('tipo'),
-                            'overwrite' => true,
-                            'max_size' => '50000',
-                            'user_file' => 'file_img_tipos'
-                        );
-                        $this->load->library('upload', $config);
-                        
-        
-            if ($this->upload->do_upload('file_img_tipos')) {
-                $upload_data = $this->upload->data();
-                $file_tipo = $upload_data['file_name'];
-            }
-     
-            
-            
-            
+
                 $data = array(
                     'tipo' => $this->input->post('tipo'),
                     'created_at' => date('Y-m-d : h:m:s'),
                     'updated_at' => date('Y-m-d : h:m:s'),
-                    'nome_imagem' => $file_tipo,
+                    'nome_imagem' => '',
                 );
                 $data = $this->security->xss_clean($data);
                 $result = $this->tipo_model->add_tipo($data);
-                if ($result) {
-                    $this->session->set_flashdata('success', 'Tipo adicionado com sucesso!');
-                    redirect(base_url('admin/tipos'));
+
+                if ($result > 0) {
+
+                    if (isset($_FILES)) {
+
+                        if ($this->ddoo_upload('file_img_tipos', $result)) {
+
+                            $upload_data = $this->upload->data();
+                            $file_cont_inicial = $upload_data['file_name'];
+
+                            $maqData = array(
+                                'nome_imagem' => $file_cont_inicial
+                            );
+                            $this->tipo_model->edit_tipo($maqData, $result);
+                            $this->session->set_flashdata('success', 'Tipo adicionado com sucesso');
+                            redirect(base_url('admin/tipos'));
+                        } else {
+                            $this->session->set_flashdata('error', 'Ocorreu erro upload do tipo');
+                            redirect(base_url('admin/tipos'));
+                        }
+                    } else {
+                        $this->session->set_flashdata('error', 'Ocorreu erro ao adicionar o tipo');
+                        redirect(base_url('admin/tipos'));
+                    }
                 }
             }
         } else {
@@ -139,9 +127,6 @@ class Tipos extends MY_Controller {
         }
     }
 
-    
-    
-    
     public function edit($id = 0) {
 
         $this->rbac->check_operation_access(); // check opration permission
@@ -178,17 +163,42 @@ class Tipos extends MY_Controller {
 
                 if ($result) {
 
-                    $this->session->set_flashdata('success', 'tipo foi atualizado com sucesso!');
+                    if (isset($_FILES)) {
+                        $tipo = $this->tipo_model->get_tipo_by_id($id);
+                    
+                             $arquivo = $this->config->item('folder_images') . 'tipos/'.$tipo['nome_imagem'];
+                      
+                        if(is_file($arquivo)){
+                           unlink($arquivo);
+                       }
+                    
+                        if ($this->ddoo_upload('file_img_tipos', $tipo['id'])) {
 
-                    redirect(base_url('admin/tipos'));
+                            $upload_data = $this->upload->data();
+                            $file_cont_inicial = $upload_data['file_name'];
+
+                            $maqData = array(
+                                'nome_imagem' => $file_cont_inicial
+                            );
+                            $this->tipo_model->edit_tipo($maqData, $result);
+                            $this->session->set_flashdata('success', 'Tipo atualizado com sucesso');
+                            redirect(base_url('admin/tipos'));
+                        } else {
+                            $this->session->set_flashdata('error', 'Ocorreu erro upload do tipo');
+                            redirect(base_url('admin/tipos'));
+                        }
+                    } else {
+                        $this->session->set_flashdata('success', 'tipo foi atualizado com sucesso!');
+                        redirect(base_url('admin/tipos'));
+                    }
                 }
             }
         } else {
 
-            $data['tipo'] = $this->tipo_model->get_tipo_by_id($id);
+            
 
 
-
+$data['tipo'] = $this->tipo_model->get_tipo_by_id($id);
             $this->load->view('admin/includes/_header');
 
             $this->load->view('admin/tipos/tipo_edit', $data);
@@ -271,6 +281,27 @@ class Tipos extends MY_Controller {
         fclose($file);
 
         exit;
+    }
+
+    function ddoo_upload($filename, $id) {
+
+         $config['upload_path'] = $this->config->item('folder_images') . 'tipos/';
+        $config['allowed_types'] = 'jpg|jpeg|png|gif|JPG|PNG|JPEG';
+        $config['max_size'] = '50000';
+        $config['file_name'] = $filename . '_' . $id;
+        $config['user_file'] = $filename;
+        $config['overwrite'] = false;
+
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload($filename)) {
+            $error = array('error' => $this->upload->display_errors());
+            return false;
+// $this->load->view('upload_form', $error);
+        } else {
+            $data = array('upload_data' => $this->upload->data());
+            return true;
+//$this->load->view('upload_success', $data);
+        }
     }
 
 }

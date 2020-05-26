@@ -6,10 +6,10 @@
             <div class="card-header">
                 <div class="d-inline-block">
                     <h3 class="card-title"> <i class="fa fa-plus"></i>
-                        Add Novo Cliente </h3>
+                        Add Novo Administrador </h3>
                 </div>
                 <div class="d-inline-block float-right">
-                    <a href="<?= base_url('admin/admin'); ?>" class="btn btn-success"><i class="fa fa-list"></i> Listar Clientes</a>
+                    <a href="<?= base_url('admin/admin'); ?>" class="btn btn-success"><i class="fa fa-list"></i> Listar administradores</a>
                 </div>
             </div>
             <div class="card-body">
@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <input type="submit" name="submit" value="Adicionar Cliente" class="btn btn-primary pull-right">
+                                        <input type="submit" name="submit" value="Adicionar Admin" class="btn btn-primary pull-right">
                                     </div>
                                 </div>
                                 <?php echo form_close(); ?>

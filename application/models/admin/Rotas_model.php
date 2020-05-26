@@ -13,8 +13,8 @@
                        
                 public function get_all_rotas(){
 			$wh =array();
-			$SQL ='SELECT * FROM ci_rotas';
-			$wh[] = " is_admin = 0";
+			$SQL ='SELECT  u.id as user_id,r.operador, u.firstname, u.lastname,r.is_active as is_active, r.nome, r.id, r.pontos FROM ci_rotas r join ci_admin u ON u.id = r.user_id';
+			//$wh[] = " is_admin = 0";
 			if(count($wh)>0)
 			{
 				$WHERE = implode(' and ',$wh);
@@ -126,25 +126,13 @@
 		}
                 
                 
-                public function get_maquinas_by_user_id($user_id){
+                public function get_pontos_by_rota_id($rota_id){
                     
-			$this->db->select('m.nome_imagem, m.observacoes_equip as nome_maquina');
-			$this->db->select('t.tipo as nome_tipo, p.ponto, p.nomefan');
-			$this->db->where('up.user_id', $user_id);
-			$this->db->from('ci_users_pontos up');     
-                        $this->db->join('ci_pontos p', 'p.id = up.ponto_id');
-                        $this->db->join('ci_machines m', 'm.pontodevenda = p.id');
-                        $this->db->join('ci_tipos t', 't.id = m.tipomaquina');
-                  
-			$query = $this->db->get();
-                   
-                        echo '<pre>';
-                        var_dump($query->result_array());
-                        
-                        echo '</pre>';
-                        
-                        exit;
-			return $result = $query->result_array();
+			$this->db->where('rp.rota_id', $rota_id);
+			$this->db->from('ci_pontos p');     
+                        $this->db->join('ci_rotas_pontos rp', 'rp.ponto_id = p.id');
+                   	$query = $this->db->get();
+                        return $query->result_array();
 		}
 
                        function get_total_machines_user($user_id){

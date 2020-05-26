@@ -66,6 +66,7 @@
                             </div>
 
 
+
                             <div class="row" style='margin-top:10px'>
                                 <div class="col-12">
                                     <label for="firstname" class="col-md-3 control-label">Nº Série</label>
@@ -73,7 +74,7 @@
                                 </div>
                                 <div class="col-12">
                                     <label for="valorvenda" class="col-md-6 control-label ">Valor de venda</label>
-                                    <input type="text" name="valorvenda" class="form-control money" id="valorvenda" pattern="[0-9]+([,\.][0-9]+)?" min="0.1" step="any">
+                                    <input type="text" name="valorvenda" class="form-control money" id="valorvenda" >
                                 </div>
 
 
@@ -83,11 +84,11 @@
                                 </div>
                                 <div class="col-12">
                                     <label for="cont_saida_inicial" class="col-md-6 control-label">Cont-Ini. de saída</label>
-                                    <input type="number" name="cont_saida_inicial" class="form-control" id="cont_saida_inicial" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any">
+                                    <input type="number" name="cont_saida_inicial" class="form-control" id="cont_saida_inicial" >
                                 </div>
                                 <div class="col-12">
                                     <label for="valordoequipamento" class="col-md-6 control-label ">Valor do Equipamento</label>
-                                    <input type="text" name="valordoequipamento" class="form-control money" id="valordoequipamento" pattern="[0-9]+([,\.][0-9]+)?" min="0.1" step="any">
+                                    <input type="text" name="valordoequipamento" class="form-control money" id="valordoequipamento">
                                 </div>
 
 
@@ -95,13 +96,13 @@
 
 
                             <div class="row" style='margin-top:25px'>
-                                <div class="col-12">
+                                <div class="col-lg-6 col-sm-12  col-md-12">
                                     <label for="firstname" class="col-md-12 control-label">Foto do contador analógico inicial</label>
                                     <div class="col-12">
                                         <?php $file_cont_inicial = (isset($rs["imagem"]) ? $rs["imagem"] : ""); ?>
                                         <div class="form-group row">
                                             <div class="col-md-12 text-center">
-                                                    <!-- <input type="hidden" name="file_img_saida_old" id="file_img_saida_old" value="<?php //echo($file_cont_inicial);    ?>" /> -->
+                                                    <!-- <input type="hidden" name="file_img_saida_old" id="file_img_saida_old" value="<?php //echo($file_cont_inicial);     ?>" /> -->
 
                                                 <div class="wrapper-image-preview text-center">
                                                     <div class="box" style="margin: 0 auto;">
@@ -124,28 +125,28 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-lg-6 col-sm-12 col-md-12">
                                     <label for="firstname" class="col-md-12 control-label">Foto do contador analógico de saida</label>
                                     <div class="col-12">
-                                        <?php $file_cont_inicial = (isset($rs["imagem"]) ? $rs["imagem"] : ""); ?>
+                                        <?php $file_cont_analogico = (isset($rs["imagem_analogico"]) ? $rs["imagem_analogico"] : ""); ?>
                                         <div class="form-group row">
                                             <div class="col-md-12 text-center">
-                                                    <!-- <input type="hidden" name="file_img_saida_old" id="file_img_saida_old" value="<?php //echo($file_cont_inicial);    ?>" /> -->
+                                                    <!-- <input type="hidden" name="file_img_saida_old" id="file_img_saida_old" value="<?php //echo($file_cont_inicial);     ?>" /> -->
 
                                                 <div class="wrapper-image-preview text-center">
                                                     <div class="box" style="margin: 0 auto;">
                                                         <?php
-                                                        $label_upload = "Enviar foto do contador Inicial";
+                                                        $label_upload = "Enviar foto do contador Analogico";
                                                         $placeholder = base_url("assets/dist/img/placeholder-image.jpg");
-                                                        $image_path = $this->config->item('folder_images') . '/maquinas/' . $file_cont_inicial;
+                                                        $image_path = $this->config->item('folder_images') . '/maquinas/' . $file_cont_analogico;
                                                         if (file_exists($image_path) and is_file($image_path)) {
                                                             $placeholder = base_url($image_path);
                                                         }
                                                         ?>
                                                         <div class="js--image-preview" style="background-image: url(<?php echo($placeholder); ?>); background-color: #F5F5F5;"></div>
                                                         <div class="upload-options">
-                                                            <label for="file_cont_inicial" class="btn btn-white-sp"> <i class="mdi mdi-camera"></i> <?php echo $label_upload; ?> </label>
-                                                            <input type="file" style="visibility:hidden;" class="image-upload" name="file_cont_inicial" id="file_cont_inicial" accept="image/*">
+                                                            <label for="file_cont_analogico" class="btn btn-white-sp"> <i class="mdi mdi-camera"></i> <?php echo $label_upload; ?> </label>
+                                                            <input type="file" style="visibility:hidden;" class="image-upload" name="file_cont_analogico" id="file_cont_analogico" accept="image/*">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -153,11 +154,22 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-                            <div class="col-12">
-                                <div class="col-lg-12"  style='margin-top:10px'>
-                                    <label for="lastname" class="col-md-12 control-label">Selecione o Tipo de Insumo</label>
+                            <div class="row" style='margin-top:25px'>
+                                <div class="col-lg-6 col-sm-12  col-md-12" >
+
+
+                                    <label for="firstname" class="col-md-12 control-label">Acessórios</label>
+                                    <label for="noteiro" class="col-md-12 control-label"> Noteiro 
+                                        <input type="checkbox" value="1" name="noteiro" id="noteiro" class="minimal">
+                                    </label><br>
+                                    <label for="ficheiro" class="col-md-12 control-label"> Ficheiro
+                                        <input type="checkbox" value="1" name="ficheiro" id="ficheiro" class="minimal">
+                                    </label>
+
+                                </div>
+                                 <div class="col-lg-6 col-sm-12  col-md-12" >
+                                      <label for="lastname" class="col-md-12 control-label">Selecione o Tipo de Insumo e a quantidade abastecida</label>
                                     <div class="input-group">
                                         <select name="item" style="width:100%" class="js-example-basic-single"id="item" >
                                             <?php
@@ -167,20 +179,16 @@
                                             }
                                             ?>
                                         </select>
-
+                                     
                                     </div>
+                                    </div>
+                                    
+                          
 
-                                </div>
-                                <br>
-                                <label for="firstname" class="col-md-12 control-label">Acessórios</label>
-                                <label for="noteiro" class="col-md-3 control-label"> Noteiro 
-                                    <input type="checkbox" value="1" name="noteiro" id="noteiro" class="minimal">
-                                </label>
-                                <label for="ficheiro" class="col-md-3 control-label"> Ficheiro
-                                    <input type="checkbox" value="1" name="ficheiro" id="ficheiro" class="minimal">
-                                </label>
 
                             </div>
+
+
 
                             <div class="row" style='margin-top:25px'>
                                 <div class="col-12" >

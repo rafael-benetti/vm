@@ -1,18 +1,21 @@
 <?php
+
 // fct_print_debug($rs);
 $id = (isset($rs["id"]) ? $rs["id"] : "");
 $created_at = (isset($rs["created_at"]) ? $rs["created_at"] : "");
 $tipomaquina = (isset($rs["nome_tipo"]) ? $rs["nome_tipo"] : "");
-$pontodevenda = (isset($rs["nome_ponto"]) ? $rs["nome_ponto"] : "");
+$pontodevenda = (isset($ponto->ponto) ? $ponto->ponto : "");
 $serial = (isset($rs["serial"]) ? $rs["serial"] : "");
 $cont_inicial = (int) (isset($rs["cont_inicial"]) ? $rs["cont_inicial"] : "");
 $cont_saida_inicial = (int) (isset($rs["cont_saida_inicial"]) ? $rs["cont_saida_inicial"] : "");
 $valorvenda = (isset($rs["valorvenda"]) ? $rs["valorvenda"] : "");
-$tipoinsumo = (isset($rs["tipoinsumo"]) ? $rs["tipoinsumo"] : "");
-$quant_insumo = (isset($rs["quant_insumo"]) ? $rs["quant_insumo"] : "");
-$noteiro = (isset($rs["noteiro"]) ? $rs["noteiro"] : "");
-$ficheiro = (isset($rs["ficheiro"]) ? $rs["ficheiro"] : "");
+$valordoequipamento= (isset($rs["valordoequipamento"]) ? $rs["valordoequipamento"] : "");
+$tipoinsumo = (isset($item['item']) ? $item['item'] : "Não vinculado");
+$quant_insumo = (isset($qtde_estoque) ? $qtde_estoque : "Não tem item");
+$noteiro = ($rs["noteiro"]==1 ? "Sim" : "Não");
+$ficheiro = ($rs["ficheiro"]==1 ? "Sim" : "Não");
 $observacoes_equip = (isset($rs["observacoes_equip"]) ? $rs["observacoes_equip"] : "");
+$data_cadastro = (isset($rs["data_cadastro"]) ? $rs["data_cadastro"] : "");
 ?> 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -51,7 +54,7 @@ $observacoes_equip = (isset($rs["observacoes_equip"]) ? $rs["observacoes_equip"]
 
             <div class="row">
 
-                <div class="col-md-4">
+                <div class="col-md-3">
 
 
                     <!-- Profile Image -->
@@ -64,6 +67,9 @@ $observacoes_equip = (isset($rs["observacoes_equip"]) ? $rs["observacoes_equip"]
 
                             <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
+                                    <b>Data do cadastro: </b> <a class="float-right"><?php echo(inverteDataHora($data_cadastro)); ?></a>
+                                </li>
+                                <li class="list-group-item">
                                     <b>Ponto Vinculado: </b> <a class="float-right"><?php echo($pontodevenda); ?></a>
                                 </li>
                                 <li class="list-group-item">
@@ -73,7 +79,7 @@ $observacoes_equip = (isset($rs["observacoes_equip"]) ? $rs["observacoes_equip"]
                                     <b>Cont. de Saida Inicial: </b> <a class="float-right"><?php echo($cont_saida_inicial); ?></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Valor de Venda: </b> <a class="float-right">R$ <?php echo($valorvenda); ?></a>
+                                    <b>Valor de Venda: </b> <a class="float-right"><?php echo(formatar_moeda($valorvenda)); ?></a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Possui Noteiro: </b> <a class="float-right"><?php echo($noteiro); ?></a>
@@ -88,7 +94,7 @@ $observacoes_equip = (isset($rs["observacoes_equip"]) ? $rs["observacoes_equip"]
                                     <b>Quantidade abastecida: </b> <a class="float-right"><?php echo($quant_insumo); ?></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b> Valor do equipamento: </b> <a class="float-right"> R$ ?.???,00</a>
+                                    <b> Valor do equipamento: </b> <a class="float-right"> <?php echo formatar_moeda($valordoequipamento); ?></a>
                                 </li>
                                 <li class="list-group-item">
                                     <b> Observações: </b> <a class="float-right"><?php echo($observacoes_equip); ?></a>
@@ -99,7 +105,7 @@ $observacoes_equip = (isset($rs["observacoes_equip"]) ? $rs["observacoes_equip"]
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card">
 
                         <div class="card-body">
@@ -109,7 +115,65 @@ $observacoes_equip = (isset($rs["observacoes_equip"]) ? $rs["observacoes_equip"]
                                     <div class="post">
                                         <b>Tipo de Máquina</b><br>
                                         <?php
+                                        $imagem = (isset($rs["tipo_nome_imagem"]) ? $rs["tipo_nome_imagem"] : "");
+                                        $placeholder = '';
+                                        $image_path = $this->config->item('folder_images') . 'tipos/' . $imagem;
+                                        if (file_exists($image_path) and is_file($image_path)) {
+                                            ?>
+                                            <div class="box-img"><a href="<?php echo( base_url($image_path) ); ?>" target="blank">
+                                                    <img src="<?php echo( base_url($image_path) ); ?>" alt="contador de entrada" style="width: 100%;" /></a>
+                                            </div>
+                                            <?php
+                                        }
+                                        ?> 
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="tab-content">
+
+                                <div class="active tab-pane" id="activity">
+                                    <div class="post">
+                                        <b>Imagem contador analogico inicial</b><br>
+                                        <?php
                                         $imagem = (isset($rs["nome_imagem"]) ? $rs["nome_imagem"] : "");
+                                        $placeholder = '';
+                         
+                                        
+                                        $image_path = $this->config->item('folder_images') . '/maquinas/' . $imagem;
+                                        if (file_exists($image_path) and is_file($image_path)) {
+                                            ?>
+                                            <div class="box-img"><a href="<?php echo( base_url($image_path) ); ?>" target="blank">
+                                                    <img src="<?php echo( base_url($image_path) ); ?>" alt="contador de entrada" style="width: 100%;" /></a>
+                                            </div>
+                                            <?php
+                                        }
+                                        ?> 
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="tab-content">
+
+                                <div class="active tab-pane" id="activity">
+                                    <div class="post">
+                                        <b>Imagem contador analogico saida</b><br>
+                                        <?php
+                                        $imagem = (isset($rs["nome_imagem_analogico"]) ? $rs["nome_imagem_analogico"] : "");
                                         $placeholder = '';
                                         $image_path = $this->config->item('folder_images') . '/maquinas/' . $imagem;
                                         if (file_exists($image_path) and is_file($image_path)) {
@@ -127,67 +191,7 @@ $observacoes_equip = (isset($rs["observacoes_equip"]) ? $rs["observacoes_equip"]
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card">
-
-                        <div class="card-body">
-                            <div class="tab-content">
-
-                                <div class="active tab-pane" id="activity">
-                                    <div class="post">
-                                        
-
-<b>Foto do contador digital</b><br>
-                                        <?php
-                                        $imagem = (isset($rs["nome_imagem"]) ? $rs["nome_imagem"] : "");
-                                        $placeholder = '';
-                                        $image_path = $this->config->item('folder_images') . '/maquinas/' . $imagem;
-                                        if (file_exists($image_path) and is_file($image_path)) {
-                                            ?>
-                                            <div class="box-img"><a href="<?php echo( base_url($image_path) ); ?>" target="blank">
-                                                    <img src="<?php echo( base_url($image_path) ); ?>" alt="contador de entrada" style="width: 100%;" /></a>
-                                            </div>
-                                            <?php
-                                        }
-                                        ?>
-                                        <br><br>
-                                        <b>Foto do contador de entrada</b><br>
-                                        <?php
-                                        $imagem = (isset($rs["nome_imagem"]) ? $rs["nome_imagem"] : "");
-                                        $placeholder = '';
-                                        $image_path = $this->config->item('folder_images') . '/maquinas/' . $imagem;
-                                        if (file_exists($image_path) and is_file($image_path)) {
-                                            ?>
-                                            <div class="box-img"><a href="<?php echo( base_url($image_path) ); ?>" target="blank">
-                                                    <img src="<?php echo( base_url($image_path) ); ?>" alt="contador de entrada" style="width: 100%;" /></a>
-                                            </div>
-                                            <?php
-                                        }
-                                        ?> 
-                                        <br><br>
-                                        <b>Foto do contador de saida</b><br>
-                                        <?php
-                                        $imagem = (isset($rs["nome_imagem"]) ? $rs["nome_imagem"] : "");
-                                        $placeholder = '';
-                                        $image_path = $this->config->item('folder_images') . '/maquinas/' . $imagem;
-                                        if (file_exists($image_path) and is_file($image_path)) {
-                                            ?>
-                                            <div class="box-img"><a href="<?php echo( base_url($image_path) ); ?>" target="blank">
-                                                    <img src="<?php echo( base_url($image_path) ); ?>" alt="contador de entrada" style="width: 100%;" /></a>
-                                            </div>
-                                            <?php
-                                        }
-                                        ?> 
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
-
-
-                    </div>
-                </div>
+                
             </div>
         </div>
     </section>

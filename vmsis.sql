@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 19-Maio-2020 às 17:39
+-- Tempo de geração: 26-Maio-2020 às 18:12
 -- Versão do servidor: 10.4.11-MariaDB
 -- versão do PHP: 7.2.29
 
@@ -55,7 +55,7 @@ CREATE TABLE `ci_admin` (
 --
 
 INSERT INTO `ci_admin` (`id`, `admin_role_id`, `username`, `firstname`, `lastname`, `email`, `mobile_no`, `image`, `password`, `last_login`, `is_verify`, `is_admin`, `is_active`, `is_supper`, `token`, `password_reset_code`, `last_ip`, `contrato`, `created_at`, `updated_at`) VALUES
-(31, 1, 'superadmin', 'Rafael', 'Benetti', 'marketing@altechindustria.com.br', '47997799705', '', '$2y$10$3h721xTsJbI6WX0/oS4n.eVFAvsfcZ1vIIMnoDROrbBBOrlLCg86y', '0000-00-00 00:00:00', 1, 1, 1, 1, '', '', '', '', '2019-01-16 06:01:58', '2020-01-23 00:00:00'),
+(1, 1, 'superadmin', 'Rafael sddd', 'Benetti5555', 'marketing@altechindustria.com.br', '47997799705', '', '$2y$10$3h721xTsJbI6WX0/oS4n.eVFAvsfcZ1vIIMnoDROrbBBOrlLCg86y', '0000-00-00 00:00:00', 1, 1, 1, 1, '', '', '', '', '2019-01-16 06:01:58', '2020-05-22 00:00:00'),
 (32, 1, 'jeronimo', 'jeronimo', 'cardoso', 'jeronimo.alvescardoso@gmail.com', '(11) 97229-6726', '', '$2y$10$8KONhbfhgGgCak/DtxDR..L5PTqAXaDfG0s8Bc.NPTQGS6Svi6qh6', '0000-00-00 00:00:00', 1, 1, 1, 0, '', '', '', '', '2020-05-14 00:00:00', '2020-05-14 00:00:00'),
 (33, 2, 'operador', 'operador', 'operador', 'operador@operador.com', '123456789', '', '$2y$10$iBuwZReVl3sCSJAI3mfIU.tjtusJbTHZlxnRmP6o0vStzKHp0oHJi', '0000-00-00 00:00:00', 1, 1, 1, 0, '', '', '', '', '2020-05-14 00:00:00', '2020-05-14 00:00:00');
 
@@ -101,6 +101,16 @@ CREATE TABLE `ci_calendar` (
   `modified_at` datetime DEFAULT NULL,
   `modified_by` varchar(64) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `ci_calendar`
+--
+
+INSERT INTO `ci_calendar` (`id`, `title`, `description`, `color`, `start_date`, `end_date`, `create_at`, `create_by`, `modified_at`, `modified_by`) VALUES
+(36, 'Accusantium totam oc', 'At ut cum rerum dese', '#FF8C00', '2020-05-01', '2020-05-15', '2020-05-21 01:33:01', NULL, NULL, NULL),
+(37, 'a', 'a', '#FF0000', '0000-00-00', '0000-00-00', '2020-05-21 01:35:34', NULL, NULL, NULL),
+(38, 'Quo earum qui et seq', 'Eu labore et ut adip', '#FF0000', '2020-05-19', '2020-05-27', '2020-05-21 01:35:49', NULL, NULL, NULL),
+(39, 'Vel est aperiam culp', 'Aut similique in obc', '#FF8C00', '2020-04-27', '2020-04-28', '2020-05-21 01:35:57', NULL, '2020-05-21 01:36:07', NULL);
 
 -- --------------------------------------------------------
 
@@ -176,7 +186,10 @@ INSERT INTO `ci_estoque_itens` (`id`, `qtde`, `item_id`, `maq_id`, `user_id`, `c
 (29, 500, 83, 0, 31, '2020-05-18 00:00:00', '2020-05-18 00:00:00', 'entrada'),
 (30, -10, 83, 0, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'saida'),
 (31, -100, 83, 0, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'saida'),
-(32, -90, 83, 0, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'saida');
+(32, -90, 83, 0, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'saida'),
+(33, -10, 83, 0, 31, '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'saida'),
+(34, -100, 84, 0, 31, '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'saida'),
+(35, -25, 84, 0, 1, '2020-05-22 00:00:00', '2020-05-22 00:00:00', 'saida');
 
 -- --------------------------------------------------------
 
@@ -207,7 +220,11 @@ INSERT INTO `ci_estoque_machine` (`id`, `qtde`, `item_id`, `maq_id`, `user_id`, 
 (89, -30, 83, 57, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'saida', 67),
 (90, 100, 83, 57, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'entrada', 0),
 (91, -40, 83, 57, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'saida', 68),
-(92, 90, 83, 57, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'entrada', 0);
+(92, 90, 83, 57, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'entrada', 0),
+(93, 10, 83, 74, 31, '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'entrada', 0),
+(94, 100, 84, 76, 31, '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'entrada', 0),
+(95, 25, 84, 76, 1, '2020-05-22 00:00:00', '2020-05-22 00:00:00', 'entrada', 0),
+(96, -10, 83, 74, 33, '2020-05-25 00:00:00', '2020-05-25 00:00:00', 'saida', 70);
 
 -- --------------------------------------------------------
 
@@ -318,15 +335,37 @@ CREATE TABLE `ci_machines` (
   `updated_at` datetime DEFAULT NULL,
   `nome_imagem` varchar(128) DEFAULT NULL,
   `qtde_insumos` int(11) NOT NULL DEFAULT 0,
-  `item_id` int(11) NOT NULL DEFAULT 0
+  `item_id` int(11) NOT NULL DEFAULT 0,
+  `nome_imagem_analogico` varchar(256) DEFAULT NULL,
+  `valordoequipamento` double NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `ci_machines`
 --
 
-INSERT INTO `ci_machines` (`id`, `tipomaquina`, `pontodevenda`, `serial`, `cont_inicial`, `cont_saida_inicial`, `valorvenda`, `imagem`, `noteiro`, `ficheiro`, `observacoes_equip`, `is_active`, `created_at`, `updated_at`, `nome_imagem`, `qtde_insumos`, `item_id`) VALUES
-(57, 80, 0, 1234, 0, 0, '10.00', '', '1', '1', 'teste', '1', '2020-05-17 00:00:00', '2020-05-17 00:00:00', 'contador_inicial_57.jpg', 0, 83);
+INSERT INTO `ci_machines` (`id`, `tipomaquina`, `pontodevenda`, `serial`, `cont_inicial`, `cont_saida_inicial`, `valorvenda`, `imagem`, `noteiro`, `ficheiro`, `observacoes_equip`, `is_active`, `created_at`, `updated_at`, `nome_imagem`, `qtde_insumos`, `item_id`, `nome_imagem_analogico`, `valordoequipamento`) VALUES
+(57, 80, 0, 1234, 0, 0, '10.00', '', '1', '1', 'teste', '1', '2020-05-17 00:00:00', '2020-05-17 00:00:00', 'contador_inicial_57.jpg', 0, 83, NULL, 0),
+(58, 80, 0, 987654789, 10, 10, '100.00', '', '1', '0', 'sssssss', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'contador_inicial_58.jpg', 0, 83, 'contador_inicial_58.jpg', 0),
+(59, 80, 51, 123, 1, 1, '10.00', '', '0', '0', 'ssss', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'contador_inicial_59.jpg', 0, 0, 'contador_inicial_59.jpg', 0),
+(60, 80, 0, 125412, 1, 1, '1.00', '', '1', '0', 'xxxxxxx', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'contador_inicial_60.jpg', 0, 0, 'contador_inicial_60.jpg', 0),
+(61, 80, 0, 12541254, 1, 1, '1.00', '', '1', '1', 'aaaa', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'contador_inicial_61.jpg', 0, 0, 'contador_inicial_61.jpg', 0),
+(62, 80, 51, 123456987, 2, 3, '1.00', '', '1', '1', 'ssssss', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'contador_inicial_62.jpg', 0, 0, 'contador_inicial_62.jpg', 0),
+(63, 80, 0, 1254521, 1, 1, '1.00', '', '0', '0', 'sssss', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', NULL, 0, 0, 'contador_analogico_63.jpg', 1),
+(64, 80, 0, 2, 2, 2, '2.00', '', '0', '0', '', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'contador_inicial_64.jpg', 0, 0, 'contador_inicial_64.jpg', 2),
+(65, 80, 0, 1, 1, 1, '1.00', '', '0', '0', '1', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', NULL, 0, 0, NULL, 11),
+(66, 79, 51, 2147483647, 1, 1, '1.00', '', '0', '0', 'xxxxxxxx', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', NULL, 0, 0, NULL, 1),
+(67, 80, 0, 123456, 123456, 123456, '12.00', '', '0', '0', 'xxxxxx', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', NULL, 0, 0, NULL, 12.34),
+(68, 80, 0, 125632, 12, 12, '12.00', '', '0', '0', 'zzzzzzz', '0', '2020-05-20 00:00:00', '2020-05-20 00:00:00', '1.jpg', 0, 0, '11.jpg', 12),
+(69, 80, 0, 2147483647, 1, 1, '1.00', '', '0', '0', '1', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'cont_inicial_69', 0, 0, 'cont_analogico_69', 1),
+(70, 80, 0, 12585236, 1, 1, '1.00', '', '0', '0', 'sssssss', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'file_cont_inicial_.jpg', 0, 0, 'file_cont_inicial_1.jpg', 1),
+(71, 80, 0, 125452136, 1, 1, '1.00', '', '0', '0', '1', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', NULL, 0, 0, NULL, 1),
+(72, 80, 0, 1254521545, 1, 1, '1.00', '', '0', '0', 'aaa', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'file_cont_inicial_.jpg', 0, 83, 'file_cont_inicial_1.jpg', 1),
+(73, 80, 0, 2147483647, 1, 1, '1.00', '', '0', '0', 'xxxxxx', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'file_cont_inicial_73.jpg', 0, 0, 'file_cont_inicial_73.jpg', 1),
+(74, 80, 51, 2147483647, 0, 1, '1.00', '', '1', '1', 'dddddddddd', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', '', 0, 83, 'file_cont_inicial_741.jpg', 1),
+(75, 80, 51, 2147483647, 0, 0, '121212.12', '', '0', '0', '', '1', '2020-05-20 00:00:00', '2020-05-26 00:00:00', 'file_cont_inicial_75.jpg', 0, 83, 'file_cont_inicial_751.jpg', 0),
+(76, 80, 0, 2147483647, 1, 1, '1234.56', '', '1', '0', 'teste de cadastro', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'file_cont_inicial_76.jpg', 0, 84, 'file_cont_inicial_761.jpg', 9876.54),
+(77, 80, 50, 2147483647, 0, 1, '1234.56', '', '0', '0', 'teste', '1', '2020-05-22 00:00:00', '2020-05-25 00:00:00', 'file_cont_inicial_771.jpg', 0, 83, 'file_cont_inicial_772.jpg', 98765.43);
 
 -- --------------------------------------------------------
 
@@ -367,7 +406,9 @@ INSERT INTO `ci_operacoes` (`id`, `maq_id`, `cont_anterior`, `cont_atual`, `cont
 (68, 57, 30, 40, 30, 40, '100', '10', '55', '1.jpg', '21.jpg', '0', 'teste', '1', '2020-05-19 11:52:34', '2020-05-19 11:52:34', 50, 33, 10, 4.5, 45, 10),
 (67, 57, 10, 30, 10, 30, '200', '20', '110', '2.jpg', '4.jpg', '0', 'teste', '1', '2020-05-19 11:27:07', '2020-05-19 11:27:07', 50, 33, 20, 4.5, 90, 25),
 (66, 57, 10, 10, 10, 10, '0', '0', '0', '', '', '0', 'teste', '1', '2020-05-19 10:25:55', '2020-05-19 10:25:55', 50, 33, 0, 4.5, 0, 10),
-(65, 57, 0, 10, 0, 10, '0', '10', '0', '', '', '0', '', '1', '2020-05-18 19:47:17', '2020-05-18 19:47:17', 49, 33, 10, 0, 0, 12);
+(65, 57, 0, 10, 0, 10, '0', '10', '0', '', '', '0', '', '1', '2020-05-18 19:47:17', '2020-05-18 19:47:17', 49, 33, 10, 0, 0, 12),
+(69, 0, 0, 10, 0, 10, '0', '10', '0', '11.jpg', '12.jpg', '0', '', '1', '2020-05-22 15:47:51', '2020-05-22 15:47:51', 52, 1, 10, 0, 0, 1000),
+(70, 74, 0, 10, 1, 10, '10', '10', '-30.5', 'kisspng-hamburger-cheeseburger-wendy-s-burger-king-food-veggie-wrap-burger-king-best-burger-2017-5b677e495bfe27_0477149515335091933768.jpg', 'kisspng-coca-cola-cherry-fizzy-drinks-diet-coke-coca-cola-png-transparent-images-5aadb56e581eb8_590981901521333614361.jpg', '0', 'teste', '1', '2020-05-25 18:50:31', '2020-05-25 18:50:31', 50, 33, 9, 4.5, 40.5, 0);
 
 -- --------------------------------------------------------
 
@@ -407,7 +448,7 @@ INSERT INTO `ci_pontos` (`id`, `ponto`, `nomefan`, `email`, `comissao`, `respons
 (51, 'Sem dono', '', 'semdono@teste.com', 10, 'teste', '(11) 98010-2250', 'Rua Pascoal Ruiz', '25', 'São Paulo', 'SP', '-23.7707827', '-46.6767842', 0, 1, '2020-05-18 07:42:13', '2020-05-18 07:42:13', 'Jardim Noronha', '04853-100', 'percentual', 31),
 (50, 'santa casa 12', '', 'santa@santaca.com', 10, 'junior', '(11) 19801-0250', 'Rua Pascoal Ruiz', '23', 'São Paulo', 'SP', '-23.7707293', '-46.6771045', 0, 1, '2020-05-17 07:49:38', '2020-05-18 00:00:00', 'Jardim Noronha', '04853-100', '', 33),
 (49, 'RIO GRANDE', '', 'TESTE@TESTE.COM', 10, 'rafael', '(46) 54654-6545', 'Rua Tenente Timbauva', '174', 'Sapucaia do Sul', 'RS', '-29.8414212', '-51.1505997', 0, 1, '2020-05-17 07:11:48', '2020-05-17 00:00:00', 'Capão da Cruz', '93226-540', '', 33),
-(52, 'POnto teste atualizar', '', 'pontoatualizar@tste.com', 11, 'responsavel atualizar', '(22) 22222-2222', 'Rua Riachuelo', '617', 'São Carlos', 'SP', '-22.0168508', '-47.8958752', 0, 1, '2020-05-19 09:15:12', '2020-05-19 00:00:00', 'Centro', '13560-110', '', 33);
+(52, 'POnto teste atualizar', '', 'pontoatualizar@tste.com', 11, 'responsavel atualizar', '(22) 22222-2222', 'Rua Riachuelo', '617', 'São Carlos', 'SP', '-22.0168508', '-47.8958752', 0, 0, '2020-05-19 09:15:12', '2020-05-19 00:00:00', 'Centro', '13560-110', '', 33);
 
 -- --------------------------------------------------------
 
@@ -417,15 +458,23 @@ INSERT INTO `ci_pontos` (`id`, `ponto`, `nomefan`, `email`, `comissao`, `respons
 
 CREATE TABLE `ci_rotas` (
   `id` int(11) NOT NULL,
-  `nome` varchar(128) NOT NULL
+  `nome` varchar(128) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `is_active` tinyint(4) NOT NULL DEFAULT 1,
+  `pontos` varchar(512) NOT NULL,
+  `operador` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `ci_rotas`
 --
 
-INSERT INTO `ci_rotas` (`id`, `nome`) VALUES
-(3, 'teste');
+INSERT INTO `ci_rotas` (`id`, `nome`, `created_at`, `updated_at`, `user_id`, `is_active`, `pontos`, `operador`) VALUES
+(12, 'ss', '2020-05-25 17:18:50', '2020-05-25 17:18:50', 1, 1, 'RIO GRANDE,POnto teste atualizar', ''),
+(13, 'ddddd', '2020-05-25 17:45:00', '2020-05-25 17:45:00', 1, 1, 'POnto teste atualizar', ' '),
+(14, 'dsgfsdfasfsadf', '2020-05-26 13:01:10', '2020-05-26 13:01:10', 1, 1, 'santa casa 12,RIO GRANDE', ' ');
 
 -- --------------------------------------------------------
 
@@ -438,6 +487,32 @@ CREATE TABLE `ci_rotas_pontos` (
   `rota_id` int(11) NOT NULL,
   `ponto_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `ci_rotas_pontos`
+--
+
+INSERT INTO `ci_rotas_pontos` (`id`, `rota_id`, `ponto_id`) VALUES
+(3, 4, 50),
+(4, 4, 52),
+(5, 3, 50),
+(6, 7, 49),
+(7, 7, 52),
+(8, 8, 50),
+(9, 8, 49),
+(10, 8, 52),
+(11, 9, 50),
+(12, 9, 49),
+(13, 9, 52),
+(14, 10, 50),
+(15, 10, 49),
+(16, 11, 49),
+(17, 11, 52),
+(18, 12, 49),
+(19, 12, 52),
+(20, 13, 52),
+(21, 14, 50),
+(22, 14, 49);
 
 -- --------------------------------------------------------
 
@@ -460,8 +535,10 @@ CREATE TABLE `ci_tipos` (
 --
 
 INSERT INTO `ci_tipos` (`id`, `tipo`, `is_admin`, `is_active`, `created_at`, `updated_at`, `nome_imagem`) VALUES
-(80, 'Grua Vintage', 0, 1, '2020-05-08 08:05:30', '2020-05-08 08:05:30', 'Grua_Vintage.png'),
-(79, 'Grua Black', 0, 1, '2020-05-08 08:05:16', '2020-05-08 08:05:16', 'Grua_Black.jpg');
+(80, 'Grua Vintage', 0, 1, '2020-05-08 08:05:30', '2020-05-20 00:00:00', 'file_img_tipos_82.jpg'),
+(79, 'Grua Black', 0, 1, '2020-05-08 08:05:16', '2020-05-22 00:00:00', 'Grua_Black.jpg'),
+(81, 'teste', 0, 1, '2020-05-20 00:00:00', '2020-05-22 00:00:00', 'teste.jpg'),
+(82, 'sssssssss', 0, 1, '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'file_img_tipos_82.jpg');
 
 -- --------------------------------------------------------
 
@@ -518,7 +595,17 @@ CREATE TABLE `ci_users_machines` (
 
 INSERT INTO `ci_users_machines` (`id`, `user_id`, `maq_id`, `ponto_id`, `created_at`, `updated_at`) VALUES
 (15, 0, 57, 0, '2020-05-18 12:48:53', '2020-05-18 12:48:53'),
-(19, 33, 57, 52, '2020-05-18 19:44:38', '2020-05-19 12:25:47');
+(19, 33, 57, 52, '2020-05-18 19:44:38', '2020-05-19 12:25:47'),
+(20, 0, 74, 50, '2020-05-20 18:02:32', '2020-05-20 19:58:45'),
+(21, 33, 73, 50, '2020-05-20 18:56:01', '2020-05-20 18:56:01'),
+(22, 0, 76, 0, '2020-05-20 20:25:48', '2020-05-20 20:25:48'),
+(23, 33, 75, 0, '2020-05-20 20:27:09', '2020-05-20 20:27:09'),
+(24, 31, 75, 51, '2020-05-21 12:17:10', '2020-05-21 12:17:10'),
+(25, 31, 72, 51, '2020-05-21 12:18:01', '2020-05-21 12:18:01'),
+(26, 31, 72, 51, '2020-05-21 12:19:32', '2020-05-21 12:19:32'),
+(27, 33, 76, 0, '2020-05-22 15:35:44', '2020-05-22 15:35:44'),
+(28, 31, 76, 51, '2020-05-22 15:44:50', '2020-05-22 15:44:50'),
+(30, 33, 77, 0, '2020-05-26 13:04:34', '2020-05-26 13:04:34');
 
 -- --------------------------------------------------------
 
@@ -785,7 +872,7 @@ ALTER TABLE `module_access`
 -- AUTO_INCREMENT de tabela `ci_admin`
 --
 ALTER TABLE `ci_admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de tabela `ci_admin_roles`
@@ -797,7 +884,7 @@ ALTER TABLE `ci_admin_roles`
 -- AUTO_INCREMENT de tabela `ci_calendar`
 --
 ALTER TABLE `ci_calendar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de tabela `ci_catfin`
@@ -815,13 +902,13 @@ ALTER TABLE `ci_clientes`
 -- AUTO_INCREMENT de tabela `ci_estoque_itens`
 --
 ALTER TABLE `ci_estoque_itens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de tabela `ci_estoque_machine`
 --
 ALTER TABLE `ci_estoque_machine`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT de tabela `ci_financeiro`
@@ -845,13 +932,13 @@ ALTER TABLE `ci_itens`
 -- AUTO_INCREMENT de tabela `ci_machines`
 --
 ALTER TABLE `ci_machines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT de tabela `ci_operacoes`
 --
 ALTER TABLE `ci_operacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT de tabela `ci_pontos`
@@ -863,19 +950,19 @@ ALTER TABLE `ci_pontos`
 -- AUTO_INCREMENT de tabela `ci_rotas`
 --
 ALTER TABLE `ci_rotas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de tabela `ci_rotas_pontos`
 --
 ALTER TABLE `ci_rotas_pontos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de tabela `ci_tipos`
 --
 ALTER TABLE `ci_tipos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT de tabela `ci_users`
@@ -887,7 +974,7 @@ ALTER TABLE `ci_users`
 -- AUTO_INCREMENT de tabela `ci_users_machines`
 --
 ALTER TABLE `ci_users_machines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de tabela `ci_users_pontos`

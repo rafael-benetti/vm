@@ -66,7 +66,8 @@
                                         ?>
                                     </select>
                                 </div>
-                            </div>  
+                            </div>
+                            
                             <!-- /.col-lg-6 -->
 
                             <div class="col-lg-6"  style='margin-top:10px'>
@@ -88,6 +89,11 @@
                                     </select>
                                 </div>
                             </div>
+                             <div class="col-6">
+                                    <label for="valordoequipamento" class="col-md-6 control-label ">Valor do Equipamento</label>
+                                    <input type="text" name="valordoequipamento" value="<?php echo $machine['valordoequipamento']; ?>" class="form-control money" id="valordoequipamento" >
+                                </div>
+                            
 
 
 
@@ -119,47 +125,85 @@
                             </div>
                         </div>
 
-                        <div class="row" style='margin-top:25px'>
-                            <div class="col-3">
+                  
 
-                               <?php $file_cont_inicial = (isset($machine["nome_imagem"]) ? $machine["nome_imagem"] : ""); ?>
-                                <div class="form-group row">
-                                    <div class="col-md-12 text-center">
-                                        <input type="hidden" name="file_cont_inicial_old" id="file_cont_inicial_old" value="<?php echo($file_cont_inicial); ?>" />
+                            
+                            <div class="row" style='margin-top:25px'>
+                                <div class="col-lg-6 col-sm-12  col-md-12">
+                                    <label for="firstname" class="col-md-12 control-label">Foto do contador analógico inicial</label>
+                                    <div class="col-12">
+                                        <?php $file_cont_inicial = (isset($machine["nome_imagem"]) ? $machine["nome_imagem"] : ""); ?>
+                                        <div class="form-group row">
+                                            <div class="col-md-12 text-center">
+                                                    <!-- <input type="hidden" name="file_img_saida_old" id="file_img_saida_old" value="<?php //echo($file_cont_inicial);    ?>" /> -->
 
-                                        <div class="wrapper-image-preview text-center">
-                                            <div class="box" style="margin: 0 auto;">
-                                                    <?php
-                                                    
-                                                    $label_upload = "Foto do contador Inicial";
-                                                    $placeholder = base_url("assets/dist/img/placeholder-image.jpg");
-                                                    $image_path = $this->config->item('folder_images') . 'maquinas/' . $file_cont_inicial;
-                                               
-                                                    if (file_exists($image_path) and is_file($image_path)) {
-                                                        $placeholder = base_url($image_path);
-                                                    }
-                                                    
-                                                    
-                                                    
-                                                    ?>
-                                                <div class="js--image-preview" style="background-image: url(<?php echo($placeholder); ?>); background-color: #F5F5F5;"></div>
-                                                <div class="upload-options">
-                                                    <label for="file_cont_inicial" class="btn btn-white-sp"> <i class="mdi mdi-camera"></i> <?php echo $label_upload; ?> </label>
-                                                    <input type="file" style="visibility:hidden;" class="image-upload" name="file_cont_inicial" id="file_cont_inicial" accept="image/*">
+                                                <div class="wrapper-image-preview text-center">
+                                                    <div class="box" style="margin: 0 auto;">
+                                                        <?php
+                                                        $label_upload = "Enviar foto do contador Inicial";
+                                                        $placeholder = base_url("assets/dist/img/placeholder-image.jpg");
+                                                        $image_path = $this->config->item('folder_images') . '/maquinas/' . $file_cont_inicial;
+                                                        if (file_exists($image_path) and is_file($image_path)) {
+                                                            $placeholder = base_url($image_path);
+                                                        }
+                                                        ?>
+                                                        <div class="js--image-preview" style="background-image: url(<?php echo($placeholder); ?>); background-color: #F5F5F5;"></div>
+                                                        <div class="upload-options">
+                                                            <label for="file_cont_inicial" class="btn btn-white-sp"> <i class="mdi mdi-camera"></i> <?php echo $label_upload; ?> </label>
+                                                            <input type="file" style="visibility:hidden;" class="image-upload" name="file_cont_inicial" id="file_cont_inicial" accept="image/*">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-lg-6 col-sm-12 col-md-12">
+                                    <label for="firstname" class="col-md-12 control-label">Foto do contador analógico de saida</label>
+                                    <div class="col-12">
+                                                              <?php $file_cont_analogico= (isset($machine["nome_imagem_analogico"]) ? $machine["nome_imagem_analogico"] : ""); ?> <div class="form-group row">
+                                            <div class="col-md-12 text-center">
+                                                    <!-- <input type="hidden" name="file_img_saida_old" id="file_img_saida_old" value="<?php //echo($file_cont_inicial);    ?>" /> -->
+
+                                                <div class="wrapper-image-preview text-center">
+                                                    <div class="box" style="margin: 0 auto;">
+                                                        <?php
+                                                        $label_upload = "Enviar foto do contador Analogico";
+                                                        $placeholder = base_url("assets/dist/img/placeholder-image.jpg");
+                                                        $image_path = $this->config->item('folder_images') . '/maquinas/' . $file_cont_analogico;
+                                                        if (file_exists($image_path) and is_file($image_path)) {
+                                                            $placeholder = base_url($image_path);
+                                                        }
+                                                        ?>
+                                                        <div class="js--image-preview" style="background-image: url(<?php echo($placeholder); ?>); background-color: #F5F5F5;"></div>
+                                                        <div class="upload-options">
+                                                            <label for="file_cont_analogico" class="btn btn-white-sp"> <i class="mdi mdi-camera"></i> <?php echo $label_upload; ?> </label>
+                                                            <input type="file" style="visibility:hidden;" class="image-upload" name="file_cont_analogico" id="file_cont_analogico" accept="image/*">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                                  <div class="row" style='margin-top:25px'>
+                         
+                                <div class="col-lg-6 col-sm-12  col-md-12" >
+                                
+                                       <label for="noteiro" class="col-md-3 control-label"> Noteiro 
+                                        <input type="checkbox" value="1" name="noteiro" id="noteiro" class="minimal" <?php echo($check_noteiro); ?> >
+                                    </label>
+                                    <label for="ficheiro" class="col-md-3 control-label"> Ficheiro
+                                        <input type="checkbox" value="1" name="ficheiro" id="ficheiro" class="minimal" <?php echo($check_ficheiro); ?> >
+                                    </label>
 
                             </div>
-                            <div class="col-1"></div>
-                            
-                            
-                            <div class="col-8">
-
-                        
-                                    <label for="lastname" class="col-md-12 control-label">Selecione o Tipo de Insumo e a quantidade abastecida</label>
+                                      
+                                <div class="col-lg-6 col-sm-12  col-md-12" >
+                                
+                                   <label for="lastname" class="col-md-12 control-label">Selecione o Tipo de Insumo e a quantidade abastecida</label>
                                     <div class="input-group">
                                         <select name="item" style="width:100%" class="js-example-basic-single"id="item" >
                                             <?php
@@ -177,27 +221,15 @@
                                         </select>
                                      
                                     </div>
-                            
-                                
-                                <div>
-                                    <label for="firstname" class="col-md-12 control-label">Acessórios</label>
-                                    <?php
-                                    $noteiro = (isset($machine["noteiro"]) ? $machine["noteiro"] : "");
-                                    $check_noteiro = (($noteiro == 0) ? "" : " checked ");
-
-                                    $ficheiro = (isset($machine["ficheiro"]) ? $machine["ficheiro"] : "");
-                                    $check_ficheiro = (($ficheiro == 0) ? "" : " checked ");
-                                    ?>
-                                    <label for="noteiro" class="col-md-3 control-label"> Noteiro 
-                                        <input type="checkbox" value="1" name="noteiro" id="noteiro" class="minimal" <?php echo($check_noteiro); ?> >
-                                    </label>
-                                    <label for="ficheiro" class="col-md-3 control-label"> Ficheiro
-                                        <input type="checkbox" value="1" name="ficheiro" id="ficheiro" class="minimal" <?php echo($check_ficheiro); ?> >
-                                    </label>
-                                </div>
 
                             </div>
-                        </div>
+                            </div>
+                                
+
+                  
+                            
+                            
+                    
 
                         <div class="row" style='margin-top:25px'>
                             <div class="col-12" >

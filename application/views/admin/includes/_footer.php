@@ -1,9 +1,10 @@
 <?php if(!isset($footer)): ?>
 
   <footer class="main-footer">
-    <strong><?= $this->general_settings['copyright']; ?></strong>
+    <strong><?php //$this->general_settings['copyright']; ?></strong>
     <div class="float-right d-none d-sm-inline-block">
-      <b>Developed By:</b> Altech
+      <!--<b>Developed By:</b> Altech-->
+      <?= $this->general_settings['copyright']; ?>
     </div>
   </footer>
 

@@ -5,14 +5,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Admin_model extends CI_Model {
 
     public function get_user_detail() {
-        $id = $this->session->userdata('id');
-        $query = $this->db->get_where('ci_admin', array('id' => $id));
-        return $result = $query->row_array();
+      
+        $this->db->where('id', $this->session->userdata('admin_id'));
+        $this->db->from('ci_admin');
+        $query = $this->db->get();
+
+        return $query->row();
     }
 
     //--------------------------------------------------------------------
     public function update_user($data) {
-        $id = $this->session->userdata('id');
+        $id = $this->session->userdata('admin_id');
         $this->db->where('id', $id);
         $this->db->update('ci_admin', $data);
         return true;

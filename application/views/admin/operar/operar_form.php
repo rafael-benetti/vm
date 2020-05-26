@@ -237,12 +237,12 @@
 
                                         <div class="col-12">
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" onclick="ver_campo_valor_sangria(1)"  type="radio" name="sangria_radio" id="sangria_sim" value="option1">
+                                                <input class="form-check-input" onclick="ver_campo_valor_sangria(1)" required="true" type="radio" name="sangria_radio" id="sangria_sim" >
                                                 <label class="form-check-label" for="inlineCheckbox1">SIM</label>
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio"  onclick="ver_campo_valor_sangria(0)"  name="sangria_radio" value="SIM" id="sangria_nao" value="option2">
-                                                <label class="form-check-label" value="NÃO" checked for="inlineCheckbox2">NÂO</label>
+                                                <input class="form-check-input" type="radio"  checked  required="true"  onclick="ver_campo_valor_sangria(0)"  name="sangria_radio" value="SIM" id="sangria_nao" >
+                                                <label class="form-check-label" value="NÃO"  for="inlineCheckbox2">NÂO</label>
                                             </div>
 
                                         </div>
@@ -252,7 +252,7 @@
 
                                         <div class="col-12">
                                             <label for="sangria" class="col-md-6 control-label ">Valor da sangria</label>
-                                            <input type="text" name="sangria" class="form-control money" id="valorvenda" pattern="[0-9]+([,\.][0-9]+)?" min="0.1" step="any">
+                                            <input type="text" name="sangria" class="form-control money" id="valorvenda">
                                         </div>
 
                                     </div>

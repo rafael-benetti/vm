@@ -10,6 +10,10 @@ class Admin extends MY_Controller {
         auth_check(); // check login auth
         $this->rbac->check_module_access();
         $this->load->model('admin/admin_model', 'admin');
+          $this->load->model('admin/operar_model', 'operar_model');
+          $this->load->model('admin/machine_model', 'machine_model');
+          $this->load->model('admin/ponto_model', 'ponto_model');
+        $this->admin_id = (int) $this->session->userdata('admin_id');
     }
 
     //-----------------------------------------------------		
@@ -50,7 +54,7 @@ class Admin extends MY_Controller {
     }
 
     //--------------------------------------------------
-    function add($tipo='1') {
+    function add($tipo = '1') {
 
         $this->rbac->check_operation_access(); // check opration permission
 
@@ -91,7 +95,7 @@ class Admin extends MY_Controller {
                 }
             }
         } else {
-            $data['tipo']=$tipo;
+            $data['tipo'] = $tipo;
             $this->load->view('admin/includes/_header', $data);
             $this->load->view('admin/admin/add');
             $this->load->view('admin/includes/_footer');
@@ -154,6 +158,20 @@ class Admin extends MY_Controller {
         }
     }
 
+    function view($id = "") {
+
+        $this->rbac->check_operation_access(); // check opration permission
+       
+        $data['detalhes'] = $this->admin->get_admin_by_id($id);
+        $data['maquinas'] = $this->machine_model->get_machines_by_user($this->admin_id);
+        $data['operacoes'] = $this->operar_model->get_operacoes_by_user($this->admin_id);
+        $this->load->view('admin/includes/_header');
+        $this->load->view('admin/admin/view', $data);
+        $this->load->view('admin/includes/_footer');
+        
+        
+    }
+
     //--------------------------------------------------
     function check_username($id = 0) {
 
@@ -170,10 +188,14 @@ class Admin extends MY_Controller {
     //------------------------------------------------------------
     function delete($id = '') {
 
+        if ($id == 1) {
+            return;
+        }
+
         $this->rbac->check_operation_access(); // check opration permission
 
         $this->admin->delete($id);
-        $this->session->set_flashdata('success', 'User has been Deleted Successfully.');
+        $this->session->set_flashdata('success', 'Usuario apagado com sucesso.');
         redirect('admin/admin');
     }
 

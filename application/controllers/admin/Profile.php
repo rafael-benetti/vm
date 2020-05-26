@@ -24,14 +24,16 @@ class Profile extends MY_Controller {
 			$data = $this->security->xss_clean($data);
 			$result = $this->admin_model->update_user($data);
 			if($result){
-				$this->session->set_flashdata('success', 'Profile has been Updated Successfully!');
+				$this->session->set_flashdata('success', 'Perfil Atualizado com sucesso');
 				redirect(base_url('admin/profile'), 'refresh');
 			}
 		}
 		else{
 
-			$data['title'] = 'Admin Profile';
+			$data['title'] = 'Perfil';
 			$data['admin'] = $this->admin_model->get_user_detail();
+                        
+                    
 			
 			$this->load->view('admin/includes/_header');
 			$this->load->view('admin/profile/index', $data);

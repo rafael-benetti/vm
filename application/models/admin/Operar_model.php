@@ -131,6 +131,15 @@ class Operar_model extends CI_Model {
             return $json;
         }
     }
+    public function get_operacoes_by_user($user_id) {
+  
+        $this->db->from('ci_operacoes op');
+        $this->db->where('op.user_id', $user_id);       
+        
+        return $this->db->get()->result_array();
+        
+        
+    }
 
     // -----------------------------------------------------
     // Change machine status
