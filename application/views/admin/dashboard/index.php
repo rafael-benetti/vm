@@ -37,7 +37,7 @@
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3><?= $all_users; ?></h3>
+                            <h3><?= $all_admin; ?></h3>
                             <p>Operadores Cadastrados</p>
                         </div>
                         <div class="icon">

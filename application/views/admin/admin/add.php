@@ -108,7 +108,7 @@
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <input type="submit" name="submit" value="Adicionar Admin" class="btn btn-primary pull-right">
-                                    </div>
+                                    </div><br><br>
                                 </div>
                                 <?php echo form_close(); ?>
                             </div>
