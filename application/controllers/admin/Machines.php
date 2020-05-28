@@ -200,6 +200,7 @@ class Machines extends MY_Controller {
             $pontos = $this->ponto_model->getTodosPontos($where_pontos);
             $itens = $this->item_model->getTodosItens(array('is_active' => 1));
 
+
             $dados_ponto = '
                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ponto_' . $row['id_maquina'] . '">
  Adicionar Ponto
@@ -240,8 +241,9 @@ class Machines extends MY_Controller {
                                   
                                         <select name="item_id" style="width:100%" class="select_operar" id="ponto_id" >';
 
+            
             foreach ($itens as $item) {
-                $dados_ponto .= '<option value="' . $item->id . '">' . $item->item . '</option>';
+                $dados_ponto .= '<option value="' . $item['id'] . '">' . $item['item'] . '</option>';
             }
 
             $dados_ponto .= '         </select>

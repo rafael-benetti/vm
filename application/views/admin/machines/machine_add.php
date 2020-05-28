@@ -32,10 +32,11 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-6"  style='margin-top:10px'>
+                                    <span data-toggle="tooltip" title="Adicionar Ponto de Venda" class="badge bg-primary"><a href="<?= base_url('admin/pontos/add'); ?>"><i class="fa fa-plus"></i></a></span>
                                     <label for="pontodevenda" class="col-md-6 control-label">Selecione o ponto de venda</label>
                                     <div class="input-group">
                                         <select name="pontodevenda" style="width:100%" class="js-example-basic-single" id="pontodevenda" >
-                                            <option value="0">Nenhum ponto</option>
+                                            <option value="0">Sem Ponto</option>
                                             <?php
                                             foreach ($pontos as $ponto) {
                                                 echo '<option value="' . $ponto->id . '">' . $ponto->ponto . '</option>';
@@ -45,10 +46,12 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6"  style='margin-top:10px'>
-                                    <label for="lastname" class="col-md-6 control-label">Tipo de Máquina</label>
+                                    <span data-toggle="tooltip" title="Adicionar Tipo de Máquina" class="badge bg-primary"><a href="<?= base_url('admin/tipos/add'); ?>"><i class="fa fa-plus"></i></a></span>
+                                      <label for="lastname" class="col-md-6 control-label">Tipo de Máquina</label> 
                                     <div class="input-group">
                                         <select name="tipomaquina" style="width:100%" class="js-example-basic-single"id="tipomaquina" >
-                                            <?php
+                                           <option value="0">Selecione o tipo</option>
+                                           <?php
                                             foreach ($tipos as $tipo) {
 
                                                 echo '<option value="' . $tipo->id . '">' . $tipo->tipo . '</option>';

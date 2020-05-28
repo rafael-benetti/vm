@@ -23,6 +23,27 @@ class Operar_model extends CI_Model {
 
         return $this->db->get()->result_array();
     }
+    
+     public function getTodasOperacoes($condicao = array()) {
+      
+        $this->db->select('ponto, sum(vendas) as venda, sum(saldo) as saldo');
+        $this->db->where($condicao);
+        $this->db->from('ci_operacoes o');
+        $this->db->group_by('ponto');
+        $this->db->order_by('vendas', 'desc');
+        return $this->db->get()->result();
+        
+    }
+     public function getTodasOperacoesMensais($condicao = array()) {
+      
+        $this->db->select('mes, ano, ponto, sum(vendas) as venda, sum(saldo) as saldo');
+        $this->db->where($condicao);
+        $this->db->from('ci_operacoes o');
+        $this->db->group_by('mes');
+        $this->db->order_by('created_at', 'desc');
+        return $this->db->get()->result();
+        
+    }
 
     public function get($condicao = array(), $primeiraLinha = FALSE, $pagina = 0, $limite = LINHAS_PESQUISA_DASHBOARD) {
       

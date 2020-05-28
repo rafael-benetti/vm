@@ -33,8 +33,9 @@
            if($this->session->userdata('is_supper')==1){
            ?>
                        <div class="form-group">
-                                <div class="col-lg-12"  style='margin-top:10px'>
+                                <div class="col-lg-12"  style='margin-top:10px'><span data-toggle="tooltip" title="Adicionar Operador" class="badge bg-primary"><a href="<?= base_url('admin/admin/add'); ?>"><i class="fa fa-plus"></i></a></span>
                                     <label for="user_id" class="col-md-6 control-label">Selecione Operador</label>
+                                       
                                     <div class="input-group">
                                         <select name="user_id" style="width:100%" class="select-operar" id="user_id" >
                                             <option value="-1">Nenhum operador</option>

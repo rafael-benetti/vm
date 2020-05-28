@@ -16,6 +16,8 @@ class Dashboard extends My_Controller {
                 $this->load->model('admin/machine_model', 'machine_model');
                 $this->load->model('admin/ponto_model', 'ponto_model');
                 $this->load->model('admin/dashboard_model', 'google');
+                $this->load->model('admin/user_model', 'user_model');
+                $this->load->model('admin/operar_model', 'operar_model');
                 $this->load->helper(array('url','html','form'));
 
 	}
@@ -55,7 +57,7 @@ class Dashboard extends My_Controller {
                 
         	$data['all_clientes'] = $this->dashboard_model->get_all_clientes();
                 
-                $data['all_admin'] = $this->dashboard_model->get_all_admin();
+                $data['all_admin'] = $this->user_model->getQtdeOperadores();
 
 		$data['active_clientes'] = $this->dashboard_model->get_active_clientes();
 
@@ -64,6 +66,25 @@ class Dashboard extends My_Controller {
                 $data['all_machines'] = $this->dashboard_model->get_all_machines();
                 
                 $data['all_pontos'] = $this->dashboard_model->get_all_pontos();
+                
+                $data['all_operacoes'] =  $this->operar_model->getTodasOperacoes();
+                $all_operacoes_mensal =  $this->operar_model->getTodasOperacoesMensais();
+                
+                
+                foreach($all_operacoes_mensal as $operacoes_mensal){
+                
+                   
+                $data['operacao_mes'][] =  get_nome_mes((int)$operacoes_mensal->mes);   
+                
+                
+                $data['operacao_vendas'][] =  $operacoes_mensal->venda;   
+                $data['operacao_saldo'][] =  $operacoes_mensal->saldo;  
+                    
+                }
+                
+             //   echo '<pre>';
+             //   var_dump(json_encode($data['operacao_mes'])); exit;
+             //  
                 
                 
                 
