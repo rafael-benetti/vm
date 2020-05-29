@@ -43,12 +43,15 @@ class Item_model extends CI_Model {
         
 			$wh =array();
 
-			$SQL ='SELECT eo.user_id, eo.created_at as data_log, eo.tipo_operacao, eo.item_id, eo.id as id, eo.qtde as qtde_operador, i.item, i.valor 
+			$SQL ='SELECT eo.user_id, eo.created_at as data_log, i.is_active, eo.tipo_operacao, eo.item_id, eo.id as id, eo.qtde as qtde, i.item, i.valor 
                             FROM ci_itens i join ci_estoque_operador eo ON  eo.item_id = i.id
                            
                             ';
-                       
+                        if($item_id>0)
 			$wh[] = " eo.user_id = ".$user_id." AND item_id = ".$item_id." ";
+                        else
+                        $wh[] = " eo.user_id = ".$user_id." ";
+
 
 			if(count($wh)>0)
 

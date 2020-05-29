@@ -503,8 +503,8 @@ class Machines extends MY_Controller {
                     'ficheiro' => (int) $this->input->post('ficheiro'),
                     'observacoes_equip' => $this->input->post('observacoes_equip'),
                     'pontodevenda' => $this->input->post('pontodevenda'),
-                    'created_at' => date('Y-m-d : h:i:s'),
-                    'updated_at' => date('Y-m-d : h:i:s'),
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
                 );
                 if ($this->is_supper == "0") {
                     $data["admin_id"] = $this->admin_id;
@@ -585,7 +585,6 @@ class Machines extends MY_Controller {
         }
         $dados['tipos'] = $this->tipo_model->getTodosTipos($where_tipos);
         $dados['pontos'] = $this->ponto_model->getTodosPontos($where_pontos);
-
         $dados['item'] = $this->item_model->getTodosItens();
         $this->load->view('admin/machines/machine_add', $dados);
         $this->load->view('admin/includes/_footer');
@@ -623,8 +622,8 @@ class Machines extends MY_Controller {
                     'maq_id' => $this->input->post('id_maquina'),
                     'tipo_operacao' => $this->input->post('tipo_operacao'),
                     'user_id' => $this->session->userdata('admin_id'),
-                    'created_at' => date('Y-m-d : h:i:s'),
-                    'updated_at' => date('Y-m-d : h:i:s'),
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
                 );
 
 
@@ -643,17 +642,22 @@ class Machines extends MY_Controller {
                         $qtde = $qtde * -1;
                     }
 
-                    $data_log_item = array(
-                        'qtde' => $qtde,
-                        'item_id' => $this->input->post('item'),
-                        'tipo_operacao' => $this->input->post('tipo_operacao') == 'saida' ? 'entrada' : 'saida',
-                        'user_id' => $this->session->userdata('admin_id'),
-                        'created_at' => date('Y-m-d : h:i:s'),
-                        'updated_at' => date('Y-m-d : h:i:s'),
-                    );
+             
+                    
+                         $data_log_item = array(
+                    'qtde' => $qtde,
+                    'item_id' => $this->input->post('item'),
+                    'tipo_operacao' => $this->input->post('tipo_operacao'),
+                      'user_id' => $this->session->userdata('admin_id'),
+                                   'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                );
 
-                    $result = $this->item_model->add_log_itens($data_log_item);
-                    //$this->item_model->edit_item(array('quantidade'=>$nova_qtde_item), $this->input->post('item'));
+
+                $result = $this->item_model->add_log_item($data_log_item);
+                    
+
+                     //$this->item_model->edit_item(array('quantidade'=>$nova_qtde_item), $this->input->post('item'));
 
                     redirect(base_url('admin/machines/view_logs/' . $this->input->post('id_maquina')), 'refresh');
                 }
@@ -725,7 +729,7 @@ class Machines extends MY_Controller {
                     'ficheiro' => (int) $this->input->post('ficheiro'),
                     'observacoes_equip' => $this->input->post('observacoes_equip'),
                     'is_active' => $this->input->post('is_active'),
-                    'updated_at' => date('Y-m-d : h:m:s'),
+                    'updated_at' => date('Y-m-d H:m:s'),
                 );
                 $data = $this->security->xss_clean($data);
 

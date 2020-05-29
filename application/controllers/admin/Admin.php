@@ -102,7 +102,7 @@ class Admin extends MY_Controller {
                 $row['id'],
                 inverteDataHora($row['data_log']),
                 $row['tipo_operacao'],
-                $row['qtde_operador'],
+                $row['qtde'],
                 $usuario->firstname . ' ' . $usuario->lastname,
                 $row['item']
             );

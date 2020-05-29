@@ -222,8 +222,8 @@ class Operar extends MY_Controller {
                     'maq_id' => $dados_maquina['id_maquina'],
                     'tipo_operacao' => 'saida',
                     'user_id' => $this->session->userdata('admin_id') == null ? $this->session->userdata('user_id') : $this->session->userdata('admin_id'),
-                    'created_at' => date('Y-m-d : h:i:s'),
-                    'updated_at' => date('Y-m-d : h:i:s'),
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
                     'id_operacao' => $result,
                 );
 

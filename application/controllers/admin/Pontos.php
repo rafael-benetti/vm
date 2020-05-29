@@ -216,8 +216,8 @@ class Pontos extends MY_Controller {
                     'bairro' => $this->input->post('bairro'),
                     'tipo_comissao' => $this->input->post('tipo_comissao'),
                     'cep' => $this->input->post('cep'),
-                    'created_at' => date('Y-m-d h:i:s'),
-                    'updated_at' => date('Y-m-d h:i:s'),
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
                     'is_active' => $this->input->post('is_active')
                 );
 
@@ -235,7 +235,7 @@ class Pontos extends MY_Controller {
             }
         } else {
 
-            $dados['operadores'] = $this->user_model->getAllUsers();
+        $dados['operadores'] = $this->user_model->getAllOperadores();     
 
             $this->load->view('admin/includes/_header');
 
@@ -249,13 +249,9 @@ class Pontos extends MY_Controller {
 
     public function edit($id = 0) {
 
-
-
         if (!verifica_permissao($this->modulo_name, 'edit')) {
             redirect('access_denied/index/');
         }
-
-
 
         if ($this->input->post('submit')) {
             $numero = $this->input->post('numero');
@@ -327,7 +323,7 @@ class Pontos extends MY_Controller {
                     'tipo_comissao' => $this->input->post('tipo_comissao'),
                     'cep' => $this->input->post('cep'),
                     'is_active' => $this->input->post('is_active'),
-                    'updated_at' => date('Y-m-d : h:m:s'),
+                    'updated_at' => date('Y-m-d H:m:s'),
                 );
 
                 $data = $this->security->xss_clean($data);
@@ -347,9 +343,7 @@ class Pontos extends MY_Controller {
         
         $data['ponto'] = $this->ponto_model->get_ponto_by_id($id);
         $this->load->view('admin/includes/_header');
-
-        $data['operadores'] = $this->user_model->getAllUsers();
-        
+        $data['operadores'] = $this->user_model->getAllOperadores();     
 
         $this->load->view('admin/pontos/ponto_edit', $data);
 

@@ -174,11 +174,12 @@
                                  <div class="col-lg-6 col-sm-12  col-md-12" >
                                       <label for="lastname" class="col-md-12 control-label">Selecione o Tipo de Insumo e a quantidade abastecida</label>
                                     <div class="input-group">
+                                      
                                         <select name="item" style="width:100%" class="js-example-basic-single"id="item" >
                                             <?php
                                             foreach ($item as $item) {
 
-                                                echo '<option value="' . $item->id . '">' . $item->item . '</option>';
+                                                echo '<option value="' . $item['id'] . '">' . $item['item'] . '</option>';
                                             }
                                             ?>
                                         </select>
