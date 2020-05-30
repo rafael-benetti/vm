@@ -47,9 +47,10 @@ class Operar_model extends CI_Model {
 
     public function get($condicao = array(), $primeiraLinha = FALSE, $pagina = 0, $limite = LINHAS_PESQUISA_DASHBOARD) {
       
-        $this->db->select('o.created_at as data, o.id as id_operacao, o.cont_anterior, o.cont_atual, o.cont_saida_anterior, o.cont_saida_atual, o.saldo, o.vendas, o.qtde_saida, o.valor_insumo');
-        $this->db->select('m.id as id_maquina, m.observacoes_equip');
-        $this->db->select('p.id as id_ponto, p.ponto');
+        $this->db->select('o.sangria as sangria, o.ponto as ponto_id, o.maq_id as maq_id, o.created_at as data, o.id as id_operacao, o.cont_anterior, o.cont_atual, o.cont_saida_anterior, o.cont_saida_atual, o.saldo, o.vendas, o.qtde_saida, o.valor_insumo');
+        $this->db->select('u.id as user_id, u.firstname, u.lastname') ;       
+//$this->db->select('m.id as id_maquina, m.observacoes_equip');
+        //$this->db->select('p.id as id_ponto, p.ponto');
         
         if(isset($condicao['data_final'])){
             
@@ -65,8 +66,9 @@ class Operar_model extends CI_Model {
         
         $this->db->where($condicao);
         $this->db->from('ci_operacoes o');
-        $this->db->join('ci_machines m', 'm.id = o.maq_id', 'JOIN');
-        $this->db->join('ci_pontos p', 'm.pontodevenda = p.id', 'JOIN');
+        //$this->db->join('ci_machines m', 'm.id = o.maq_id', 'JOIN');
+        //$this->db->join('ci_pontos p', 'm.pontodevenda = p.id', 'JOIN');
+        $this->db->join('ci_admin u', 'u.id = o.user_id', 'JOIN');
         $this->db->order_by("o.id", "asc");
 
 

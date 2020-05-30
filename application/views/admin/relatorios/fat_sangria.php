@@ -41,7 +41,7 @@
             </div>
 
         </div>
-        <form id="form_relatorio" action="<?php echo base_url('admin/relatorios/fat_diario'); ?>" method="get" >
+        <form id="form_relatorio" action="<?php echo base_url('admin/relatorios/fat_sangria'); ?>" method="get" >
             <div class="card">
                 <div class="row">
                     <div class="col-12">
@@ -167,20 +167,18 @@
                                         <th>Operador</th>
                                         <th>Ponto</th>
                                         <th>Máquina</th>
-                                        <th>Total Contador entrada</th>
-                                        <th>Total Contador Saida</th>
-                                        <th>Valor de entrada</th>
-                                        <th>Valor de saida</th>
                                         <th>Sangria</th>
-                                        <th>Lucro</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
                                     <?php
+                                    
+                                    $total_vendas = 0;
                                     foreach ($relatorios as $relatorio) {
                                         $ponto = $this->ponto_model->get_ponto($relatorio->ponto_id);
                                         $maquina = $this->machine_model->get_machine_by_id($relatorio->maq_id);
+                                        $total_vendas += $relatorio->sangria;
                                         ?>
                                         <tr>
 
@@ -189,12 +187,7 @@
                                             <th><?php echo $relatorio->firstname.' '.$relatorio->lastname; ?></th>
                                             <th><?php echo $ponto->ponto; ?></th>
                                             <th><?php echo $maquina['nome_tipo']; ?> - <?php echo $maquina['serial']; ?></th>
-                                            <th><?php echo $relatorio->cont_atual; ?></th>
-                                            <th><?php echo $relatorio->cont_saida_atual; ?></th>
-                                            <th><?php echo formatar_moeda($relatorio->vendas); ?></th>
-                                            <th><?php echo formatar_moeda($relatorio->cont_anterior); ?></th>
                                             <th><?php echo formatar_moeda($relatorio->sangria); ?></th>
-                                            <th><?php echo formatar_moeda($relatorio->saldo); ?></th>
                                         </tr>
                                         <?php
                                     }
@@ -203,9 +196,7 @@
                                 </tbody> 
                                 <tfoot>
                                     <tr>
-                                        <td colspan="3">Total Entrada: <b><?php echo $total_entrada ?></b></td>
-                                        <td colspan="3">Total de Saida: <b><?php echo $total_saida; ?></b></td>
-                                        <td colspan="3">Saldo Total:  <?php echo $total_vendas; ?></b></td>
+                                        <td colspan="6"><span style="float:right">Total Sangria:<b>  <?php echo formatar_moeda($total_vendas); ?></b></span></td>
                                     </tr>
                                 </tfoot>
 

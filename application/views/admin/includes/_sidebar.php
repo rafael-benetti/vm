@@ -429,6 +429,17 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2);
                                 </a>
 
                             </li>
+                            <li class="nav-item">
+
+                                <a href="<?= base_url('admin/relatorios/fat_sangria'); ?>" class="nav-link">
+
+                                    <i class="fa fa-dollar nav-icon"></i>
+
+                                    <p>Sangria</p>
+
+                                </a>
+
+                            </li>
                             <!--
                             <li class="nav-item">
 

@@ -374,7 +374,7 @@ class Machines extends MY_Controller {
 
                 $get_machine_user = $this->ponto_model->get_count_machines_user($user_id, $maq_id);
 
-
+     
                 if (!$get_machine_user) {
                     $data_users_machines = array(
                         'ponto_id' => $ponto_id,
@@ -385,13 +385,14 @@ class Machines extends MY_Controller {
                     );
                     $result = $this->user_model->add_user_machine($data_users_machines);
                 } else {
-
+        
                     $data_users_machines = array(
                         'ponto_id' => $ponto_id,
                         'user_id' => $user_id,
                         'maq_id' => $maq_id,
                         'updated_at' => date('Y-m-d H:i:s')
                     );
+                    
                     $result = $this->user_model->update_user_machine($data_users_machines, $get_machine_user);
                 }
 
