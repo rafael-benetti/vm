@@ -27,6 +27,11 @@ class Dashboard extends My_Controller {
 	//--------------------------------------------------------------------------
 
 	public function index(){
+            
+             if($this->session->userdata('is_supper') == 0){
+                            redirect(base_url('admin/operar/operar_list'), 'refresh');
+        }
+            
         $users = $this->google->get_list();
         $markers = [];
         $infowindow = [];

@@ -90,6 +90,7 @@
               <th>Qtde<br>Jogadas</th>
               <th>Valor<br>Arrecadado</th>
               <th>Saldo de<br>Entrada</th>
+              <th>Sangria</th>
               <th>Ativo</th>
               <th width="100" class="text-right">Ações</th>
             </tr>
@@ -133,8 +134,9 @@
 			{ "targets": 5, "name": "cont_atual", 'searchable':true, 'orderable':false},
 			{ "targets": 6, "name": "vendas", 'searchable':false, 'orderable':false},
 			{ "targets": 7, "name": "qtde_jogadas", 'searchable':false, 'orderable':false},
-			{ "targets": 8, "name": "saldo", 'searchable':false, 'orderable':false},
-			{ "targets": 9, "name": "Ações", 'searchable':false, 'orderable':false,'width':'100px'}
+			{ "targets": 8, "name": "sangria", 'searchable':false, 'orderable':false},
+			{ "targets": 9, "name": "saldo", 'searchable':false, 'orderable':false},
+			{ "targets": 10, "name": "Ações", 'searchable':false, 'orderable':false,'width':'100px'}
 		]
 	});
 
@@ -228,8 +230,9 @@
 					{ "targets": 6, "name": "qtde_jogadas", 'searchable':false, 'orderable':false},
 					{ "targets": 7, "name": "valor_arrecadado", 'searchable':false, 'orderable':false},
 					{ "targets": 8, "name": "saldo", 'searchable':false, 'orderable':false},
-					{ "targets": 9, "name": "is_active", 'searchable':false, 'orderable':false},
-					{ "targets": 10, "name": "Ações", 'searchable':false, 'orderable':false,'width':'100px'}
+					{ "targets": 9, "name": "sangria", 'searchable':false, 'orderable':false},
+					{ "targets": 10, "name": "is_active", 'searchable':false, 'orderable':false},
+					{ "targets": 11, "name": "Ações", 'searchable':false, 'orderable':false,'width':'100px'}
 				]
 			});
 			//---------------------------------------------------

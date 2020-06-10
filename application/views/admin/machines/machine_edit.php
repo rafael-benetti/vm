@@ -188,6 +188,18 @@
                                 </div>
                                
                             </div>
+                        
+                        <?php 
+                        $check_noteiro = "";
+                        $check_ficheiro = "";
+                        if($machine["noteiro"] == '1'){
+                           $check_noteiro = ' checked="true"'; 
+                        }
+                        if($machine["ficheiro"] == '1'){                            
+                           $check_ficheiro = ' checked="true"';                            
+                        }
+                        ?>
+                        
                                   <div class="row" style='margin-top:25px'>
                          
                                 <div class="col-lg-6 col-sm-12  col-md-12" >

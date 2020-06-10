@@ -33,6 +33,7 @@ class web_service extends CI_Controller {
         $this->load->helper('JWT');
         // $this->load->library('form_validation');
         $this->load->model('model_web_service');
+        $this->load->model('admin/auth_model');
         $this->load->database();
         // $this->load->library('session');
         $this->load->library('image_lib');
@@ -40,7 +41,7 @@ class web_service extends CI_Controller {
         $this->load->library('email');
         // $this->load->library('pagination');
 
-        date_default_timezone_set("Asia/Kolkata");
+        date_default_timezone_set("America/sao_paulo");
         // session_start();
     }
 
@@ -52,8 +53,7 @@ class web_service extends CI_Controller {
 
         $postdata = file_get_contents("php://input");
         $request = json_decode($postdata);
-
-        $key_status = $this->model_web_service->authenticate_key($request);
+         $key_status = $this->model_web_service->authenticate_key($request);
 
         if ($key_status) {
             $this->do_login($request);
@@ -67,22 +67,36 @@ class web_service extends CI_Controller {
 
     function do_login($request) {
 
-        $result = $this->model_web_service->login($request);
+        
+                $data = array(
+                    'username' => $request->Email,
+                    'password' => $request->Password
+                );
 
+                $result = $this->auth_model->login($data);
+      
+        
         if ($result) {
+            if($result['admin_role_id']=="2"){
             //$this->model_web_service->update_device_id($request->device_id, $result['id']);
             $finresult[] = array('status' => 'success', 'message' => 'Conectado com sucesso', 'code' => 'success',
                 'id' => $result['id'],
-                'mobile' => $result['mobile'],
+                'id_admin' => $result['id'],
+                'firstname' => $result['firstname'],
+                'lastname' => $result['lastname'],
                 'username' => $result['username'],
                 'email' => $result['email'],
-                'wallet_amount' => $result['wallet_amount'],
+                'mobile_no' => $result['mobile_no'],
+                'image' => $result['image'],
                 'token' => $this->token_gen($result['username'])
             );
             print json_encode($finresult);
+            }else{
+                $finresult[] = array('status' => 'failed', 'message' => 'Você esta tentando conectar com usuario que não é operador!', 'code' => 'Login failed');
+            print json_encode($finresult);
+            }
         } else {
-            $finresult[] = array('status' => 'failed', 'message' => 'Não foi possivel conectar, veifique suas credências e tnte novamente!', 'code' => 'Login failed',
-            );
+            $finresult[] = array('status' => 'failed', 'message' => 'Não foi possivel conectar, veifique suas credências e tnte novamente!', 'code' => 'Login failed');
             print json_encode($finresult);
         }
     }

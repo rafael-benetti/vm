@@ -241,8 +241,11 @@ class Machines extends MY_Controller {
                                   
                                         <select name="item_id" style="width:100%" class="select_operar" id="ponto_id" >';
 
-            
+            $dados_ponto .= '<option value="">Escolha o Insumo</option>';
             foreach ($itens as $item) {
+                if($row['item_id'] == $item['id'])
+                $dados_ponto .= '<option selected="true" value="' . $item['id'] . '">' . $item['item'] . '</option>';
+                else
                 $dados_ponto .= '<option value="' . $item['id'] . '">' . $item['item'] . '</option>';
             }
 
@@ -346,12 +349,7 @@ class Machines extends MY_Controller {
         $user_id = $this->ponto_model->get_user_id_by_ponto($ponto_id);
         $maq_id = $this->input->post('maq_id');
         $item_id = $this->input->post('item_id');
-
-
-
-
-
-
+        
         if ($this->input->post('ponto_id')) {
 
             $this->form_validation->set_rules('ponto_id', 'required');

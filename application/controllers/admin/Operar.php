@@ -319,6 +319,7 @@ class Operar extends MY_Controller {
             $nome_ponto = $ponto->ponto;
             $tipo = $row['tipo'];
             $serial = $row['serial'];
+            $sangria = $row['sangria'];
 
             $cont_anterior = (int) $row['cont_anterior'];
             $cont_atual = (int) $row['cont_atual'];
@@ -341,6 +342,7 @@ class Operar extends MY_Controller {
                 $qtde_jogadas,
                 formatar_moeda($valor_arrecadado),
                 formatar_moeda($saldo),
+                formatar_moeda($sangria),
                 $bnt_status,
                 @$view . @$delete . @$edit
             );
@@ -551,7 +553,7 @@ class Operar extends MY_Controller {
                         $qtde_estoque = $this->machine_model->get_estoque_machine($rs_item['id_maquina']);
 
                         if ($qtde_estoque > 0) {
-                            $html_cbo .= '<option value="' . $rs_item["id_maquina"] . '">' . $rs_item["nome_tipo"] . ' | ' . $rs_item["serial"] . ' (' . $qtde_estoque . ')</option>';
+                            $html_cbo .= '<option value="' . $rs_item["id_maquina"] . '">' . $rs_item["nome_tipo"] . ' | ' . $rs_item["serial"] . '</option>';
                         } else {
                             $html_cbo .= '<option>Não tem máquina com estoque para esse ponto</option>';
                         }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 28-Maio-2020 às 21:35
+-- Tempo de geração: 10-Jun-2020 às 20:35
 -- Versão do servidor: 10.4.11-MariaDB
 -- versão do PHP: 7.2.29
 
@@ -56,8 +56,8 @@ CREATE TABLE `ci_admin` (
 
 INSERT INTO `ci_admin` (`id`, `admin_role_id`, `username`, `firstname`, `lastname`, `email`, `mobile_no`, `image`, `password`, `last_login`, `is_verify`, `is_admin`, `is_active`, `is_supper`, `token`, `password_reset_code`, `last_ip`, `contrato`, `created_at`, `updated_at`) VALUES
 (1, 1, 'superadmin', 'Rafael sddd', 'Benetti5555', 'marketing@altechindustria.com.br', '47997799705', '', '$2y$10$3h721xTsJbI6WX0/oS4n.eVFAvsfcZ1vIIMnoDROrbBBOrlLCg86y', '0000-00-00 00:00:00', 1, 1, 1, 1, '', '', '', '', '2019-01-16 06:01:58', '2020-05-22 00:00:00'),
-(32, 1, 'jeronimo', 'jeronimo', 'cardoso', 'jeronimo.alvescardoso@gmail.com', '(11) 97229-6726', '', '$2y$10$8KONhbfhgGgCak/DtxDR..L5PTqAXaDfG0s8Bc.NPTQGS6Svi6qh6', '0000-00-00 00:00:00', 1, 1, 1, 0, '', '', '', '', '2020-05-14 00:00:00', '2020-05-14 00:00:00'),
-(33, 2, 'operador', 'operador', 'operador', 'operador@operador.com', '123456789', '', '$2y$10$iBuwZReVl3sCSJAI3mfIU.tjtusJbTHZlxnRmP6o0vStzKHp0oHJi', '0000-00-00 00:00:00', 1, 1, 1, 0, '', '', '', '', '2020-05-14 00:00:00', '2020-05-14 00:00:00');
+(33, 2, 'operador', 'operador', 'operador', 'operador@operador.com', '123456789', '', '$2y$10$iBuwZReVl3sCSJAI3mfIU.tjtusJbTHZlxnRmP6o0vStzKHp0oHJi', '0000-00-00 00:00:00', 1, 1, 1, 0, '', '', '', '', '2020-05-14 00:00:00', '2020-05-14 00:00:00'),
+(35, 2, 'operador2', 'Operador', 'dois', 'operador2@gmail.com', '(11) 97729-6726', '', '$2y$10$MO4MAQJqwnMGs/EmPDDEmOqT3/9r7h2ztgda3qroltJ18DgMW7SQe', '0000-00-00 00:00:00', 1, 1, 1, 0, '', '', '', '', '2020-05-29 00:00:00', '2020-05-29 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -107,10 +107,10 @@ CREATE TABLE `ci_calendar` (
 --
 
 INSERT INTO `ci_calendar` (`id`, `title`, `description`, `color`, `start_date`, `end_date`, `create_at`, `create_by`, `modified_at`, `modified_by`) VALUES
-(36, 'Accusantium totam oc', 'At ut cum rerum dese', '#FF8C00', '2020-05-01', '2020-05-15', '2020-05-21 01:33:01', NULL, NULL, NULL),
+(36, 'Vel est aperiam culp', ']]´~~~', '#FF8C00', '2020-04-28', '2020-04-29', '2020-05-21 01:33:01', NULL, '2020-06-05 19:30:47', NULL),
 (37, 'a', 'a', '#FF0000', '0000-00-00', '0000-00-00', '2020-05-21 01:35:34', NULL, NULL, NULL),
 (38, 'Quo earum qui et seq', 'Eu labore et ut adip', '#FF0000', '2020-05-19', '2020-05-27', '2020-05-21 01:35:49', NULL, NULL, NULL),
-(39, 'Vel est aperiam culp', 'Aut similique in obc', '#FF8C00', '2020-04-27', '2020-04-28', '2020-05-21 01:35:57', NULL, '2020-05-21 01:36:07', NULL);
+(39, 'yhh', 'hhh', '#40E0D0', '2020-04-28', '2020-04-28', '2020-05-21 01:35:57', NULL, '2020-06-05 19:30:51', NULL);
 
 -- --------------------------------------------------------
 
@@ -182,21 +182,15 @@ CREATE TABLE `ci_estoque_itens` (
 --
 
 INSERT INTO `ci_estoque_itens` (`id`, `qtde`, `item_id`, `maq_id`, `user_id`, `created_at`, `updated_at`, `tipo_operacao`) VALUES
-(28, -10, 0, 0, 33, '2020-05-17 00:00:00', '2020-05-17 00:00:00', 'saida'),
-(29, 500, 83, 0, 31, '2020-05-18 00:00:00', '2020-05-18 00:00:00', 'entrada'),
-(30, -10, 83, 0, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'saida'),
-(31, -100, 83, 0, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'saida'),
-(32, -90, 83, 0, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'saida'),
-(33, -10, 83, 0, 31, '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'saida'),
-(34, -100, 84, 0, 31, '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'saida'),
-(35, -25, 84, 0, 1, '2020-05-22 00:00:00', '2020-05-22 00:00:00', 'saida'),
-(36, -25, 83, 0, 1, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'saida'),
-(37, -1, 84, 0, 1, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'saida'),
-(38, 0, 0, 0, 1, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'saida'),
-(39, 10, 83, 0, 1, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'entrada'),
-(40, -25, 84, 0, 1, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'saida'),
-(41, -30, 84, 0, 1, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'saida'),
-(42, 12, 83, 0, 1, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'entrada');
+(1, 10, 85, 0, 1, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'entrada'),
+(2, 25, 83, 0, 1, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'entrada'),
+(3, -10, 83, 0, 33, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'saida'),
+(4, 10, 85, 0, 1, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'entrada'),
+(5, -25, 84, 0, 1, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'saida'),
+(6, -25, 83, 0, 1, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'saida'),
+(7, -1, 84, 0, 1, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'saida'),
+(8, -5, 85, 0, 1, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'saida'),
+(9, -52, 83, 0, 1, '2020-05-29 00:00:00', '2020-05-29 00:00:00', 'saida');
 
 -- --------------------------------------------------------
 
@@ -221,18 +215,17 @@ CREATE TABLE `ci_estoque_machine` (
 --
 
 INSERT INTO `ci_estoque_machine` (`id`, `qtde`, `item_id`, `maq_id`, `user_id`, `created_at`, `updated_at`, `tipo_operacao`, `id_operacao`) VALUES
-(86, 10, 0, 57, 33, '2020-05-17 00:00:00', '2020-05-17 00:00:00', 'entrada', 0),
-(87, 10, 83, 57, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'entrada', 0),
-(88, -10, 83, 57, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'saida', 66),
-(89, -30, 83, 57, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'saida', 67),
-(90, 100, 83, 57, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'entrada', 0),
-(91, -40, 83, 57, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'saida', 68),
-(92, 90, 83, 57, 33, '2020-05-19 00:00:00', '2020-05-19 00:00:00', 'entrada', 0),
-(93, 10, 83, 74, 31, '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'entrada', 0),
-(94, 100, 84, 76, 31, '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'entrada', 0),
-(95, 25, 84, 76, 1, '2020-05-22 00:00:00', '2020-05-22 00:00:00', 'entrada', 0),
-(96, -10, 83, 74, 33, '2020-05-25 00:00:00', '2020-05-25 00:00:00', 'saida', 70),
-(97, -40, 83, 57, 33, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'saida', 71);
+(1, 11, 83, 2, 33, '2020-05-28 07:43:57', '2020-05-28 07:43:57', 'entrada', 0),
+(2, 4, 83, 2, 33, '2020-05-28 08:26:45', '2020-05-28 08:26:45', 'entrada', 0),
+(3, -5, 83, 2, 33, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'saida', 1),
+(4, 5, 83, 2, 33, '2020-05-28 22:03:12', '2020-05-28 22:03:12', 'entrada', 0),
+(5, -7, 83, 2, 33, '2020-05-29 16:21:06', '2020-05-29 16:21:06', 'saida', 2),
+(6, 52, 85, 1, 1, '2020-05-29 16:22:22', '2020-05-29 16:22:22', 'entrada', 0),
+(7, -1, 85, 1, 33, '2020-05-29 16:22:55', '2020-05-29 16:22:55', 'saida', 3),
+(8, 125, 85, 3, 35, '2020-05-29 16:31:38', '2020-05-29 16:31:38', 'entrada', 0),
+(9, -1, 83, 3, 35, '2020-05-29 16:32:59', '2020-05-29 16:32:59', 'saida', 4),
+(10, -2, 83, 3, 35, '2020-05-29 16:34:36', '2020-05-29 16:34:36', 'saida', 5),
+(11, -2, 83, 1, 33, '2020-05-29 18:40:46', '2020-05-29 18:40:46', 'saida', 6);
 
 -- --------------------------------------------------------
 
@@ -255,16 +248,17 @@ CREATE TABLE `ci_estoque_operador` (
 --
 
 INSERT INTO `ci_estoque_operador` (`id`, `qtde`, `item_id`, `user_id`, `created_at`, `updated_at`, `tipo_operacao`) VALUES
-(36, 10, 83, 33, '2020-05-28 11:49:22', '2020-05-28 11:49:22', 'entrada'),
-(38, 52, 83, 33, '2020-05-28 12:03:37', '2020-05-28 12:03:37', 'entrada'),
-(39, 10, 83, 33, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'entrada'),
-(40, 25, 83, 33, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'entrada'),
-(41, 25, 83, 33, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'entrada'),
-(43, 0, 0, 33, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'entrada'),
-(44, -10, 83, 33, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'saida'),
-(45, 25, 84, 33, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'entrada'),
-(46, 30, 84, 33, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'entrada'),
-(47, -12, 83, 33, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'saida');
+(1, 10, 0, 0, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'entrada'),
+(2, -11, 83, 33, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'entrada'),
+(3, 25, 84, 33, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'entrada'),
+(4, 25, 83, 33, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'entrada'),
+(5, 1, 84, 33, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'entrada'),
+(6, 5, 85, 33, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'entrada'),
+(7, -4, 83, 33, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'entrada'),
+(8, -5, 83, 33, '2020-05-28 22:03:13', '2020-05-28 22:03:13', 'entrada'),
+(9, -52, 85, 1, '2020-05-29 16:22:22', '2020-05-29 16:22:22', 'entrada'),
+(10, 52, 83, 35, '2020-05-29 00:00:00', '2020-05-29 00:00:00', 'entrada'),
+(11, -125, 85, 35, '2020-05-29 16:31:38', '2020-05-29 16:31:38', 'entrada');
 
 -- --------------------------------------------------------
 
@@ -317,15 +311,16 @@ CREATE TABLE `ci_general_settings` (
   `recaptcha_site_key` varchar(255) DEFAULT NULL,
   `recaptcha_lang` varchar(50) DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,
-  `updated_date` datetime DEFAULT NULL
+  `updated_date` datetime DEFAULT NULL,
+  `serv_secret_key` varchar(256) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `ci_general_settings`
 --
 
-INSERT INTO `ci_general_settings` (`id`, `favicon`, `logo`, `proprietario`, `application_name`, `timezone`, `currency`, `copyright`, `email_from`, `smtp_host`, `smtp_port`, `smtp_user`, `smtp_pass`, `facebook_link`, `twitter_link`, `google_link`, `youtube_link`, `linkedin_link`, `instagram_link`, `recaptcha_secret_key`, `recaptcha_site_key`, `recaptcha_lang`, `created_date`, `updated_date`) VALUES
-(1, 'assets/img/52146e792d37f1a9af76f4d931cf2f88.png', 'assets/img/52146e792d37f1a9af76f4d931cf2f88.png', 'Altech Indústria', 'VM System', 'America/Sao_Paulo', 'BRL', 'Copyright © 2019 Altech All rights reserved.', 'marketing@altechindustria.com', 'mail.altechindustria.com', 25, 'marketing@altechindustria.com', 'pipoca123', 'https://facebook.com', 'https://twitter.com', 'https://google.com', 'https://youtube.com', 'https://linkedin.com', 'https://instagram.com', '6Lf8Pt0UAAAAALo_d1yxGKGt2AB6maRn8PXK1HlK', '6Lf8Pt0UAAAAALswA1YgTTK7rd65Br8a-Tp-pqGh', 'pt-BR', '2020-05-13 00:00:00', '2020-05-13 00:00:00');
+INSERT INTO `ci_general_settings` (`id`, `favicon`, `logo`, `proprietario`, `application_name`, `timezone`, `currency`, `copyright`, `email_from`, `smtp_host`, `smtp_port`, `smtp_user`, `smtp_pass`, `facebook_link`, `twitter_link`, `google_link`, `youtube_link`, `linkedin_link`, `instagram_link`, `recaptcha_secret_key`, `recaptcha_site_key`, `recaptcha_lang`, `created_date`, `updated_date`, `serv_secret_key`) VALUES
+(1, 'assets/img/52146e792d37f1a9af76f4d931cf2f88.png', 'assets/img/52146e792d37f1a9af76f4d931cf2f88.png', 'Altech Indústria', 'VM System', 'America/Sao_Paulo', 'BRL', 'Copyright © 2019 Altech All rights reserved.', 'marketing@altechindustria.com', 'mail.altechindustria.com', 25, 'marketing@altechindustria.com', 'pipoca123', 'https://facebook.com', 'https://twitter.com', 'https://google.com', 'https://youtube.com', 'https://linkedin.com', 'https://instagram.com', '6Lf8Pt0UAAAAALo_d1yxGKGt2AB6maRn8PXK1HlK', '6Lf8Pt0UAAAAALswA1YgTTK7rd65Br8a-Tp-pqGh', 'pt-BR', '2020-05-13 00:00:00', '2020-05-13 00:00:00', 'c46fd89de65815b4823c800755576f5a417dd236');
 
 -- --------------------------------------------------------
 
@@ -349,8 +344,9 @@ CREATE TABLE `ci_itens` (
 --
 
 INSERT INTO `ci_itens` (`id`, `item`, `quantidade`, `valor`, `is_admin`, `is_active`, `created_at`, `updated_at`) VALUES
-(83, 'Ursinho Comum', '-500', '4.50', 0, 1, '2020-05-08 08:05:11', '2020-05-08 08:05:11'),
-(84, 'Ursinho Prêmium', '', '8.50', 33, 1, '2020-05-08 08:05:31', '2020-05-08 08:05:31');
+(83, 'Ursinho Comum', '475', '4.50', 0, 1, '2020-05-08 08:05:11', '2020-05-08 08:05:11'),
+(84, 'Ursinho Prêmium', '400', '8.50', 33, 1, '2020-05-08 08:05:31', '2020-05-08 08:05:31'),
+(85, 'Urso teste', '-10', '10.00', 0, 1, '2020-05-28 00:00:00', '2020-05-28 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -385,27 +381,9 @@ CREATE TABLE `ci_machines` (
 --
 
 INSERT INTO `ci_machines` (`id`, `tipomaquina`, `pontodevenda`, `serial`, `cont_inicial`, `cont_saida_inicial`, `valorvenda`, `imagem`, `noteiro`, `ficheiro`, `observacoes_equip`, `is_active`, `created_at`, `updated_at`, `nome_imagem`, `qtde_insumos`, `item_id`, `nome_imagem_analogico`, `valordoequipamento`) VALUES
-(57, 80, 0, 1234, 0, 0, '10.00', '', '1', '1', 'teste', '1', '2020-05-17 00:00:00', '2020-05-17 00:00:00', 'contador_inicial_57.jpg', 0, 83, NULL, 0),
-(58, 80, 0, 987654789, 10, 10, '100.00', '', '1', '0', 'sssssss', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'contador_inicial_58.jpg', 0, 83, 'contador_inicial_58.jpg', 0),
-(59, 80, 51, 123, 1, 1, '10.00', '', '0', '0', 'ssss', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'contador_inicial_59.jpg', 0, 0, 'contador_inicial_59.jpg', 0),
-(60, 80, 0, 125412, 1, 1, '1.00', '', '1', '0', 'xxxxxxx', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'contador_inicial_60.jpg', 0, 0, 'contador_inicial_60.jpg', 0),
-(61, 80, 0, 12541254, 1, 1, '1.00', '', '1', '1', 'aaaa', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'contador_inicial_61.jpg', 0, 0, 'contador_inicial_61.jpg', 0),
-(62, 80, 51, 123456987, 2, 3, '1.00', '', '1', '1', 'ssssss', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'contador_inicial_62.jpg', 0, 0, 'contador_inicial_62.jpg', 0),
-(63, 80, 0, 1254521, 1, 1, '1.00', '', '0', '0', 'sssss', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', NULL, 0, 0, 'contador_analogico_63.jpg', 1),
-(64, 80, 0, 2, 2, 2, '2.00', '', '0', '0', '', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'contador_inicial_64.jpg', 0, 0, 'contador_inicial_64.jpg', 2),
-(65, 80, 0, 1, 1, 1, '1.00', '', '0', '0', '1', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', NULL, 0, 0, NULL, 11),
-(66, 79, 51, 2147483647, 1, 1, '1.00', '', '0', '0', 'xxxxxxxx', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', NULL, 0, 0, NULL, 1),
-(67, 80, 0, 123456, 123456, 123456, '12.00', '', '0', '0', 'xxxxxx', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', NULL, 0, 0, NULL, 12.34),
-(68, 80, 0, 125632, 12, 12, '12.00', '', '0', '0', 'zzzzzzz', '0', '2020-05-20 00:00:00', '2020-05-20 00:00:00', '1.jpg', 0, 0, '11.jpg', 12),
-(69, 80, 0, 2147483647, 1, 1, '1.00', '', '0', '0', '1', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'cont_inicial_69', 0, 0, 'cont_analogico_69', 1),
-(70, 80, 0, 12585236, 1, 1, '1.00', '', '0', '0', 'sssssss', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'file_cont_inicial_.jpg', 0, 0, 'file_cont_inicial_1.jpg', 1),
-(71, 80, 0, 125452136, 1, 1, '1.00', '', '0', '0', '1', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', NULL, 0, 0, NULL, 1),
-(72, 80, 0, 1254521545, 1, 1, '1.00', '', '0', '0', 'aaa', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'file_cont_inicial_.jpg', 0, 83, 'file_cont_inicial_1.jpg', 1),
-(73, 80, 0, 2147483647, 1, 1, '1.00', '', '0', '0', 'xxxxxx', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'file_cont_inicial_73.jpg', 0, 0, 'file_cont_inicial_73.jpg', 1),
-(74, 80, 51, 2147483647, 0, 1, '1.00', '', '1', '1', 'dddddddddd', '1', '2020-05-20 00:00:00', '2020-05-20 00:00:00', '', 0, 83, 'file_cont_inicial_741.jpg', 1),
-(75, 80, 51, 2147483647, 0, 0, '121212.12', '', '0', '0', '', '1', '2020-05-20 00:00:00', '2020-05-26 00:00:00', 'file_cont_inicial_75.jpg', 0, 83, 'file_cont_inicial_751.jpg', 0),
-(76, 80, 0, 2147483647, 1, 1, '1234.56', '', '1', '0', 'teste de cadastro', '0', '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'file_cont_inicial_76.jpg', 0, 84, 'file_cont_inicial_761.jpg', 9876.54),
-(77, 80, 50, 2147483647, 0, 1, '1234.56', '', '0', '0', 'teste', '0', '2020-05-22 00:00:00', '2020-05-25 00:00:00', 'file_cont_inicial_771.jpg', 0, 83, 'file_cont_inicial_772.jpg', 98765.43);
+(1, 1, 53, 1, 1, 1, '12.00', '', '1', '0', '', '1', '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'file_cont_inicial_1.jpg', 0, 83, 'file_cont_inicial_11.jpg', 10),
+(2, 1, 53, 123, 1, 1, '1.20', '', '0', '0', '', '1', '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'file_cont_inicial_2.jpg', 0, 83, 'file_cont_inicial_21.jpg', 100),
+(3, 1, 53, 12, 0, 1, '1.00', '', '1', '1', 's', '1', '2020-05-29 16:27:49', '2020-06-10 14:06:10', '', 0, 83, 'file_cont_inicial_31.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -445,13 +423,12 @@ CREATE TABLE `ci_operacoes` (
 --
 
 INSERT INTO `ci_operacoes` (`id`, `maq_id`, `cont_anterior`, `cont_atual`, `cont_saida_anterior`, `cont_saida_atual`, `vendas`, `qnt_vendas`, `saldo`, `imagem`, `imagem_cont_saida`, `status_op`, `observacoes_equip`, `is_active`, `created_at`, `updated_at`, `ponto`, `user_id`, `qtde_saida`, `valor_insumo`, `saidas`, `sangria`, `mes`, `ano`) VALUES
-(68, 57, 30, 40, 30, 40, '100', '10', '55', '1.jpg', '21.jpg', '0', 'teste', '1', '2020-05-19 11:52:34', '2020-05-19 11:52:34', 50, 33, 10, 4.5, 45, 10, 1, 2020),
-(67, 57, 10, 30, 10, 30, '200', '20', '110', '2.jpg', '4.jpg', '0', 'teste', '1', '2020-05-19 11:27:07', '2020-05-19 11:27:07', 50, 33, 20, 4.5, 90, 25, 1, 2019),
-(66, 57, 10, 10, 10, 10, '0', '0', '0', '', '', '0', 'teste', '1', '2020-02-19 10:25:55', '2020-05-19 10:25:55', 50, 33, 0, 4.5, 0, 10, 2, 2020),
-(65, 57, 0, 10, 0, 10, '0', '10', '0', '', '', '0', '', '1', '2020-02-18 19:47:17', '2020-05-18 19:47:17', 49, 33, 10, 0, 0, 12, 3, 2020),
-(69, 0, 0, 10, 0, 10, '0', '10', '0', '11.jpg', '12.jpg', '0', '', '1', '2020-03-22 15:47:51', '2020-05-22 15:47:51', 52, 1, 10, 0, 0, 1000, 12, 2019),
-(70, 74, 0, 10, 1, 10, '10', '10', '-30.5', 'kisspng-hamburger-cheeseburger-wendy-s-burger-king-food-veggie-wrap-burger-king-best-burger-2017-5b677e495bfe27_0477149515335091933768.jpg', 'kisspng-coca-cola-cherry-fizzy-drinks-diet-coke-coca-cola-png-transparent-images-5aadb56e581eb8_590981901521333614361.jpg', '0', 'teste', '1', '2020-04-25 18:50:31', '2020-05-25 18:50:31', 50, 33, 9, 4.5, 40.5, 0, 4, 2020),
-(71, 57, 40, 40, 40, 40, '0', '0', '0', 'kisspng-hamburger-cheeseburger-wendy-s-burger-king-food-veggie-wrap-burger-king-best-burger-2017-5b677e495bfe27_04771495153350919337681.jpg', 'kisspng-hamburger-cheeseburger-wendy-s-burger-king-food-veggie-wrap-burger-king-best-burger-2017-5b677e495bfe27_04771495153350919337682.jpg', '0', '', '1', '2020-04-28 14:49:04', '2020-05-28 14:49:04', 52, 33, 0, 4.5, 0, 0, 4, 2020);
+(1, 2, 0, 5, 0, 5, '6', '5', '-16.5', 'kisspng-hamburger-cheeseburger-wendy-s-burger-king-food-veggie-wrap-burger-king-best-burger-2017-5b677e495bfe27_04771495153350919337683.jpg', 'd4a1c593af8c080d0421c0d51dc32fe1.jpg', '0', '', '1', '2020-05-27 20:27:38', '2020-05-27 20:27:38', 50, 33, 5, 4.5, 22.5, 100, 0, 0),
+(2, 2, 5, 15, 5, 7, '12', '10', '3', 'cabana-do-sol.jpg', 'd4a1c593af8c080d0421c0d51dc32fe11.jpg', '0', 'sssssss', '1', '2020-05-28 16:21:06', '2020-05-28 16:21:06', 50, 33, 2, 4.5, 9, 25, 0, 0),
+(3, 1, 0, 5, 0, 1, '60', '5', '50', 'cabana-do-sol1.jpg', 'd4a1c593af8c080d0421c0d51dc32fe12.jpg', '0', '', '1', '2020-05-29 16:22:55', '2020-05-29 16:22:55', 52, 33, 1, 10, 10, 1, 0, 0),
+(4, 3, 0, 10, 0, 1, '10', '10', '5.5', 'd4a1c593af8c080d0421c0d51dc32fe13.jpg', 'kisspng-coca-cola-cherry-fizzy-drinks-diet-coke-coca-cola-png-transparent-images-5aadb56e581eb8_5909819015213336143611.jpg', '0', '', '1', '2020-05-29 16:32:59', '2020-05-29 16:32:59', 54, 35, 1, 4.5, 4.5, 10, 0, 0),
+(5, 3, 10, 15, 1, 2, '5', '5', '0.5', 'cabana-do-sol2.jpg', 'kisspng-coca-cola-cherry-fizzy-drinks-diet-coke-coca-cola-png-transparent-images-5aadb56e581eb8_5909819015213336143612.jpg', '0', '', '1', '2020-05-29 16:34:36', '2020-05-29 16:34:36', 54, 35, 1, 4.5, 4.5, 0, 0, 0),
+(6, 1, 5, 5, 1, 2, '0', '0', '-4.5', 'd4a1c593af8c080d0421c0d51dc32fe14.jpg', 'kisspng-coca-cola-cherry-fizzy-drinks-diet-coke-coca-cola-png-transparent-images-5aadb56e581eb8_5909819015213336143613.jpg', '0', '22222222', '1', '2020-05-29 18:40:46', '2020-05-29 18:40:46', 50, 33, 1, 4.5, 4.5, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -488,10 +465,10 @@ CREATE TABLE `ci_pontos` (
 --
 
 INSERT INTO `ci_pontos` (`id`, `ponto`, `nomefan`, `email`, `comissao`, `responsavel`, `telefone`, `endereco`, `numero`, `cidade`, `estado`, `latitude`, `longitude`, `is_admin`, `is_active`, `created_at`, `updated_at`, `bairro`, `cep`, `tipo_comissao`, `user_id`) VALUES
-(51, 'Sem dono', '', 'semdono@teste.com', 10, 'teste', '(11) 98010-2250', 'Rua Pascoal Ruiz', '25', 'São Paulo', 'SP', '-23.7707827', '-46.6767842', 0, 1, '2020-05-18 07:42:13', '2020-05-18 07:42:13', 'Jardim Noronha', '04853-100', 'percentual', 31),
 (50, 'santa casa 12', '', 'santa@santaca.com', 10, 'junior', '(11) 19801-0250', 'Rua Pascoal Ruiz', '23', 'São Paulo', 'SP', '-23.7707293', '-46.6771045', 0, 1, '2020-05-17 07:49:38', '2020-05-18 00:00:00', 'Jardim Noronha', '04853-100', '', 33),
-(49, 'RIO GRANDE', '', 'TESTE@TESTE.COM', 10, 'rafael', '(46) 54654-6545', 'Rua Tenente Timbauva', '174', 'Sapucaia do Sul', 'RS', '-29.8414212', '-51.1505997', 0, 0, '2020-05-17 07:11:48', '2020-05-17 00:00:00', 'Capão da Cruz', '93226-540', '', 33),
-(52, 'POnto teste atualizar', '', 'pontoatualizar@tste.com', 11, 'responsavel atualizar', '(22) 22222-2222', 'Rua Riachuelo', '617', 'São Carlos', 'SP', '-22.0168508', '-47.8958752', 0, 1, '2020-05-19 09:15:12', '2020-05-19 00:00:00', 'Centro', '13560-110', '', 33);
+(54, 'POnto do operador 2', '', 'jeronimo.alvescardoso@gmail.com', 10, 'jeronimo', '(11) 98010-2250', 'Rua Riachuelo', '25', 'São Carlos', 'SP', '-22.0117206', '-47.8958826', 0, 1, '2020-05-29 16:29:37', '2020-05-29 16:05:14', 'Centro', '13560-110', '', 35),
+(53, 'ponto novo', '', 'a@a.com', 10, 'junior', '(11) 98010-2250', 'Rua Riachuelo', '23', 'São Carlos', 'SP', '-22.0117011', '-47.8958833', 0, 1, '2020-05-28 06:25:40', '2020-05-28 00:00:00', 'Centro', '13560-110', '', 33),
+(52, 'Ponto teste atualizar', '', 'pontoatualizar@tste.com', 11, 'responsavel atualizar', '(22) 22222-2222', 'Rua Riachuelo', '617', 'São Carlos', 'SP', '-22.0168508', '-47.8958752', 0, 1, '2020-05-19 09:15:12', '2020-05-28 00:00:00', 'Centro', '13560-110', '', 33);
 
 -- --------------------------------------------------------
 
@@ -510,15 +487,6 @@ CREATE TABLE `ci_rotas` (
   `operador` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Extraindo dados da tabela `ci_rotas`
---
-
-INSERT INTO `ci_rotas` (`id`, `nome`, `created_at`, `updated_at`, `user_id`, `is_active`, `pontos`, `operador`) VALUES
-(12, 'ss', '2020-05-25 17:18:50', '2020-05-25 17:18:50', 1, 1, 'RIO GRANDE,POnto teste atualizar', ''),
-(13, 'ddddd', '2020-05-25 17:45:00', '2020-05-25 17:45:00', 1, 1, 'POnto teste atualizar', ' '),
-(14, 'dsgfsdfasfsadf', '2020-05-26 13:01:10', '2020-05-26 13:01:10', 1, 1, 'santa casa 12,RIO GRANDE', ' ');
-
 -- --------------------------------------------------------
 
 --
@@ -530,32 +498,6 @@ CREATE TABLE `ci_rotas_pontos` (
   `rota_id` int(11) NOT NULL,
   `ponto_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `ci_rotas_pontos`
---
-
-INSERT INTO `ci_rotas_pontos` (`id`, `rota_id`, `ponto_id`) VALUES
-(3, 4, 50),
-(4, 4, 52),
-(5, 3, 50),
-(6, 7, 49),
-(7, 7, 52),
-(8, 8, 50),
-(9, 8, 49),
-(10, 8, 52),
-(11, 9, 50),
-(12, 9, 49),
-(13, 9, 52),
-(14, 10, 50),
-(15, 10, 49),
-(16, 11, 49),
-(17, 11, 52),
-(18, 12, 49),
-(19, 12, 52),
-(20, 13, 52),
-(21, 14, 50),
-(22, 14, 49);
 
 -- --------------------------------------------------------
 
@@ -578,10 +520,7 @@ CREATE TABLE `ci_tipos` (
 --
 
 INSERT INTO `ci_tipos` (`id`, `tipo`, `is_admin`, `is_active`, `created_at`, `updated_at`, `nome_imagem`) VALUES
-(80, 'Grua Vintage', 0, 1, '2020-05-08 08:05:30', '2020-05-20 00:00:00', 'file_img_tipos_82.jpg'),
-(79, 'Grua Black', 0, 1, '2020-05-08 08:05:16', '2020-05-22 00:00:00', 'Grua_Black.jpg'),
-(81, 'teste', 0, 1, '2020-05-20 00:00:00', '2020-05-22 00:00:00', 'teste.jpg'),
-(82, 'sssssssss', 0, 1, '2020-05-20 00:00:00', '2020-05-20 00:00:00', 'file_img_tipos_82.jpg');
+(1, 'Tipo de máquina', 0, 1, '2020-05-28 00:00:00', '2020-05-28 00:00:00', 'file_img_tipos_1.jpg');
 
 -- --------------------------------------------------------
 
@@ -610,13 +549,6 @@ CREATE TABLE `ci_users` (
   `profile_id` int(11) NOT NULL DEFAULT 1
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Extraindo dados da tabela `ci_users`
---
-
-INSERT INTO `ci_users` (`id`, `username`, `firstname`, `lastname`, `email`, `mobile_no`, `password`, `address`, `role`, `is_active`, `is_verify`, `is_admin`, `token`, `password_reset_code`, `last_ip`, `created_at`, `updated_at`, `profile_id`) VALUES
-(51, 'rafa', 'Rafael', 'Benetti', 'rafa@rafa.com', '(47) 99999-9999', '$2y$10$pV7ceT31/PcuUQVxJPrfbeQrs90.H4I49/ZfggeaPbhIMBfmWy51m', '', 1, 1, 0, 0, '', '', '', '2020-05-08 08:05:37', '2020-05-08 08:05:37', 2);
-
 -- --------------------------------------------------------
 
 --
@@ -637,18 +569,10 @@ CREATE TABLE `ci_users_machines` (
 --
 
 INSERT INTO `ci_users_machines` (`id`, `user_id`, `maq_id`, `ponto_id`, `created_at`, `updated_at`) VALUES
-(15, 0, 57, 0, '2020-05-18 12:48:53', '2020-05-18 12:48:53'),
-(19, 33, 57, 52, '2020-05-18 19:44:38', '2020-05-19 12:25:47'),
-(20, 0, 74, 50, '2020-05-20 18:02:32', '2020-05-20 19:58:45'),
-(21, 33, 73, 50, '2020-05-20 18:56:01', '2020-05-20 18:56:01'),
-(22, 0, 76, 0, '2020-05-20 20:25:48', '2020-05-20 20:25:48'),
-(23, 33, 75, 0, '2020-05-20 20:27:09', '2020-05-20 20:27:09'),
-(24, 31, 75, 51, '2020-05-21 12:17:10', '2020-05-21 12:17:10'),
-(25, 31, 72, 51, '2020-05-21 12:18:01', '2020-05-21 12:18:01'),
-(26, 31, 72, 51, '2020-05-21 12:19:32', '2020-05-21 12:19:32'),
-(27, 33, 76, 0, '2020-05-22 15:35:44', '2020-05-22 15:35:44'),
-(28, 31, 76, 51, '2020-05-22 15:44:50', '2020-05-22 15:44:50'),
-(30, 33, 77, 0, '2020-05-26 13:04:34', '2020-05-26 13:04:34');
+(1, 33, 2, 0, '2020-05-28 19:37:22', '2020-05-29 18:39:57'),
+(2, 33, 1, 50, '2020-05-29 16:21:46', '2020-05-29 18:40:00'),
+(3, 0, 3, 0, '2020-05-29 16:29:55', '2020-05-29 16:29:55'),
+(5, 35, 3, 54, '2020-05-29 16:32:28', '2020-06-10 15:25:12');
 
 -- --------------------------------------------------------
 
@@ -766,7 +690,12 @@ INSERT INTO `module_access` (`id`, `admin_role_id`, `module`, `operation`) VALUE
 (35, 2, 'machines', 'view'),
 (39, 2, 'operar', 'view'),
 (40, 2, 'operar', 'add'),
-(43, 2, 'itens', 'view');
+(43, 2, 'itens', 'view'),
+(45, 2, 'machines', 'add'),
+(46, 2, 'machines', 'edit'),
+(47, 2, 'machines', 'delete'),
+(48, 2, 'machines', 'change_status'),
+(49, 2, 'machines', 'access');
 
 --
 -- Índices para tabelas despejadas
@@ -776,7 +705,9 @@ INSERT INTO `module_access` (`id`, `admin_role_id`, `module`, `operation`) VALUE
 -- Índices para tabela `ci_admin`
 --
 ALTER TABLE `ci_admin`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Índices para tabela `ci_admin_roles`
@@ -921,7 +852,7 @@ ALTER TABLE `module_access`
 -- AUTO_INCREMENT de tabela `ci_admin`
 --
 ALTER TABLE `ci_admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de tabela `ci_admin_roles`
@@ -933,7 +864,7 @@ ALTER TABLE `ci_admin_roles`
 -- AUTO_INCREMENT de tabela `ci_calendar`
 --
 ALTER TABLE `ci_calendar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de tabela `ci_catfin`
@@ -951,19 +882,19 @@ ALTER TABLE `ci_clientes`
 -- AUTO_INCREMENT de tabela `ci_estoque_itens`
 --
 ALTER TABLE `ci_estoque_itens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `ci_estoque_machine`
 --
 ALTER TABLE `ci_estoque_machine`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `ci_estoque_operador`
 --
 ALTER TABLE `ci_estoque_operador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `ci_financeiro`
@@ -981,43 +912,43 @@ ALTER TABLE `ci_general_settings`
 -- AUTO_INCREMENT de tabela `ci_itens`
 --
 ALTER TABLE `ci_itens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT de tabela `ci_machines`
 --
 ALTER TABLE `ci_machines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `ci_operacoes`
 --
 ALTER TABLE `ci_operacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `ci_pontos`
 --
 ALTER TABLE `ci_pontos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de tabela `ci_rotas`
 --
 ALTER TABLE `ci_rotas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `ci_rotas_pontos`
 --
 ALTER TABLE `ci_rotas_pontos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `ci_tipos`
 --
 ALTER TABLE `ci_tipos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `ci_users`
@@ -1029,7 +960,7 @@ ALTER TABLE `ci_users`
 -- AUTO_INCREMENT de tabela `ci_users_machines`
 --
 ALTER TABLE `ci_users_machines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `ci_users_pontos`
@@ -1053,7 +984,7 @@ ALTER TABLE `module`
 -- AUTO_INCREMENT de tabela `module_access`
 --
 ALTER TABLE `module_access`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
