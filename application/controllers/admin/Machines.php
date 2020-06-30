@@ -572,16 +572,26 @@ class Machines extends MY_Controller {
 
         $this->load->view('admin/includes/_header');
 
-        $where_tipos = array('is_active' => 1);
-        $where_pontos = array('is_active' => 1);
-        if ($this->is_supper == "0") {
+
+        if ($this->is_supper == 1) {
             $where_tipos = array(
                 'is_active' => 1
-            );
+            );   
             $where_pontos = array(
                 'is_active' => 1
             );
+        }else{
+             $where_tipos = array(
+                'is_active' => 1
+            );    
+             $where_pontos = array(
+                'is_active' => 1,
+                'user_id' => (int)$this->session->userdata('admin_id')
+            );
+            
         }
+        
+      
         $dados['tipos'] = $this->tipo_model->getTodosTipos($where_tipos);
         $dados['pontos'] = $this->ponto_model->getTodosPontos($where_pontos);
         $dados['item'] = $this->item_model->getTodosItens();

@@ -35,6 +35,26 @@ $cur_tab = $this->uri->segment(2) == '' ? 'dashboard' : $this->uri->segment(2);
         <nav class="mt-2">
 
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                
+                 <?php if ($this->is_supper == 0): ?> 
+
+                    <li id="tarefas_settings" class="nav-item">
+
+                        <a href="<?= base_url('admin/operar/operar'); ?>" class="nav-link">
+
+                            <i class="nav-icon fa fa-calendar"></i>
+
+                            <p>
+
+                                Operar
+
+                            </p>
+
+                        </a>
+
+                    </li>
+
+                <?php endif; ?>
 
                 <!-- Add icons to the links using the .nav-icon class
               with font-awesome or any other icon font library -->
